@@ -1,9 +1,10 @@
-package Model.locations;
+package model.locations;
 
 public enum Location {
 	HOME (0, "HOME"),
-	OFFICE (1, "OFFICE");
-	
+	OFFICE (1, "OFFICE"),
+	PARK(2, "PARK");
+
 	private int id;
 	private String name;
 	
@@ -16,7 +17,9 @@ public enum Location {
 	public int getId() {
 		return id;
 	}
-	
+	public String getName() {
+		return name;
+	}
 	public static void printAll() {
 		System.out.println("-------------------------------------");
 		for (Location loc : Location.values()) {

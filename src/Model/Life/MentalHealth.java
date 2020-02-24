@@ -1,4 +1,4 @@
-package Model.Life;
+package model.life;
 
 public class MentalHealth {
 	int health;

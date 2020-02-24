@@ -1,0 +1,33 @@
+Cambios:
+
+- Añadida clase places para los sitios en los que puede estar y simplificar los menús que pueden tener.
+
+- Refactor del nombre de los paquetes para que estén todos en minúsculas y adición del paquete places.
+
+- Cambios en game para que llame al menú de donde sea que esté el jugador y pueda ejecutar esas acciones.
+
+- Cambio de tipo de assets a arraylist para no lidiar con problemas de arrays primitivos. (con todos los cambios de sintaxis que conlleva)
+
+- Creada la clase Place y la clase Action. Actions contiene: el nombre de la acción, una breve descripción, la mental health que otorga y el tiempo que quita.
+
+- Creado el método toString de Action y el menú de place, que contiene actions para que desempeñen los brokers.
+
+- Creadas las clases Office, Park, Home, que contendrán las acciones y heredarán de place.
+
+- Creado contenido de todos los places.
+
+- Cambiado el formato de turno a time y day. Day servirá de turno, aunque todavía no está modificado para ello porque hay que cambiar time y su toString.
+
+- Creados los menús y sus contenidos de cada place.
+	->Esto hace que nuestro sistema ya no sean sitios en los que hayan cosas sino que es híbrido y también implementa que los brokers estén en sitios.
+	->Para enlazarlo utilizan ambos los mismos indices como tags en los arrays, son static y final.
+
+- Cambiado el método run para realizar todo esto.
+
+- Refactor de todo lo dependiente de Turn, en concreto la generación del precio de activos.
+
+- Refactor de todo Game y sus métodos showstate y run para adecuarse a todo esto.
+
+- Refactor del refresh del mercado que se hacia en broker, ahora el mercado tiene un refresh y el broker otro, que es el que jode las acciones del broker.
+
+- Creado metodo end en broker, que dice como terminas al salir de run, esto depende de si te has vuelto depresivo suicida o has perdido dinero y en un futuro si te ingresan por inanición.

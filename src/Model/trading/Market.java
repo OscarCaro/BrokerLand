@@ -1,50 +1,54 @@
-package Model.trading;
+package model.trading;
 
-import  Model.trading.*;
-import  Model.locations.*;
+import controller.Game;
+import  model.locations.*;
+
+import java.util.*;
 
 public class Market extends Locatable{
-	public final int maxM = 1000;
-	public static Asset assets[];
+
+	public static List<Asset> assets;
 	public static int size;
 	public Market() {
 		super(Location.OFFICE);
 		
-		assets = new Asset[maxM];
+		assets = new ArrayList<Asset>();
 	}
-	 public void initMarket() {
-		size = 0;
-		assets[size]= new Asset();
-		assets[size + 1]= new Asset();
-		assets[size+ 2]= new Asset();
+
+	public static void refresh() {
+		for (int i = 0; i < Market.size; i++) {
+			Market.assets.get(i).price = Asset.AssetPriceGen();
+		}
+	}
+
+	public void initMarket() {
+		assets.add(new Asset());
+		assets.add(new Asset());
+		assets.add(new Asset());
 		size = 3;
 	}
 	
-	boolean addAsset(Asset a) {
-		if(Market.size<maxM) {
-			Market.assets[size] = a;
-			size++;
-			return true;
-		}
-		return false;
+	public void addAsset(Asset a) {
+		assets.add(a);
+		size++;
 	}
 	
-	public void opportunity() {
-		assets[size]= new Asset();
+	public static void opportunity() {
+		assets.add(new Asset());
 		size++;
 	}
 	
 	public static void showState() {
 		System.out.println("The market sits currently at: ");
 		for(int i = 0; i < size; i++) {
-			System.out.println(i + ": " + assets[i] );
+			System.out.println(i + ": " + assets.get(i) );
 		}
 	}
 	
 	public static int getOwned () {
 		int a = 0;
 		for(int i = 0; i < Market.size; i++) {
-			if(Market.assets[i].owned) {
+			if(assets.get(i).owned) {
 				 a++;
 			}
 		}

@@ -1,7 +1,6 @@
-package Model.trading;
+package model.trading;
 
 import controller.Game;
-import controller.main;
 
 public class Asset {
 
@@ -27,8 +26,8 @@ public class Asset {
 
 
 
-	private int  AssetPriceGen() {
-		 return (int) (Math.random() * (1000 + (Game.turn * 100))) + 37;
+	public static int  AssetPriceGen() {
+		 return (int) (Math.random() * (1000 + (Game.day * 100))) + 37;
 	}
 	
 	private String  AssetStringGen() {

@@ -1,6 +1,4 @@
-package Model.locations;
-
-import Model.locations.*;
+package model.locations;
 
 public abstract class Locatable {
 	protected Location loc;
@@ -17,5 +15,7 @@ public abstract class Locatable {
 		return loc.equals(this.loc);
 	}
 	
-
+	public Location whereIs(){
+		return loc;
+	}
 }
