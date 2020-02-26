@@ -15,7 +15,7 @@ public class Park extends Place {
     @Override
     void enactAction(int i, Broker b) {
         b.addMental(actions.get(i).mental);
-        Game.time += actions.get(i).time;
+        Game.t.addTime(actions.get(i).time);
         switch (i){
             case 0:
                 System.out.println("You fed the pigeons wholesomely.");

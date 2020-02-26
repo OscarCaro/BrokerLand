@@ -89,7 +89,7 @@ public class Broker extends Locatable {
     public void refresh() {
         for (int i = 0; i < Market.size; i++) {
             if (Market.assets.get(i).owned) {
-                Market.assets.get(i).price = Math.abs(Market.assets.get(i).price - (37 + 100 + (Game.day)));
+                Market.assets.get(i).price = Math.abs(Market.assets.get(i).price - (37 + 100 + (Game.t.day)));
             }
         }
     }

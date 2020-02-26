@@ -1,5 +1,6 @@
 package controller;
 
+import model.life.*;
 import model.locations.*;
 import model.places.*;
 import model.trading.*;
@@ -8,8 +9,7 @@ import java.util.ArrayList;
 
 public class Game {
 
-    public static int time;
-    public static int day=1;
+	public static Time t;
     private ArrayList<Locatable> locatables;
     private ArrayList<Place> places;
     private Broker player;
@@ -23,16 +23,15 @@ public class Game {
         places.add(Park.index, new Park());
         player = new Broker();
         locatables.add(player);
-
+        t = new Time();
         market = new Market();
         market.initMarket();
         locatables.add(market);
 
-        time = 8030;
     }
 
     public void showState() {
-        System.out.println("Time: " + time%2400 + "  ----------------   " + player.whereIs().getName());
+        System.out.println(t + ". You're now at the "+ player.whereIs().getName());
     }
 
     public void run() {
@@ -44,7 +43,7 @@ public class Game {
             player.showLife();
             Market.refresh();
             player.refresh();
-            time += 10;
+            t.addTime(10);
         }
         System.out.println(player.end());
 

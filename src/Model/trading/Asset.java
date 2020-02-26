@@ -27,7 +27,7 @@ public class Asset {
 
 
 	public static int  AssetPriceGen() {
-		 return (int) (Math.random() * (1000 + (Game.day * 100))) + 37;
+		 return (int) (Math.random() * (1000 + (Game.t.day * 100))) + 37;
 	}
 	
 	private String  AssetStringGen() {
