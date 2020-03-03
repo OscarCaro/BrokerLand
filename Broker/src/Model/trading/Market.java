@@ -1,7 +1,7 @@
 package model.trading;
 
 import controller.Game;
-import  model.locations.*;
+import model.locations.*;
 
 import java.util.*;
 

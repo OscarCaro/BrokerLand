@@ -1,11 +1,11 @@
 package controller;
 
+import java.util.ArrayList;
+
 import model.life.*;
 import model.locations.*;
 import model.places.*;
 import model.trading.*;
-
-import java.util.ArrayList;
 
 public class Game {
 

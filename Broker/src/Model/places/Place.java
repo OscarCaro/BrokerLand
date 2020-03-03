@@ -1,8 +1,8 @@
 package model.places;
 
-import model.trading.Broker;
-
 import java.util.*;
+
+import model.trading.Broker;
 
 
 public abstract class Place {
