@@ -43,7 +43,6 @@ public class Game {
             player.showLife();
             Market.refresh();
             player.refresh();
-            t.addTime(10);
         }
         System.out.println(player.end());
 
