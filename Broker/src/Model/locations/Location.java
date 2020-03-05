@@ -32,11 +32,7 @@ public enum Location {
 	}
 	
 	public static int totalValue() {
-		int i = 0;
-		for (Location loc : Location.values()) {
-			i++;
-		}
-		return i;
+		return values().length;
 	}
 	
 	public static Location parse(int id) {
