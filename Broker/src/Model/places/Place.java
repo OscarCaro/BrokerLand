@@ -6,11 +6,15 @@ import model.trading.Broker;
 
 
 public abstract class Place {
+	
     protected List<Action> actions;
+    public String name;   
 
-    public Place(){
+    public Place(String name){
         actions = new ArrayList<>();
+        this.name = name;
     }
+    
     public void menu(Broker b) {
         System.out.println("-------------------------------------");
         System.out.println("What do you want to do?");
@@ -25,5 +29,9 @@ public abstract class Place {
     }
 
     abstract void enactAction(int i, Broker b);
+    
+    public String toString() {
+    	return this.name;
+    }
 
 }

@@ -7,6 +7,7 @@ import model.trading.Market;
 public class Office extends Place {
     public static final int index = 1;
     public Office() {
+    	super("Office");
         actions.add(new Action("Buy", "Take a look at the market and decide on what to buy.", 1*60, -5));
         actions.add(new Action("Wait for market move", "Spend 2 hours analysing the state of the market.", 2*60, -3));
         actions.add(new Action("Sell", "Take a look at your portfolio and decide on what to sell.", 1*60, -2));

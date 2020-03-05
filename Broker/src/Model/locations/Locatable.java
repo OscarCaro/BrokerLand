@@ -1,21 +1,25 @@
 package model.locations;
 
+import model.places.Place;
+
 public abstract class Locatable {
-	protected Location loc;
 	
-	public Locatable(Location loc) {
-		this.loc = loc;
+	protected Place place;
+	protected Locations possibleLocations;
+	
+	public Locatable() {
+		this.possibleLocations = new Locations();		
 	}
 	
-	public void go(Location newLoc) {
-		this.loc = newLoc;
+	public void go(Place newPlace) {
+		this.place = newPlace;
 	}
 	
-	public boolean isIn (Location loc) {
-		return loc.equals(this.loc);
+	public boolean isIn (Place place) {
+		return this.place.equals(place);
 	}
 	
-	public Location whereIs(){
-		return loc;
+	public Place whereIs(){
+		return place;
 	}
 }

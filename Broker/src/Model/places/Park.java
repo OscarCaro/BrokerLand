@@ -6,6 +6,7 @@ import model.trading.Broker;
 public class Park extends Place {
     public static final int index = 2;
     public Park(){
+    	super("Park");
         actions.add(new Action("Feed the pigeons", "Take a time off your stressful lifestyle feeding the pigeons.", 15, 4));
         actions.add(new Action("Observe the kids", "Look at the kids and reminisce of the times where you were one of them.", 30, 1));
         actions.add(new Action("Ride the swing", "Get on the swing and pretend you're a kid and life's not difficult.", 10, -10));

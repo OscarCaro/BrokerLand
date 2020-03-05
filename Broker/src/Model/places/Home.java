@@ -6,6 +6,7 @@ import model.trading.Broker;
 public class Home extends Place {
     public static final int index = 0;
     public Home() {
+    	super("Home");
         actions.add(new Action("Sleep", "Spend 6 hours getting a good hardworking person sleep.", 60*4, 5));
         actions.add(new Action("Cook meal", "Spend 2 hours cooking and eating food.", 60*2, 5));
         actions.add(new Action("Order takeaway", "Spend 1 hour ordering and eating takeaway food.", 60, -5));

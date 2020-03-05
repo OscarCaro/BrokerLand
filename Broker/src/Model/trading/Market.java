@@ -10,8 +10,8 @@ public class Market extends Locatable{
 	public static List<Asset> assets;
 	public static int size;
 	public Market() {
-		super(Location.OFFICE);
-		
+		super();
+		go(possibleLocations.getOffice());		
 		assets = new ArrayList<Asset>();
 	}
 

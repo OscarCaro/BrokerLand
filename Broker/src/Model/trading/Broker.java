@@ -3,7 +3,8 @@ package model.trading;
 import controller.Game;
 import model.life.MentalHealth;
 import model.locations.Locatable;
-import model.locations.Location;
+import model.locations.Locations;
+import model.places.Place;
 
 import java.util.Scanner;
 
@@ -13,16 +14,17 @@ public class Broker extends Locatable {
     protected MentalHealth mental;
 
     public Broker() {
-        super(Location.HOME);
+    	super();
+    	go(possibleLocations.getHome());
         mental = new MentalHealth(100);
         money = 1000;
         in = new Scanner(System.in);
     }
 
     public void update() {
-        if (isIn(Location.HOME)) {
+        if (isIn(possibleLocations.getHome())) {
             eat();
-        } else if (isIn(Location.OFFICE)) {
+        } else if (isIn(possibleLocations.getOffice())) {
             buy();
             refresh();
             showAssets();
@@ -112,15 +114,15 @@ public class Broker extends Locatable {
     }
 
     public void askMove() {
-        System.out.println("You're currently at the " + loc.toString() + "\nDo you want to move? (y/n)");
+        System.out.println("You're currently at the " + place.toString() + "\nDo you want to move? (y/n)");
         String input = in.nextLine();
         if (input.toUpperCase().equals("Y")) {
-            Location.printAll();
+            possibleLocations.printAll();
             System.out.println("Where to?");
             input = in.nextLine();
-            if (Integer.parseInt(input) >= 0 && Integer.parseInt(input) < Location.totalValue()) {
-                Location l = Location.parse(Integer.parseInt(input));
-                this.go(l);
+            if (Integer.parseInt(input) >= 0 && Integer.parseInt(input) < possibleLocations.getSize()) {
+                Place place = possibleLocations.parse(Integer.parseInt(input));
+                this.go(place);
             }
         }
 
