@@ -1,18 +1,23 @@
-package model.places;
+package model.locations;
 
 import java.util.*;
 
-import model.trading.Broker;
+import model.actions.Action;
+import model.players.Broker;
 
 
-public abstract class Place {
+public abstract class Location {
 	
     protected List<Action> actions;
     public String name;   
 
-    public Place(String name){
+    public Location(String name){
         actions = new ArrayList<>();
         this.name = name;
+    }
+    
+    protected void addAction(Action action) {
+    	actions.add(action);
     }
     
     public void menu(Broker b) {
@@ -24,11 +29,11 @@ public abstract class Place {
         System.out.println("-------------------------------------");
         String aux = Broker.in.nextLine();
         if (Integer.parseInt(aux) >= 0 && Integer.parseInt(aux) < actions.size()) {
-            enactAction(Integer.parseInt(aux), b);
+//            enactAction(Integer.parseInt(aux), b);
         }
     }
 
-    abstract void enactAction(int i, Broker b);
+//    abstract void enactAction(int i, Broker b);
     
     public String toString() {
     	return this.name;

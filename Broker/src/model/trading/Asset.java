@@ -4,11 +4,11 @@ import controller.Game;
 
 public class Asset {
 
-	int price;
+	public int price;
 	public String name;
 	public boolean owned;
 	
-	Asset() {
+	public Asset() {
 		price = AssetPriceGen();
 		name = AssetStringGen();
 		owned = false;

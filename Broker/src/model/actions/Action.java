@@ -1,7 +1,10 @@
-package model.places;
+package model.actions;
 
+import model.locations.Location;
+import model.players.Player;
 
-public class Action {
+public abstract class Action{
+	
     protected String name;
     protected String desc;
     protected int time, mental;
@@ -18,6 +21,8 @@ public class Action {
         this.time = time;
         this.mental = mental;
     }
+    
+    public abstract void execute(Player performer);
 
     @Override
     public String toString() {

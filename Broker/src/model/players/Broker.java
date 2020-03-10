@@ -1,42 +1,37 @@
-package model.trading;
+package model.players;
 
 import controller.Game;
 import model.life.MentalHealth;
-import model.locations.Locatable;
-import model.locations.Locations;
-import model.places.Place;
+import model.locations.Location;
+import model.locations.LocationChanger;
 
 import java.util.Scanner;
 
-public class Broker extends Locatable {
+public class Broker extends Player {
+	
     public static Scanner in;
-    public int money;
-    protected MentalHealth mental;
 
-    public Broker() {
-    	super();
-    	go(possibleLocations.getHome());
-        mental = new MentalHealth(100);
-        money = 1000;
+    public Broker(LocationChanger map, Market globalMarket) {
+    	super(map.getHomeObj(), map, 1000, globalMarket);
         in = new Scanner(System.in);
     }
 
     public void update() {
-        if (isIn(possibleLocations.getHome())) {
-            eat();
-        } else if (isIn(possibleLocations.getOffice())) {
-            buy();
-            refresh();
-            showAssets();
-            sell();
-        }
+//        if (isIn(possibleLocations.getHome())) {
+//            eat();
+//        } else if (isIn(possibleLocations.getOffice())) {
+//            buy();
+//            refresh();
+//            showAssets();
+//            sell();
+//        }
         askMove();
 
     }
 
     public void eat() {
         System.out.println("you ate");
-        mental.add(15);
+//        mental.add(15);
     }
 
 
@@ -44,7 +39,7 @@ public class Broker extends Locatable {
         System.out.println("Do you want to buy any asset? (y/n)");
         String input = in.nextLine();
         while (input.toUpperCase().equals("Y")) {
-            mental.add(-10);
+//            mental.add(-10);
             System.out.println("Which one? (0->" + (Market.size - 1) + ")");
             input = in.nextLine();
             if (Integer.parseInt(input) >= 0 && Integer.parseInt(input) < Market.size) {
@@ -70,7 +65,7 @@ public class Broker extends Locatable {
             System.out.println("Do you want to sell any? (y/n)");
             String input = in.nextLine();
             if (input.toUpperCase().equals("Y")) {
-                mental.add(-20);
+//                mental.add(-20);
                 while (!input.toUpperCase().equals("N") && Market.getOwned() > 0) {
                     System.out.println("Which one? (index)");
                     input = in.nextLine();
@@ -114,41 +109,42 @@ public class Broker extends Locatable {
     }
 
     public void askMove() {
-        System.out.println("You're currently at the " + place.toString() + "\nDo you want to move? (y/n)");
+//        System.out.println("You're currently at the " + place.toString() + "\nDo you want to move? (y/n)");
         String input = in.nextLine();
         if (input.toUpperCase().equals("Y")) {
-            possibleLocations.printAll();
+//            possibleLocations.printAll();
             System.out.println("Where to?");
             input = in.nextLine();
-            if (Integer.parseInt(input) >= 0 && Integer.parseInt(input) < possibleLocations.getSize()) {
-                Place place = possibleLocations.parse(Integer.parseInt(input));
-                this.go(place);
-            }
+//            if (Integer.parseInt(input) >= 0 && Integer.parseInt(input) < possibleLocations.getSize()) {
+//                Location place = possibleLocations.parse(Integer.parseInt(input));
+//                this.go(place);
+//            }
         }
 
     }
 
     public void addMental(int m) {
-        mental.add(m);
+//        mental.add(m);
     }
 
     public boolean checkHealth() {
-        return money > 0 && !mental.insane();
+//        return money > 0 && !mental.insane();
+    	return false;
     }
 
     public void showLife() {
         System.out.println("-------------------------------------");
         System.out.println("Your portfolio amounts to: " + "$" + money);
-        System.out.println(mental);
+//        System.out.println(mental);
         System.out.println("-------------------------------------");
     }
 
     public String end() {
         String aux = null;
-        if (money < 0) {
+//        if (money < 0) {
             aux = "You went bankrupt and your addiction to cocaine made "
                     + "you go into rehab,\n you're now starting a new life in the fields of Maine.\n";
-        } else if (mental.insane())
+//        } else if (mental.insane())
             aux = "The life you chose has seemed unbearable for a time now,\n" +
                     " and after considering suicide several times too many you decide to get help.\n" +
                     " The first thing you do to change your life around is give up trading.\n ";

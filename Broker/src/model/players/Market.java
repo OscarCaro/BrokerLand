@@ -1,23 +1,23 @@
-package model.trading;
+package model.players;
 
 import controller.Game;
 import model.locations.*;
+import model.trading.Asset;
 
 import java.util.*;
 
-public class Market extends Locatable{
+public class Market{
 
 	public static List<Asset> assets;
 	public static int size;
 	public Market() {
 		super();
-		go(possibleLocations.getOffice());		
 		assets = new ArrayList<Asset>();
 	}
 
 	public static void refresh() {
 		for (int i = 0; i < Market.size; i++) {
-			Market.assets.get(i).price = Asset.AssetPriceGen();
+			//Market.assets.get(i).price = Asset.AssetPriceGen();
 		}
 	}
 
