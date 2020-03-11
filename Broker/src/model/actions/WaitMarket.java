@@ -1,5 +1,6 @@
 package model.actions;
 
+import model.players.Market;
 import model.players.Player;
 
 public class WaitMarket extends Action {
@@ -9,9 +10,10 @@ public class WaitMarket extends Action {
 	}
 
 	@Override
-	public void execute(Player performer) {
-		// TODO Auto-generated method stub
-
+	protected void performSpecificAction(Player performer) {
+		//TODO: re-implement once market is ok
+		Market.opportunity();
+		Market.showState();
 	}
 
 }

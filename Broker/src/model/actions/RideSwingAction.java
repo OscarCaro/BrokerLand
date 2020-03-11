@@ -9,9 +9,8 @@ public class RideSwingAction extends Action {
 	}
 
 	@Override
-	public void execute(Player performer) {
-		// TODO Auto-generated method stub
-
+	protected void performSpecificAction(Player performer) {
+		System.out.println("You ride the swing, everyone stares at you, you go sit down on the bench again fully ashamed.");
 	}
 
 }

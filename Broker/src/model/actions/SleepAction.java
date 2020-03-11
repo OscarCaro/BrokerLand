@@ -9,9 +9,8 @@ public class SleepAction extends Action {
 	}
 
 	@Override
-	public void execute(Player performer) {
-		
-
+	protected void performSpecificAction(Player performer) {
+		System.out.println("You got an ok rest.");
 	}
 
 }

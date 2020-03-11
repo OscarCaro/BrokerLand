@@ -9,9 +9,8 @@ public class StareWallAction extends Action {
 	}
 
 	@Override
-	public void execute(Player performer) {
-		// TODO Auto-generated method stub
-
+	protected void performSpecificAction(Player performer) {
+		System.out.println("You intently stare at the wall wondering about your life decisions.");
 	}
 
 }

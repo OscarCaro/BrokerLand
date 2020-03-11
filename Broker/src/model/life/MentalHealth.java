@@ -1,7 +1,9 @@
 package model.life;
 
 public class MentalHealth {
+	
 	int health;
+	
 	public MentalHealth(int m) {
 		this.health = m;
 	}

@@ -9,9 +9,8 @@ public class OrderTakeawayAction extends Action {
 	}
 
 	@Override
-	public void execute(Player performer) {
-		// TODO Auto-generated method stub
-
+	protected void performSpecificAction(Player performer) {
+		System.out.println("The meal was just ok. What you'd expect from a takeaway meal.");
 	}
 
 }

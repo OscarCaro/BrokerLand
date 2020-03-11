@@ -17,7 +17,7 @@ public class Market{
 
 	public static void refresh() {
 		for (int i = 0; i < Market.size; i++) {
-			//Market.assets.get(i).price = Asset.AssetPriceGen();
+			Market.assets.get(i).price = Asset.AssetPriceGen();
 		}
 	}
 

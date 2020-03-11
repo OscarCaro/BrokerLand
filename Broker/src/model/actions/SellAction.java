@@ -10,9 +10,8 @@ public class SellAction extends Action {
 	}
 
 	@Override
-	public void execute(Player performer) {
-		// TODO Auto-generated method stub
-
+	protected void performSpecificAction(Player performer) {
+		performer.sell();
 	}
 
 }

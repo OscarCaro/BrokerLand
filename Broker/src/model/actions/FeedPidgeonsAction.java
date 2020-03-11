@@ -9,9 +9,9 @@ public class FeedPidgeonsAction extends Action {
 	}
 
 	@Override
-	public void execute(Player performer) {
-		// TODO Auto-generated method stub
-
+	protected void performSpecificAction(Player performer) {
+		performer.modifyMoney(-5);
+		System.out.println("You fed the pigeons wholesomely.");
 	}
 
 }

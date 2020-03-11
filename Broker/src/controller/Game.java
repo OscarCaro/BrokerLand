@@ -4,6 +4,7 @@ import model.life.*;
 import model.locations.*;
 import model.players.Broker;
 import model.players.Market;
+import model.players.Player;
 import model.trading.*;
 
 public class Game {
@@ -11,7 +12,7 @@ public class Game {
 	public static Time t;
     
 	private Map map;
-    private Broker player;
+    private Broker broker;
     private Market market;
 
     public Game() {
@@ -21,7 +22,7 @@ public class Game {
         market = new Market();
         market.initMarket();
 
-        player = new Broker(map, market);        
+        broker = new Broker(map, market);        
 
     }
 
@@ -30,17 +31,14 @@ public class Game {
     }
 
     public void run() {
-//        while (player.checkHealth()) {
-//            Location current = player.whereIs();
-//            showState();
-//            current.menu(player);
-//            player.askMove();
-//            player.showLife();
-//            Market.refresh();
-//            player.refresh();
-//        }
-//        System.out.println(player.end());
-
+        while (broker.canContinue()) {
+        	broker.update();
+        	market.refresh();
+        	broker.refresh();
+        	
+        }
+        System.out.println(broker.endMessage());
     }
+
 
 }

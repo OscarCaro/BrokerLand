@@ -4,15 +4,18 @@ import java.util.*;
 
 import model.actions.Action;
 import model.players.Broker;
+import model.players.Player;
 
 
 public abstract class Location {
 	
     protected List<Action> actions;
+    protected List<Player> playersInside;
     public String name;   
 
     public Location(String name){
         actions = new ArrayList<>();
+        playersInside = new ArrayList<>();
         this.name = name;
     }
     
@@ -20,21 +23,32 @@ public abstract class Location {
     	actions.add(action);
     }
     
-    public void menu(Broker b) {
-        System.out.println("-------------------------------------");
-        System.out.println("What do you want to do?");
-        for (int i = 0; i < actions.size(); i++) {
-            System.out.println(i + ": " + actions.get(i));
-        }
-        System.out.println("-------------------------------------");
-        String aux = Broker.in.nextLine();
-        if (Integer.parseInt(aux) >= 0 && Integer.parseInt(aux) < actions.size()) {
-//            enactAction(Integer.parseInt(aux), b);
-        }
+    public void enterPlayer(Player player) {
+    	this.playersInside.add(player);
     }
-
-//    abstract void enactAction(int i, Broker b);
     
+    protected void exitPlayer(Player player) {
+    	this.playersInside.remove(player);
+    }
+    
+    public void printActions() {
+    	System.out.println("======================================");
+    	for(int i = 0; i < actions.size(); i++) {
+    		System.out.println(i + ". " + actions.get(i));
+    	}
+    	System.out.println("======================================");
+    }
+    
+    public void performAction(Player player, int actionIdx) {
+    	if(actionIdx >= 0 && actionIdx < actions.size()) {
+    		actions.get(actionIdx).perform(player);
+    	}
+    }
+    
+    public int getNumOfActions() {
+    	return this.actions.size();
+    }
+ 
     public String toString() {
     	return this.name;
     }
