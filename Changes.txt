@@ -1,4 +1,42 @@
-Cambios:
+Nueva implementación:
+
+Game:	
+	Contiene el mapa de locations, al broker (player con input), el market, y en un futuro una lista de MODS(players sin input).
+
+Location:
+	Clase abstracta para los lugares. 
+	Contiene una lista de players que están en esa location en el momento actual.
+	Contiene una lista de actions que se pueden hacer desde esa location
+
+Action:
+	Clase abstracta para las acciones. Solo tiene método perform, que recibe un player y lo modifica (i.e. le baja la mentalHealth)
+
+Map:
+	Contiene la lista de locations. Aquí es donde se guardan los objetos de la clase HOME, Park, etc. Importante que solo haya un objeto de cada location.
+	Implementa la intefaz LocationChanger
+
+LocationChanger:
+	Todos los players van a tener una referencia al mapa, pero enmascarada bajo esta interfaz, que solo permite cambiarte de location
+
+Player Class:
+	Clase abstracta para cualquier jugador (ya sea el usuario o los MODS). Guarda la info sobre mentalHealth, dinero, 
+	una referencia al market (que es global), la currentLocation, y un LocationChanger para poder moverse a otros sitios.
+
+Broker:
+	Extiende player y se encarga de todo el input/output
+
+MOD(futuro):
+	Extiende player y se mueve a base de decisiones random en vez de por el input del usuario
+
+Market:
+	Hay un solo market(creado en game) pero todos los player tienen acceso a el simultaneamente.
+
+
+
+
+
+
+Antiguos cambios:
 
 - Añadida clase places para los sitios en los que puede estar y simplificar los menús que pueden tener.
 
