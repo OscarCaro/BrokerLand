@@ -26,10 +26,6 @@ public class Game {
 
     }
 
-    public void showState() {
-//        System.out.println(t + ". You're now at the "+ player.whereIs());
-    }
-
     public void run() {
         while (broker.canContinue()) {
         	broker.update();
