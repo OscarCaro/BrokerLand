@@ -5,6 +5,7 @@ import model.life.MentalHealth;
 import model.life.Time;
 import model.locations.Location;
 import model.locations.LocationChanger;
+import model.trading.Market;
 
 public abstract class Player {
 	
@@ -13,10 +14,10 @@ public abstract class Player {
 	protected Market globalMarket;
 	protected MentalHealth mentalH;
 	protected int money;
-	protected Time ownTime;
+	protected Time ownTime;		//To be used when we add more players (MODS)
 	
-	public Player(LocationChanger map, Location loc, int money, Market globalMarket) {
-		map.startIn(this, loc);
+	public Player(LocationChanger map, int locIdx, int money, Market globalMarket) {
+		map.startIn(this, locIdx);
 		this.map = map;
 		this.money = money;
 		this.globalMarket = globalMarket;
@@ -48,12 +49,20 @@ public abstract class Player {
 		this.mentalH.add(amount);
 	}
 	
+	public int getMoney() {
+		return this.money;
+	}
+	
 	public void modifyMoney(int amount) {
 		this.money += amount;
 	}
 	
 	public void addTime(int minutes) {
 		this.ownTime.addTime(minutes);
+	}
+	
+	public Market getGlobalMarket() {
+		return this.globalMarket;
 	}
 
 }

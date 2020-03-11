@@ -3,7 +3,6 @@ package controller;
 import model.life.*;
 import model.locations.*;
 import model.players.Broker;
-import model.players.Market;
 import model.players.Player;
 import model.trading.*;
 
@@ -20,7 +19,6 @@ public class Game {
 
     	map = new Map();
         market = new Market();
-        market.initMarket();
 
         broker = new Broker(map, market);        
 
@@ -29,9 +27,8 @@ public class Game {
     public void run() {
         while (broker.canContinue()) {
         	broker.update();
-        	market.refresh();
-        	broker.refresh();
-        	
+        	market.refresh(); 
+        	System.out.println("\n\n\n");
         }
         System.out.println(broker.endMessage());
     }

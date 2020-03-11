@@ -28,9 +28,10 @@ public class Map implements LocationChanger{
 	}
 	
 	@Override
-	public void startIn(Player player, Location startLoc) {
-		player.setCurrLoc(startLoc);
-		startLoc.enterPlayer(player);		
+	public void startIn(Player player, int locIdx) {
+		Location loc = locations.get(locIdx);
+		player.setCurrLoc(loc);
+		loc.enterPlayer(player);		
 	}
 	
 	@Override
@@ -44,21 +45,4 @@ public class Map implements LocationChanger{
 	public int getNumOfLocs() {
 		return this.locations.size();
 	}
-
-	@Override
-	public Location getHomeObj() {		
-		return locations.get(HOMEIDX);
-	}
-
-	@Override
-	public Location getOfficeObj() {		
-		return locations.get(OFFICEIDX);
-	}
-
-	@Override
-	public Location getParkObj() {
-		return locations.get(PARKIDX);
-	}
-	
-
 }

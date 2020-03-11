@@ -8,7 +8,7 @@ import model.actions.SellAction;
 import model.actions.StareWallAction;
 import model.actions.WaitMarket;
 import model.players.Broker;
-import model.players.Market;
+import model.trading.Market;
 
 public class Office extends Location {
 

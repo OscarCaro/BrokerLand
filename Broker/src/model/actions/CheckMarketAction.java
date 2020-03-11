@@ -1,7 +1,7 @@
 package model.actions;
 
-import model.players.Market;
 import model.players.Player;
+import model.trading.Market;
 
 public class CheckMarketAction extends Action {
 	
@@ -11,9 +11,7 @@ public class CheckMarketAction extends Action {
 
 	@Override
 	protected void performSpecificAction(Player performer) {
-		//TODO: re-implement once market is ok
-		Market.showState();
-
+		performer.getGlobalMarket().print();
 	}
 
 }

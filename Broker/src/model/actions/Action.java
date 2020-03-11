@@ -1,5 +1,6 @@
 package model.actions;
 
+import controller.Game;
 import model.players.Player;
 
 public abstract class Action{
@@ -18,7 +19,8 @@ public abstract class Action{
     
     public void perform(Player player) {
     	player.modifyHealth(mental);
-    	player.addTime(time);
+    	//player.addTime(time);			To be used when we add more players (MODS)
+    	Game.t.addTime(time);
     	performSpecificAction(player);
     }
     

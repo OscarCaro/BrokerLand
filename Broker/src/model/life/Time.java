@@ -1,9 +1,9 @@
 package model.life;
 
 public class Time {
-	public static int minutes;
-	public static int hours;
-	public static int day;
+	public int minutes;
+	public int hours;
+	public int day;
 
 	public Time() {
 		minutes = 0;
@@ -33,7 +33,7 @@ public class Time {
 		if (aux2.length() < 2) {
 			aux2 = "0" + aux2;
 		}
-		return "It's: " + aux1 + ":" + aux2 + " of day:" + day;
+		return "It's: " + aux1 + ":" + aux2 + " of day " + day;
 
 	}
 
