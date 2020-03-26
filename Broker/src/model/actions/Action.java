@@ -1,6 +1,8 @@
 package model.actions;
 
 import controller.Game;
+import model.players.Bot;
+import model.players.Broker;
 import model.players.Player;
 
 public abstract class Action{
@@ -17,14 +19,14 @@ public abstract class Action{
         this.mental = mental;
     }
     
-    public void perform(Player player) {
+    public void perform(Player player, boolean isUser) {
     	player.modifyHealth(mental);
     	//player.addTime(time);			To be used when we add more players (MODS)
     	Game.t.addTime(time);
-    	performSpecificAction(player);
+    	performSpecificAction(player, isUser);
     }
     
-    protected abstract void performSpecificAction(Player player);
+    protected abstract void performSpecificAction(Player player, boolean isUser);
 
     @Override
     public String toString() {

@@ -1,5 +1,7 @@
 package model.actions;
 
+import model.players.Bot;
+import model.players.Broker;
 import model.players.Player;
 
 public class StareWallAction extends Action {
@@ -9,8 +11,12 @@ public class StareWallAction extends Action {
 	}
 
 	@Override
-	protected void performSpecificAction(Player performer) {
-		System.out.println("You intently stare at the wall wondering about your life decisions.");
+	protected void performSpecificAction(Player player, boolean isUser) {
+		if(isUser) {
+			System.out.println("You intently stare at the wall wondering about your life decisions.");		
+		}
+		else {
+			System.out.println(player.getName() + " intently stares at the wall wondering about his life decisions.");		
+		}		
 	}
-
 }

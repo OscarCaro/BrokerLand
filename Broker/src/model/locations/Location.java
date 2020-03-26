@@ -39,9 +39,9 @@ public abstract class Location {
     	System.out.println("======================================");
     }
     
-    public void performAction(Player player, int actionIdx) {
+    public void performAction(Player player, int actionIdx, boolean isUser) {
     	if(actionIdx >= 0 && actionIdx < actions.size()) {
-    		actions.get(actionIdx).perform(player);
+    		actions.get(actionIdx).perform(player, isUser);
     	}
     }
     

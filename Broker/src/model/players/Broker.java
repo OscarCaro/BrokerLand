@@ -15,7 +15,7 @@ public class Broker extends Player {
     private Scanner in;
 
     public Broker(LocationChanger map, Market globalMarket) {
-    	super(map, Map.HOMEIDX, 1000, globalMarket);
+    	super("You", "", map, Map.HOMEIDX, 1000, globalMarket);
         in = new Scanner(System.in);
     }
 
@@ -39,7 +39,7 @@ public class Broker extends Player {
         	System.out.println("What do you want to do?");
         	aux = in.nextLine();
         }
-        currLoc.performAction(this, Integer.parseInt(aux));    	
+        currLoc.performAction(this, Integer.parseInt(aux), true);    	
     }
     
 	private void askNewLocation() {		

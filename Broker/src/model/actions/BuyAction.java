@@ -1,5 +1,7 @@
 package model.actions;
 
+import model.players.Bot;
+import model.players.Broker;
 import model.players.Player;
 
 public class BuyAction extends Action {
@@ -9,8 +11,8 @@ public class BuyAction extends Action {
 	}
 
 	@Override
-	protected void performSpecificAction(Player performer) {
-		performer.buy();
+	protected void performSpecificAction(Player player, boolean isUser) {
+		player.buy(); // Different for broker that for mod	
 	}
 
 }

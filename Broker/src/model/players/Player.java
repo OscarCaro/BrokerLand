@@ -1,6 +1,5 @@
 package model.players;
 
-
 import model.life.MentalHealth;
 import model.life.Time;
 import model.locations.Location;
@@ -15,9 +14,13 @@ public abstract class Player {
 	protected MentalHealth mentalH;
 	protected int money;
 	protected Time ownTime;		//To be used when we add more players (MODS)
+	protected String name;
+	protected String surname;
 	
-	public Player(LocationChanger map, int locIdx, int money, Market globalMarket) {
+	public Player(String name, String surname, LocationChanger map, int locIdx, int money, Market globalMarket) {
 		map.startIn(this, locIdx);
+		this.name = name;
+		this.surname = surname;
 		this.map = map;
 		this.money = money;
 		this.globalMarket = globalMarket;
@@ -63,6 +66,10 @@ public abstract class Player {
 	
 	public Market getGlobalMarket() {
 		return this.globalMarket;
+	}
+	
+	public String getName() {
+		return this.name + " " + this.surname;
 	}
 
 }
