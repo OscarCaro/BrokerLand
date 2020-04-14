@@ -16,7 +16,7 @@ public class CookAction extends Action {
 			System.out.println("The meal was fine.");		
 		}
 		else {
-			System.out.println( player.getName() + "ate at home");
+			System.out.println( player.getName() + " ate at home");
 		}		
 	}
 

@@ -1,10 +1,14 @@
 package model.players;
 
+import javafx.util.Pair;
 import model.life.MentalHealth;
 import model.life.Time;
 import model.locations.Location;
 import model.locations.LocationChanger;
+import model.trading.Asset;
 import model.trading.Market;
+
+import java.util.*;
 
 public abstract class Player {
 	
@@ -16,7 +20,8 @@ public abstract class Player {
 	protected Time ownTime;		//To be used when we add more players (MODS)
 	protected String name;
 	protected String surname;
-	
+	protected List<Pair<Asset, Integer>> portfolio;
+
 	public Player(String name, String surname, LocationChanger map, int locIdx, int money, Market globalMarket) {
 		map.startIn(this, locIdx);
 		this.name = name;
@@ -26,6 +31,7 @@ public abstract class Player {
 		this.globalMarket = globalMarket;
 		this.mentalH = new MentalHealth(100);
 		this.ownTime = new Time();
+		this.portfolio = new ArrayList<>();
 	}
 	
 	public abstract void update();
@@ -70,6 +76,10 @@ public abstract class Player {
 	
 	public String getName() {
 		return this.name + " " + this.surname;
+	}
+
+	public List<Pair<Asset, Integer>> getPortfolio(){
+		return portfolio;
 	}
 
 }

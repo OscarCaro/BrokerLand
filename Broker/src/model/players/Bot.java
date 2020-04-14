@@ -1,19 +1,15 @@
 package model.players;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import model.locations.LocationChanger;
-import model.locations.Map;
+import model.locations.WorldMap;
 import model.trading.Market;
 import model.utils.Utils;
 
 public class Bot extends Player {
 
 	public Bot(LocationChanger map, Market globalMarket) {
-		super(Utils.generateName(), Utils.generateSurname(), map, Map.HOMEIDX, 1000, globalMarket);
+		super(Utils.generateName(), Utils.generateSurname(), map, WorldMap.HOMEIDX, 1000, globalMarket);
 	}
 
 	@Override
@@ -26,9 +22,11 @@ public class Bot extends Player {
 		currLoc.performAction(this,	Utils.randomNum(currLoc.getNumOfActions()), false);
     }
     
-	private void askNewLocation() {		        
-        map.moveTo(this, Utils.randomNum(map.getNumOfLocs()));
-        System.out.println(getName() + " went to " + currLoc);		// TODO: only when newLoc != oldLoc
+	private void askNewLocation() {
+		if(Utils.randomNum(101)>50) {
+			map.moveTo(this, Utils.randomNum(map.getNumOfLocs()));
+			System.out.println(getName() + " went to " + currLoc);        // TODO: only when newLoc != oldLoc
+		}
 	}
 
 	@Override

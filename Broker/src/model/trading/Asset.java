@@ -7,38 +7,28 @@ public class Asset {
 
 	public int price;
 	public String name;
-	private Player owner;
-	
+	public int sharesOwned; //number of shares that are sold and are brokers properties as of now
+
+
 	public Asset() {
 		price = priceGen();
 		name = stringGen();
-		owner = null;
+		sharesOwned = 0;
 	}
 	
-	public boolean isAvailable() {
-		return owner != null;
-	}
-	
-	public boolean isOwnedBy(Player player) {
-		return owner != null && owner.equals(player);
-	}
-	
-	public boolean buy(Player player) {
-		if(owner == null && player.getMoney() >= price) {
-			owner = player;
-			player.modifyMoney(-1 * price);
+	public boolean buy(Player player, int quantity) {
+		int fullp = price * quantity;
+		if(player.getMoney() >= fullp) {
+			player.modifyMoney(- 1* fullp);
+			sharesOwned += quantity;
 			return true;
 		}
 		return false;
 	}
 	
-	public boolean sell(Player player) {
-		if (owner != null && owner.equals(player)) {
-			owner.modifyMoney(price);
-			owner = null;
-			return true;
-		}
-		return false;
+	public boolean sell(Player player, int quantity) {
+		player.modifyMoney(price*quantity);
+		return true;
 	}
 	
 	public void refreshPrice() {

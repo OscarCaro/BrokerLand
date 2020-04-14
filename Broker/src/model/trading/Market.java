@@ -30,41 +30,31 @@ public class Market{
 		for(int i = 0; i < assets.size(); i++) {
 			System.out.println(i + ": " + assets.get(i) );
 		}
-	}	
-	
-	public List<Asset> getAssetsOwnedBy(Player player) {
-		List<Asset> subList = new ArrayList<>();
-		for(Asset asset : assets) {
-			if (asset.isOwnedBy(player)) {
-				subList.add(asset);
-			}
-		}
-		return subList;
 	}
 	
-	public boolean buy(Player player, int assetIdx) {
+	public boolean buy(Player player, int assetIdx, int quantity) {
 		if(assetIdx >= 0 && assetIdx < assets.size()) {
-			return assets.get(assetIdx).buy(player);
+			return assets.get(assetIdx).buy(player, quantity);
 		}
 		return false;
 	}
 	
-	public boolean sell(Player player, int assetIdx) {
-		if(assetIdx >= 0 && assetIdx < assets.size()) {
-			return assets.get(assetIdx).sell(player);
+	public boolean sell(Player player, int assetIdx, int quantity) {
+		if(assetIdx >= 0 && assetIdx < assets.size() && quantity >= assets.get(assetIdx).sharesOwned) {
+			return assets.get(assetIdx).sell(player, quantity);
 		}
 		return false;
 	}
-	
-	public boolean isAssetOwnedBy (Player player, int assetIdx) {
-		if(assetIdx >= 0 && assetIdx < assets.size()) {
-			return assets.get(assetIdx).isOwnedBy(player);
-		}
-		return false;
-	}
-	
+
 	public int getNumOfAssets() {
 		return assets.size();
 	}
-	
+
+	public int marketIndex(Asset key) {
+		for (int i = 0; i < assets.size(); i++){
+			if (key.equals(assets.get(i))) return i;
+		}
+		throw new ArrayIndexOutOfBoundsException("Asset is not in market.");
+	}
+
 }

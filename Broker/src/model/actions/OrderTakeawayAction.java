@@ -16,7 +16,7 @@ public class OrderTakeawayAction extends Action {
 			System.out.println("The meal was just ok. What you'd expect from a takeaway meal.");		
 		}
 		else {
-			System.out.println(player.getName() + "ate a takeaway meal.");		
+			System.out.println(player.getName() + " ate a takeaway meal.");
 		}		
 	}
 

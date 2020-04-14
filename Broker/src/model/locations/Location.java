@@ -32,17 +32,18 @@ public abstract class Location {
     }
     
     public void printActions() {
-    	System.out.println("======================================");
+    	System.out.println("==================================================================");
     	for(int i = 0; i < actions.size(); i++) {
     		System.out.println(i + ". " + actions.get(i));
     	}
-    	System.out.println("======================================");
+        System.out.println("==================================================================");
     }
     
     public void performAction(Player player, int actionIdx, boolean isUser) {
     	if(actionIdx >= 0 && actionIdx < actions.size()) {
-    		actions.get(actionIdx).perform(player, isUser);
-    	}
+            actions.get(actionIdx).perform(player, isUser);
+        }
+    	else throw new IllegalArgumentException("No such action by "+actionIdx + "in " + actions);
     }
     
     public int getNumOfActions() {

@@ -5,7 +5,7 @@ import java.util.List;
 
 import model.players.Player;
 
-public class Map implements LocationChanger{
+public class WorldMap implements LocationChanger{
 	
 	public static final int HOMEIDX = 0;
 	public static final int OFFICEIDX = 1;
@@ -13,7 +13,7 @@ public class Map implements LocationChanger{
 	
 	private List<Location> locations;
 	
-	public Map() {
+	public WorldMap() {
 		locations = new ArrayList<Location>();
 		locations.add(HOMEIDX, new Home());
 		locations.add(OFFICEIDX, new Office());

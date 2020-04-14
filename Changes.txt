@@ -1,3 +1,40 @@
+cambios del 14/4:
+
+Game: 
+	refactor de broker por player, porque pensaba que así es más legible.
+	borrado el \n que dan las acciones de los bots
+
+Broker:
+	Cambiado el método buy y sell para soportar cantidades (lista de parejas).
+	Cambios en el texto.
+	Creado Show portfolio.
+
+Player:
+	Ahora cada player tiene una lista de parejas de Asset con cantidad que posee del asset.
+
+Market: 
+	Mil cosas para soportar cantidades y deshacerse de Ownership de assets.
+
+Asset: 
+	Quitado el ownership y añadido un contador de acciones vendidas global que es el que usaremos para decidir cuales quiebran.
+	
+Bot: 
+	Ask new location ahora solo funcionará el 50% de las veces. //en un futuro se hará para que sean propensos a ir a la oficina
+
+Location: 
+	Añadida excepcion en performAction si el indice se sale aunque no debería.
+
+Map: 
+	Refactor a Worldmap por conflicto con Map de java.util
+
+Actions (en general): 	
+	
+	Arreglado el texto de aquellas defectuosas.
+
+
+
+
+
 Nueva implementación:
 
 Game:	
