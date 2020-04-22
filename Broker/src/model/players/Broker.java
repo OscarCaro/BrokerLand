@@ -15,8 +15,8 @@ public class Broker extends Player {
 
     private Scanner in;
 
-    public Broker(LocationChanger map, Market globalMarket) {
-        super("You", "", map, WorldMap.HOMEIDX, 1000, globalMarket);
+    public Broker(LocationChanger map) {
+        super("You", "", map, WorldMap.HOMEIDX, 1000);
         in = new Scanner(System.in);
     }
 

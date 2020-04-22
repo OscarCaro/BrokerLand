@@ -21,11 +21,11 @@ public class Game {
     public Game() {
         t = new Time();
     	worldMap = new WorldMap();
-        market = new Market();
-        player = new Broker(worldMap, market);
+        market = Market.getInstance();
+        player = new Broker(worldMap);
         bots = new ArrayList<>();
-        for(int i = 0; i < 10; i++) { //make difficulties?
-        	bots.add(new Bot(worldMap, market));
+        for(int i = 0; i < 10; i++) {
+        	bots.add(new Bot(worldMap));
         }
     }
 

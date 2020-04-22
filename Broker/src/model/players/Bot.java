@@ -8,8 +8,8 @@ import model.utils.Utils;
 
 public class Bot extends Player {
 
-	public Bot(LocationChanger map, Market globalMarket) {
-		super(Utils.generateName(), Utils.generateSurname(), map, WorldMap.HOMEIDX, 1000, globalMarket);
+	public Bot(LocationChanger map) {
+		super(Utils.generateName(), Utils.generateSurname(), map, WorldMap.HOMEIDX, 1000);
 	}
 
 	@Override

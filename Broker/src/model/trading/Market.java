@@ -4,15 +4,25 @@ import java.util.*;
 
 import model.players.Player;
 
+//This class follows the Singleton pattern, since there should be only one Market
 public class Market{
+	
+	private static Market instance;
 
 	public List<Asset> assets;
 	
-	public Market() {
+	private Market() {
 		assets = new ArrayList<Asset>();
 		assets.add(new Asset());
 		assets.add(new Asset());
 		assets.add(new Asset());
+	}
+	
+	public static Market getInstance() {
+		if (instance == null) {
+			instance = new Market();
+		}
+		return instance;
 	}
 
 	public void refresh() {

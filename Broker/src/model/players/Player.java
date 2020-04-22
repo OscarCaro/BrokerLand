@@ -22,13 +22,13 @@ public abstract class Player {
 	protected String surname;
 	protected List<Pair<Asset, Integer>> portfolio;
 
-	public Player(String name, String surname, LocationChanger map, int locIdx, int money, Market globalMarket) {
+	public Player(String name, String surname, LocationChanger map, int locIdx, int money) {
 		map.startIn(this, locIdx);
 		this.name = name;
 		this.surname = surname;
 		this.map = map;
 		this.money = money;
-		this.globalMarket = globalMarket;
+		this.globalMarket = Market.getInstance();
 		this.mentalH = new MentalHealth(100);
 		this.ownTime = new Time();
 		this.portfolio = new ArrayList<>();
