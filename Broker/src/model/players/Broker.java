@@ -64,13 +64,23 @@ public class Broker extends Player {
     public String endMessage() {
         String aux = null;
         if (money < 0) {
-            aux = "You went bankrupt and your addiction to cocaine made "
-                    + "you go into rehab,\n you're now starting a new life in the fields of Maine.\n";
-        } else if (mentalH.insane())
+            aux = "You went bankrupt and fled the country,\n you're now starting a new life in the fields of Maine.\n";
+            aux += "\n-------------- You are done ---------------";
+        } else if (mentalH.insane()) {
             aux = "The life you chose has seemed unbearable for a time now,\n" +
                     " and after considering suicide several times too many you decide to get help.\n" +
                     " The first thing you do to change your life around is give up trading.\n ";
-        aux += "\n-------------- You are done ---------------";
+            aux += "\n-------------- You are done ---------------";
+        }
+        else{
+            aux =  "You are the only broker left in the platform.\n" +
+                    "With enormous influence over it and a moneymaking machine in your hands now,\n" +
+                    "you start paying attention to the equally enormous void in your heart.\n "+
+                     "You are now all alone in a trading world devoid of interest.\n "+
+                    "You won, but at what cost.\n";
+            aux += "\n-------------- You won ---------------";
+        }
+
         return aux;
     }
 
@@ -87,11 +97,8 @@ public class Broker extends Player {
             System.out.println("How many? (1->" + (this.money / globalMarket.assets.get(idx).price) + ")");
             input = in.nextLine();
             int qtty = Integer.parseInt(input);
-            if (!globalMarket.buy(this, idx, qtty)) {
+            if(!playerBuyAsset(idx, qtty)) {
                 System.out.println("You cannot buy that asset");
-            }
-            else{
-                portfolio.add(new Pair<>(globalMarket.assets.get(idx), qtty));
             }
         }
         showPortfolio();
@@ -126,12 +133,7 @@ public class Broker extends Player {
                     input = in.nextLine();
                     qtty = Integer.parseInt(input);
                 }
-                globalMarket.sell( this, globalMarket.marketIndex(portfolio.get(idx).getKey()), qtty);
-                Pair<Asset, Integer> p = new Pair<>(portfolio.get(idx).getKey(), portfolio.get(idx).getValue()-qtty);
-                portfolio.remove(idx);
-                if (p.getValue() > 0){
-                    portfolio.add(p);
-                } //If I did not sell all of them I must keep the pair with the new value of qtty
+                this.playerSellAsset(idx, qtty);
                 showPortfolio();
                 if (portfolio.size() > 0) {
                     System.out.println("Do you want to sell any others? (y/n)");

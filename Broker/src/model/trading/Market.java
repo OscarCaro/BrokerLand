@@ -27,7 +27,7 @@ public class Market {
     }
 
     private void addNewAsset() {
-        Asset a=null;
+        Asset a = null;
         boolean aux = true;
         while (aux) {
             aux = false;
@@ -66,7 +66,7 @@ public class Market {
     }
 
     public boolean sell(Player player, int assetIdx, int quantity) {
-        if (assetIdx >= 0 && assetIdx < assets.size() && quantity >= assets.get(assetIdx).sharesOwned) {
+        if (assetIdx >= 0 && assetIdx < assets.size() && quantity <= assets.get(assetIdx).sharesOwned) {
             return assets.get(assetIdx).sell(player, quantity);
         }
         return false;

@@ -1,3 +1,15 @@
+cambios del 22/04: //Planteándome seriamente dejar de escribir changes.txt y solo escribir en los commit de los small releases
+
+implementado el buy y sell de los brokers con el strategy pattern, por ahora todos implementan la estrategia random.
+
+rework de las strings de los assets para que sean mas legibles y creativas.
+
+arreglados un monton de bugs y strings deficientes.
+
+ahora se puede ganar.
+
+los brokers ahora pueden "perder".
+
 cambios del 14/4:
 
 Game: 

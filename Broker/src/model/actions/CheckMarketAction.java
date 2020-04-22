@@ -17,7 +17,7 @@ public class CheckMarketAction extends Action {
 			player.getGlobalMarket().print();		
 		}
 		else {
-			System.out.println(player.getName() + "just checked the market");		
+			System.out.println(player.getName() + " just checked the market");
 		}		
 	}
 

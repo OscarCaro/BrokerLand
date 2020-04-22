@@ -41,14 +41,14 @@ public class Asset {
     }
 
     private int priceGen() {
-        return  Utils.randomNum(1000 + (Game.t.day * 100)) + 37;
+        return Utils.randomNum(10 + (Game.t.day * 10)) + 20;
     }
 
     private String stringGen() {
-        int type = Utils.randomNum(  6);
+        int type = Utils.randomNum(6);
         StringBuilder name = new StringBuilder("" + Utils.randomLetter()); /*first an Upper case letter.*/
         if (type == 0) {
-            int length = Utils.randomNum( 2) + 1;
+            int length = Utils.randomNum(2) + 1;
             char aux;
             aux = Utils.randomLetter();
             if (aux == 'A' || aux == 'O' || aux == 'I' || aux == 'E' || aux == 'U') {
@@ -60,19 +60,19 @@ public class Asset {
             }
             name.append(" Electricity");
         } else if (type == 1) { //Incorporated companies
-            int length = Utils.randomNum( 3) + 2;
+            int length = Utils.randomNum(3) + 2;
             for (int i = 0; i < length; i++) {
                 name.append(Utils.randomLetter());
             }
-            name.append(" Inc.");
+            name.append(" Inc");
         } else if (type == 2) { //Limited Liability Company asset
-            int length =  Utils.randomNum( 3) + 1;
+            int length = Utils.randomNum(3) + 1;
             for (int i = 0; i < length; i++) {
                 name.append(Utils.randomLetter());
             }
             name.append(" LLC");
         } else if (type == 3) { //Crypto Assets
-            int length =  Utils.randomNum( 2);
+            int length = Utils.randomNum(2);
             char aux;
             for (int i = 0; i < length; i++) {
                 aux = Utils.randomLetter();
@@ -91,7 +91,7 @@ public class Asset {
             }
             name.append(" Coin");
         } else if (type == 4) {//Cooperatives
-            int oneMore, length = Utils.randomNum( 2) + 1;
+            int oneMore, length = Utils.randomNum(2) + 1;
             char aux;
             aux = Utils.randomLetter();
             for (int i = 0; i < length; i++) {
@@ -101,15 +101,15 @@ public class Asset {
                 } else {
                     name.append(Character.toLowerCase(Utils.randomVowel()));
                     name.append(Character.toLowerCase(aux));
-                    oneMore = Utils.randomNum( 2);
+                    oneMore = Utils.randomNum(2);
                     if (oneMore == 0) {
                         name.append(Character.toLowerCase(Utils.randomConsonant()));
                     }
                 }
             }
-            name.append(" Co.");
+            name.append(" Co");
         } else { //random assets or resources
-            int oneMore, length = Utils.randomNum( 3) + 1;
+            int oneMore, length = Utils.randomNum(3) + 1;
             char aux;
             for (int i = 0; i < length; i++) {
                 aux = Utils.randomLetter();
@@ -119,7 +119,7 @@ public class Asset {
                 } else {
                     name.append(Character.toLowerCase(Utils.randomVowel()));
                     name.append(Character.toLowerCase(aux));
-                    oneMore = Utils.randomNum( 5);
+                    oneMore = Utils.randomNum(5);
                     if (oneMore == 0) {
                         name.append(Character.toLowerCase(Utils.randomConsonant()));
                     }
