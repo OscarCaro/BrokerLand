@@ -4,6 +4,7 @@ import controller.Game;
 import model.locations.WorldMap;
 import model.trading.Asset;
 import model.utils.Pair;
+import model.utils.Utils;
 
 import java.util.Scanner;
 
@@ -18,13 +19,14 @@ public class Broker extends Player {
 
     public void update() {
 //    	System.out.println(ownTime + ". You're now at: "+ currLoc);		To be used when we add more players (MODS)
-        System.out.println("------------------------------------------------------------------");
+        Utils.minusWall();
         System.out.println(Game.t + ". You're now at: " + currLoc);
-        System.out.println("------------------------------------------------------------------");
+        Utils.minusWall();
         System.out.println(mentalH + " Money:" + money);
-        System.out.println("------------------------------------------------------------------");
+        Utils.minusWall();
         showPortfolio();
-        System.out.println("------------------------------------------------------------------\n");
+        Utils.minusWall();
+        System.out.println();
         askActions();
         askNewLocation();
     }
@@ -154,13 +156,13 @@ public class Broker extends Player {
             System.out.println("Your assets on the market sit currently at: ");
             int i = 0;
             for (Pair<Asset, Integer> p : portfolio) {
-                System.out.println("\"-----------------------------------------------------------");
+                Utils.minusWall();
                 System.out.println(i + ": " + p.getKey().name + "| Selling at: " + p.getKey().price + "| Owned "+ p.getValue() + " of them." );
                 i++;
             }
-            System.out.println("-----------------------------------------------------------\n");
+            Utils.minusWall();
 
-            System.out.println("Your portfolio now amounts to: " + "$" + money);
+            System.out.println("\nYour portfolio now amounts to: " + "$" + money);
         }
     }
 }

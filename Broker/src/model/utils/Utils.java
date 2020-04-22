@@ -11,7 +11,12 @@ public class Utils {
 	}
 
 
-
+	public static void minusWall(){
+		System.out.println("---------------------------------------------------------------------------------------");
+	}
+	public static void equalsWall(){
+		System.out.println("=======================================================================================");
+	}
 	public static String generateName() {
 		int size = 16;
 		String[] names = {

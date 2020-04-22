@@ -17,7 +17,7 @@ public class FeedPidgeonsAction extends Action {
 			System.out.println("You fed the pigeons wholesomely.");	
 		}
 		else {
-			System.out.println( player.getName() + "fed the pigeons wholesomely.");		
+			System.out.println( player.getName() + " fed the pigeons.");
 		}		
 	}
 

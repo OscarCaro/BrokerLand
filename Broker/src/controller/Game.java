@@ -31,7 +31,7 @@ public class Game {
 
     public void run(){
         while (player.canContinue(true) && !playerIsWinner()) {
-            player.update(); //comment this out if you want to check bots
+            //player.update(); //comment this out if you want to check bots
             for (Bot b : bots) {
                 b.update();
             }
@@ -47,7 +47,7 @@ public class Game {
     }
 
     private void flushBots() {
-        System.out.println("==================================================================");
+        Utils.equalsWall();
         Iterator<Bot> iter = bots.iterator();
         while (iter.hasNext()) {
             Bot b = iter.next();
@@ -58,7 +58,7 @@ public class Game {
             }
         }
         System.out.println((bots.size()+1) + " total brokers remaining.");
-        System.out.println("==================================================================");
+        Utils.equalsWall();
     }
 }
 /*

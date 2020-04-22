@@ -20,7 +20,7 @@ public class Bot extends Player {
 
     @Override
     public void update() {
-        System.out.println("------------------------------------------------------------------");
+        Utils.minusWall();
         askActions();
         askNewLocation();
     }

@@ -16,7 +16,7 @@ public class WorldMap implements LocationChanger{
 	private List<Location> locations;
 	
 	private WorldMap() {
-		locations = new ArrayList<Location>();
+		locations = new ArrayList<>();
 		locations.add(HOMEIDX, new Home());
 		locations.add(OFFICEIDX, new Office());
 		locations.add(PARKIDX, new Park());		
