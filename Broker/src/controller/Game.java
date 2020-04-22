@@ -13,19 +13,17 @@ public class Game {
 
 	public static Time t;
     
-	private WorldMap worldMap;
     private Broker player;
     private Market market;
     private List<Bot> bots;
 
     public Game() {
         t = new Time();
-    	worldMap = new WorldMap();
         market = Market.getInstance();
-        player = new Broker(worldMap);
+        player = new Broker();
         bots = new ArrayList<>();
         for(int i = 0; i < 10; i++) {
-        	bots.add(new Bot(worldMap));
+        	bots.add(new Bot());
         }
     }
 

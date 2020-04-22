@@ -4,6 +4,7 @@ import model.life.MentalHealth;
 import model.life.Time;
 import model.locations.Location;
 import model.locations.LocationChanger;
+import model.locations.WorldMap;
 import model.trading.Asset;
 import model.trading.Market;
 import model.utils.Pair;
@@ -22,11 +23,11 @@ public abstract class Player {
 	protected String surname;
 	protected List<Pair<Asset, Integer>> portfolio;
 
-	public Player(String name, String surname, LocationChanger map, int locIdx, int money) {
+	public Player(String name, String surname, int locIdx, int money) {
+		this.map = WorldMap.getInstance();
 		map.startIn(this, locIdx);
 		this.name = name;
-		this.surname = surname;
-		this.map = map;
+		this.surname = surname;		
 		this.money = money;
 		this.globalMarket = Market.getInstance();
 		this.mentalH = new MentalHealth(100);

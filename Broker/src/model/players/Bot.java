@@ -1,15 +1,13 @@
 package model.players;
 
 
-import model.locations.LocationChanger;
 import model.locations.WorldMap;
-import model.trading.Market;
 import model.utils.Utils;
 
 public class Bot extends Player {
 
-	public Bot(LocationChanger map) {
-		super(Utils.generateName(), Utils.generateSurname(), map, WorldMap.HOMEIDX, 1000);
+	public Bot() {
+		super(Utils.generateName(), Utils.generateSurname(), WorldMap.HOMEIDX, 1000);
 	}
 
 	@Override

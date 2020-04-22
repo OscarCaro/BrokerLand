@@ -1,22 +1,18 @@
 package model.players;
 
 import controller.Game;
-import model.locations.LocationChanger;
 import model.locations.WorldMap;
 import model.trading.Asset;
-import model.trading.Market;
 import model.utils.Pair;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Broker extends Player {
 
     private Scanner in;
 
-    public Broker(LocationChanger map) {
-        super("You", "", map, WorldMap.HOMEIDX, 1000);
+    public Broker() {
+        super("You", "", WorldMap.HOMEIDX, 1000);
         in = new Scanner(System.in);
     }
 

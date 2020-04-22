@@ -2,10 +2,12 @@ package model.locations;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import model.players.Player;
+import model.trading.Market;
 
 public class WorldMap implements LocationChanger{
+	
+	private static WorldMap instance;
 	
 	public static final int HOMEIDX = 0;
 	public static final int OFFICEIDX = 1;
@@ -13,11 +15,18 @@ public class WorldMap implements LocationChanger{
 	
 	private List<Location> locations;
 	
-	public WorldMap() {
+	private WorldMap() {
 		locations = new ArrayList<Location>();
 		locations.add(HOMEIDX, new Home());
 		locations.add(OFFICEIDX, new Office());
 		locations.add(PARKIDX, new Park());		
+	}
+	
+	public static WorldMap getInstance() {
+		if (instance == null) {
+			instance = new WorldMap();
+		}
+		return instance;
 	}
 
 	@Override
