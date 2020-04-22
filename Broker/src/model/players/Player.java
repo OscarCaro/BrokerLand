@@ -1,12 +1,12 @@
 package model.players;
 
-import javafx.util.Pair;
 import model.life.MentalHealth;
 import model.life.Time;
 import model.locations.Location;
 import model.locations.LocationChanger;
 import model.trading.Asset;
 import model.trading.Market;
+import model.utils.Pair;
 
 import java.util.*;
 

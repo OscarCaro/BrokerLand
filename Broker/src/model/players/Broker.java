@@ -1,11 +1,12 @@
 package model.players;
 
 import controller.Game;
-import javafx.util.Pair;
 import model.locations.LocationChanger;
 import model.locations.WorldMap;
 import model.trading.Asset;
 import model.trading.Market;
+import model.utils.Pair;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
