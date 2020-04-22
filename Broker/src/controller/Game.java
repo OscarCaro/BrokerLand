@@ -33,8 +33,8 @@ public class Game {
         	for (Bot b : bots) {
         		b.update();
         	}
-        	market.refresh(); 
-        	System.out.println("\n\n\n");
+        	market.refresh();
+        	System.out.println("");
         }
         System.out.println(player.endMessage());
     }

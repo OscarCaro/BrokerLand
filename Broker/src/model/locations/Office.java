@@ -21,30 +21,4 @@ public class Office extends Location {
     	addAction(new StareWallAction());
     }
 
-//    @Override
-//    void enactAction(int i, Broker b) {
-////        b.addMental(actions.get(i).mental);
-////        Game.t.addTime(actions.get(i).time);
-//        switch (i){
-//            case 0:
-//                Market.showState();
-//                b.buy();
-//                break;
-//            case 1:
-//                Market.opportunity();
-//                Market.showState();
-//                break;
-//            case 2:
-//                b.showAssets();
-//                b.sell();
-//                break;
-//            case 3:
-//                Market.showState();
-//                break;
-//            case 4:
-//                System.out.println("You intently stare at the wall wondering about your life decisions.");
-//                break;
-//
-//        }
-//    }
 }

@@ -16,7 +16,7 @@ public class TakeShowerAction extends Action {
 			System.out.println("You relax while taking a hot shower.");		
 		}
 		else {
-			System.out.println(player.getName() + " takes a hot shawer.");		
+			System.out.println(player.getName() + " took a hot shower.");
 		}		
 	}
 

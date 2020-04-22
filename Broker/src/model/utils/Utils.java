@@ -28,4 +28,33 @@ public class Utils {
 		};
 		return surnames[randomNum(size)];
 	}
+
+	public static char randomConsonant() {
+
+		char aux =  (char) ((int) (Math.random() * 25 + 65));
+		while (aux == 'A' || aux == 'O' || aux == 'I' || aux == 'E' ||aux == 'U'){
+			aux =  (char) ((int) (Math.random() * 25 + 65));
+		}
+		return aux;
+	}
+
+	public static char randomVowel() {
+		char aux =  (char) ((int) (Math.random() * 25 + 65));
+		while (aux != 'A' && aux != 'O' && aux != 'I' && aux != 'E' && aux != 'U'){
+			aux =  (char) ((int) (Math.random() * 25 + 65));
+		}
+		return aux;
+	}
+
+	public static String spaces(int n) {
+		StringBuilder aux= new StringBuilder();
+		for (int i=0;i<n;i++ ){
+			aux.append(' ');
+		}
+		return aux.toString();
+	}
+
+	public static char randomLetter() {
+		return (char) ((int) (Math.random() * 25 + 65));
+	}
 }
