@@ -10,7 +10,7 @@ import model.utils.Utils;
 public class Asset {
 
     private static final int maxSquaringSize = 18;
-    private static final int BANKRUPCYTURNS = 3;
+    private static final int BANKRUPTCYTURNS = 3;
     public int price;
     public String name;
     public int sharesOwned; //number of shares that are sold and are brokers properties as of now
@@ -76,11 +76,11 @@ public class Asset {
         }
         industryBoom = Utils.randomNum(10) > 9;
 
-        if (sharesOwned == 0 || record.isEmpty() || sharesOwned < (int) 0.1 * Game.getTimeClone().day) {
+        if (sharesOwned == 0 || record.isEmpty() || sharesOwned < (int) (0.2 * (double) Game.getTimeClone().day) || (curve10 < - Game.getTimeClone().day/2 && sharesOwned > Game.getTimeClone().day) || (!industryBoom && Utils.randomNum(10)>7)) {
             bankruptcyIndex++;
         }
 
-        if (bankruptcyIndex >= BANKRUPCYTURNS) {
+        if (bankruptcyIndex >= BANKRUPTCYTURNS) {
             bankrupt = true;
         }
 

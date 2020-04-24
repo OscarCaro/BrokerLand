@@ -12,7 +12,7 @@ public class SellAction extends Action {
 	
 	@Override
 	protected void performSpecificAction(Player player, boolean isUser) {
-		player.sell(); // Different for broker than for mods	
+		player.sell(); // Different for broker than for mods
 	}
 
 }

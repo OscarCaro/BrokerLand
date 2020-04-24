@@ -131,9 +131,10 @@ public abstract class Player {
                     Utils.minusWall();
                 }
                 else{
-                    System.out.println(this.name + " was affected by the bankruptcy of " + p.getKey().name + "!");
+                    System.out.println(this.getName() + " was affected by the bankruptcy of " + p.getKey().name + ".");
                 }
                 this.modifyMoney( p.getKey().price*p.getValue());
+                this.modifyHealth(-10);
                 iter.remove();
             }
         }
