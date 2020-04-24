@@ -1,3 +1,7 @@
+CHANGES.TXT HAS BEEN DEPRECATED AND THE NEW UPDATE INFORMATIONS WILL BE IN THE COMMITS.
+
+
+
 cambios del 22/04: //Planteándome seriamente dejar de escribir changes.txt y solo escribir en los commit de los small releases
 
 implementado el buy y sell de los brokers con el strategy pattern, por ahora todos implementan la estrategia random.
