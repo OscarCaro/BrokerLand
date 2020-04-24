@@ -26,7 +26,7 @@ public class Bot extends Player {
     }
 
     private void askActions() {
-        currLoc.performAction(this, Utils.randomNum(currLoc.getNumOfActions()), false);
+        currLoc.performAction(this, Utils.randomNum(currLoc.getNumOfActions()));
     }
 
     public String endMessage() {

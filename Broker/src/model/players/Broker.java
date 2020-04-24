@@ -36,12 +36,11 @@ public class Broker extends Player {
         currLoc.printActions();
         System.out.println("Select: ");
         String aux = in.nextLine();
-        while (Integer.parseInt(aux) < 0 || Integer.parseInt(aux) >= currLoc.getNumOfActions()) {
+        while (!currLoc.performAction(this, aux)) {
             System.out.println("Invalid option");
             System.out.println("What do you want to do?");
             aux = in.nextLine();
         }
-        currLoc.performAction(this, Integer.parseInt(aux), true);
     }
 
     private void askNewLocation() {

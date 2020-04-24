@@ -3,6 +3,7 @@ package model.locations;
 import java.util.*;
 
 import model.actions.Action;
+import model.actions.ActionParser;
 import model.players.Broker;
 import model.players.Player;
 
@@ -33,17 +34,22 @@ public abstract class Location {
     
     public void printActions() {
     	System.out.println("==================================================================");
-    	for(int i = 0; i < actions.size(); i++) {
-    		System.out.println(i + ". " + actions.get(i));
+    	for(Action a : actions) {
+    		System.out.println("· " + a);
     	}
         System.out.println("==================================================================");
     }
     
-    public void performAction(Player player, int actionIdx, boolean isUser) {
+    // For MODS: using random number
+    public void performAction(Player player, int actionIdx) {
     	if(actionIdx >= 0 && actionIdx < actions.size()) {
-            actions.get(actionIdx).perform(player, isUser);
+            actions.get(actionIdx).perform(player, false);
         }
-    	else throw new IllegalArgumentException("No such action by "+actionIdx + "in " + actions);
+    }
+    
+    // For Broker (user): using input string
+    public boolean performAction(Player player, String input) {
+    	return ActionParser.parseAction(input, actions, player, true);
     }
     
     public int getNumOfActions() {

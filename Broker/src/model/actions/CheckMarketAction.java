@@ -8,7 +8,7 @@ import model.trading.Market;
 public class CheckMarketAction extends Action {
 	
 	public CheckMarketAction() {
-		super("Check the market", "Look at the current state of the market.", 1*60, -2);
+		super("Check", "CHECK the market", "Look at the current state of the market.", 1*60, -2);
 	}
 
 	@Override

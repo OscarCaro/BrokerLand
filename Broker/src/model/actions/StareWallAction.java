@@ -7,7 +7,7 @@ import model.players.Player;
 public class StareWallAction extends Action {
 	
 	public StareWallAction() {
-		super("Stare at wall", "Spend some time staring at the wall aimlessly.", 20, -5);
+		super("Stare", "STARE at wall", "Spend some time staring at the wall aimlessly.", 20, -5);
 	}
 
 	@Override

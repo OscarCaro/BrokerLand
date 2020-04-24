@@ -7,12 +7,14 @@ import model.players.Player;
 
 public abstract class Action{
 	
+	protected String parsingName;
     protected String name;
     protected String desc;
     protected int time, mental;
 
 
-    public Action(String name, String desc, int time, int mental) {
+    public Action(String parsingName, String name, String desc, int time, int mental) {
+    	this.parsingName = parsingName;
         this.name = name;
         this.desc = desc;
         this.time = time;
@@ -31,5 +33,9 @@ public abstract class Action{
     @Override
     public String toString() {
         return name + ": " + desc;
+    }
+    
+    public String getParsingName() {
+    	return this.parsingName;
     }
 }
