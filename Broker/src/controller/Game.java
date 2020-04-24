@@ -3,7 +3,9 @@ package controller;
 import model.life.Time;
 import model.players.Bot;
 import model.players.Broker;
+import model.trading.Asset;
 import model.trading.Market;
+import model.utils.Pair;
 import model.utils.Utils;
 
 import java.io.IOException;
@@ -14,7 +16,6 @@ import java.util.List;
 public class Game {
 
     public static Time t;
-
     private Broker player;
     private Market market;
     private List<Bot> bots;
@@ -29,6 +30,10 @@ public class Game {
         }
     }
 
+
+    public static Time getTimeClone(){
+        return new Time(t);
+    }
     public void run(){
         while (player.canContinue(true) && !playerIsWinner()) {
             player.update(); //comment this out if you want to check bots
@@ -36,12 +41,21 @@ public class Game {
                 b.update();
             }
             market.refresh();
+            this.flushAssets();
             flushBots();
             System.out.println("\n");
         }
         System.out.println(player.endMessage());
     }
 
+    private void flushAssets(){
+        if(market.flushAssets()) {
+            for (Bot b : bots) {
+                b.flushAssets(false);
+            }
+            player.flushAssets(true);
+        }
+    }
     private boolean playerIsWinner() {
         return bots.isEmpty();
     }
@@ -62,5 +76,4 @@ public class Game {
     }
 }
 /*
-
  */

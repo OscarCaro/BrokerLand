@@ -19,9 +19,9 @@ public class Utils {
 	public static String generateName() {
 		int size = 16;
 		String[] names = {
-				"Liam", "Noah", "Mason", "Logan ", "James", "Ethan",
+				"Liam", "Noah", "Mason", "Logan", "James", "Ethan",
 				"Lucas", "Jacob", "Michael", "Matthew", "Alexander", "William",
-				"Daniel", "Oliver", "Sebastian", "David" 
+				"Daniel", "Oliver", "Sebastian", "David", "Thomas", "Oscar"
 		};
 		return names[randomNum(size)];
  	}
@@ -30,7 +30,7 @@ public class Utils {
 		int size = 8;
 		String[] surnames = {
 				"Smith", "Johnson", "Williams", "Jones",
-				"Miller", "Taylor", "Martin", "Anderson"
+				"Miller", "Taylor", "Martin", "Anderson", "Moore", "Caro"
 		};
 		return surnames[randomNum(size)];
 	}

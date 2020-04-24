@@ -8,8 +8,10 @@ import model.locations.WorldMap;
 import model.trading.Asset;
 import model.trading.Market;
 import model.utils.Pair;
+import model.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public abstract class Player {
@@ -114,6 +116,26 @@ public abstract class Player {
         } else {
             portfolio.add(new Pair<>(globalMarket.assets.get(marketIndex), qtty));
             return true;
+        }
+    }
+
+    public void flushAssets(boolean isUser){
+        Iterator<Pair<Asset, Integer>> iter = portfolio.iterator();
+        while (iter.hasNext()) {
+            Pair<Asset, Integer> p = iter.next();
+            if (p.getKey().isBankrupt()) {
+
+                if (isUser){
+                    Utils.minusWall();
+                    System.out.println("You got rid of " + p.getValue() + " assets of " + p.getKey().name + " since it went bankrupt.");
+                    Utils.minusWall();
+                }
+                else{
+                    System.out.println(this.name + " was affected by the bankruptcy of " + p.getKey().name + "!");
+                }
+                this.modifyMoney( p.getKey().price*p.getValue());
+                iter.remove();
+            }
         }
     }
 }

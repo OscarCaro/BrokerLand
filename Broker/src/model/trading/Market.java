@@ -1,8 +1,10 @@
 package model.trading;
 
 import model.players.Player;
+import model.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 //This class follows the Singleton pattern, since there should be only one Market
@@ -42,10 +44,38 @@ public class Market {
     }
 
     public void refresh() {
-        for (Asset asset : assets) {
-            asset.refreshPrice();
+        Iterator<Asset> iter = assets.iterator();
+        while (iter.hasNext()) {
+            Asset a = iter.next();
+            a.refreshPrice();
         }
     }
+
+    public boolean flushAssets() {
+        Iterator<Asset> iter = assets.iterator();
+        boolean isFirst = true;
+        while (iter.hasNext()) {
+            Asset a = iter.next();
+            if (a.isBankrupt()) {
+                if (isFirst) {
+                    System.out.println();
+                    Utils.equalsWall();
+                    isFirst = false;
+                    System.out.println(a.name + " declared bankruptcy!");
+                } else {
+                    Utils.minusWall();
+                    System.out.println(a.name + " declared bankruptcy!");
+                }
+                iter.remove();
+            }
+        }
+        if (!isFirst) {
+            Utils.equalsWall();
+            System.out.println();
+        }
+        return !isFirst;
+    }
+
 
     public void opportunity() {
         assets.add(new Asset());
@@ -80,7 +110,7 @@ public class Market {
         for (int i = 0; i < assets.size(); i++) {
             if (key.equals(assets.get(i))) return i;
         }
-        throw new ArrayIndexOutOfBoundsException("Asset is not in market.");
+        return -1;
     }
 
 }

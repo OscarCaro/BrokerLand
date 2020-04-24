@@ -1,12 +1,7 @@
 package model.locations;
 
 import controller.Game;
-import model.actions.Action;
-import model.actions.BuyAction;
-import model.actions.CheckMarketAction;
-import model.actions.SellAction;
-import model.actions.StareWallAction;
-import model.actions.WaitMarket;
+import model.actions.*;
 import model.players.Broker;
 import model.trading.Market;
 

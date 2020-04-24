@@ -4,15 +4,22 @@ public class Time {
 	public int minutes;
 	public int hours;
 	public int day;
-
+	public int totalMinutes;
 	public Time() {
 		minutes = 0;
 		hours = 8;
 		day = 1;
 	}
 
+	public Time(Time t) {
+		this.day = t.day;
+		this.hours= t.hours;
+		this.minutes = t.minutes;
+	}
+
 	public void addTime(int minutes) {
 		this.minutes += Math.abs(minutes);
+		totalMinutes += Math.abs(minutes);
 		while (this.minutes >= 60) {
 			this.minutes -= 60;
 			this.hours += 1;

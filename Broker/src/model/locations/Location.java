@@ -6,6 +6,7 @@ import model.actions.Action;
 import model.actions.ActionParser;
 import model.players.Broker;
 import model.players.Player;
+import model.utils.Utils;
 
 
 public abstract class Location {
@@ -33,11 +34,11 @@ public abstract class Location {
     }
     
     public void printActions() {
-    	System.out.println("==================================================================");
+        Utils.equalsWall();
     	for(Action a : actions) {
-    		System.out.println("· " + a);
+    		System.out.println(a);
     	}
-        System.out.println("==================================================================");
+        Utils.equalsWall();
     }
     
     // For MODS: using random number

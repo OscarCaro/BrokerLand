@@ -24,7 +24,9 @@ public abstract class Action{
     public void perform(Player player, boolean isUser) {
     	player.modifyHealth(mental);
     	//player.addTime(time);			To be used when we add more players (MODS)
-    	Game.t.addTime(time);
+        if (isUser) {
+            Game.t.addTime(time);
+        }
     	performSpecificAction(player, isUser);
     }
     

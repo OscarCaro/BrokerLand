@@ -10,10 +10,10 @@ public class randomStrategy implements MarketStrategy {
     @Override
     public void buyAsset(Bot b) {
         Market maux = Market.getInstance();
-        int rAsset = Utils.randomNum(maux.assets.size() - 1);
+        int rAsset = Utils.randomNum(maux.assets.size());
         Asset aaux = maux.assets.get(rAsset);
         while (aaux.price > b.getMoney()) {
-            rAsset = Utils.randomNum(maux.assets.size() - 1);
+            rAsset = Utils.randomNum(maux.assets.size());
             aaux = maux.assets.get(rAsset);
         }
         int rQuant = Math.max(Utils.randomNum(b.getMoney() / aaux.price), 1); //He buys either 1 or a random amount he can afford
@@ -36,3 +36,6 @@ public class randomStrategy implements MarketStrategy {
 }
 
 
+/*
+
+ */
