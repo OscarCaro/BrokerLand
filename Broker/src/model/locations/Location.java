@@ -3,10 +3,7 @@ package model.locations;
 import java.util.*;
 
 import model.actions.Action;
-import model.actions.ActionParser;
-import model.players.Broker;
 import model.players.Player;
-import model.utils.Utils;
 
 
 public abstract class Location {
@@ -33,28 +30,8 @@ public abstract class Location {
     	this.playersInside.remove(player);
     }
     
-    public void printActions() {
-        Utils.equalsWall();
-    	for(Action a : actions) {
-    		System.out.println(a);
-    	}
-        Utils.equalsWall();
-    }
-    
-    // For MODS: using random number
-    public void performAction(Player player, int actionIdx) {
-    	if(actionIdx >= 0 && actionIdx < actions.size()) {
-            actions.get(actionIdx).perform(player, false);
-        }
-    }
-    
-    // For Broker (user): using input string
-    public boolean performAction(Player player, String input) {
-    	return ActionParser.parseAction(input, actions, player, true);
-    }
-    
-    public int getNumOfActions() {
-    	return this.actions.size();
+    public List<Action> getActions(){
+    	return Collections.unmodifiableList(actions);
     }
  
     public String toString() {

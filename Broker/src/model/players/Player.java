@@ -21,7 +21,7 @@ public abstract class Player {
     protected Market globalMarket;
     protected MentalHealth mentalH;
     protected int money;
-    protected Time ownTime;        //To be used when we add more players (MODS)
+    protected Time ownTime;        
     protected String name;
     protected String surname;
     protected List<Pair<Asset, Integer>> portfolio;
@@ -88,6 +88,10 @@ public abstract class Player {
 
     public Market getGlobalMarket() {
         return this.globalMarket;
+    }
+    
+    public Time getTime() {
+    	return this.ownTime;
     }
 
     public String getName() {

@@ -23,9 +23,8 @@ public abstract class Action{
     
     public void perform(Player player, boolean isUser) {
     	player.modifyHealth(mental);
-    	//player.addTime(time);			To be used when we add more players (MODS)
-        //if (isUser)
-            Game.t.addTime(time);
+    	player.addTime(time);
+        
     	performSpecificAction(player, isUser);
     }
     
@@ -38,5 +37,9 @@ public abstract class Action{
     
     public String getParsingName() {
     	return this.parsingName;
+    }
+    
+    public int getTime() {
+    	return this.time;
     }
 }

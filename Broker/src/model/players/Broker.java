@@ -1,11 +1,13 @@
 package model.players;
 
-import controller.Game;
+import model.actions.Action;
+import model.actions.ActionParser;
 import model.locations.WorldMap;
 import model.trading.Asset;
 import model.utils.Pair;
 import model.utils.Utils;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Broker extends Player {
@@ -18,9 +20,8 @@ public class Broker extends Player {
     }
 
     public void update() {
-//    	System.out.println(ownTime + ". You're now at: "+ currLoc);		To be used when we add more players (MODS)
         Utils.minusWall();
-        System.out.println(Game.t + ". You're now at: " + currLoc);
+        System.out.println(ownTime + ". You're now at: " + currLoc);
         Utils.minusWall();
         System.out.println(mentalH + " Money:" + money);
         Utils.minusWall();
@@ -32,11 +33,12 @@ public class Broker extends Player {
     }
 
     private void askActions() {
+    	List<Action> actions = currLoc.getActions();	// Call returns an unmodifiable list
         System.out.println("What do you want to do?");
-        currLoc.printActions();
+        printActions(actions);
         System.out.println("Select: ");
         String aux = in.nextLine();
-        while (!currLoc.performAction(this, aux)) {
+        while (!ActionParser.parseAction(aux, actions, this, true)) {
             System.out.println("Invalid option");
             System.out.println("What do you want to do?");
             aux = in.nextLine();
@@ -44,8 +46,7 @@ public class Broker extends Player {
     }
 
     private void askNewLocation() {
-//    	System.out.println(ownTime + ". You're now at: "+ currLoc);		To be used when we add more players (MODS)
-        System.out.println(Game.t + ". You're now at: " + currLoc);
+        System.out.println(ownTime + ". You're now at: " + currLoc);
         System.out.println("\nDo you want to move? (y/n)");
         String input = in.nextLine();
         if (input.toUpperCase().equals("Y")) {
@@ -163,5 +164,14 @@ public class Broker extends Player {
 
             System.out.println("\nYour portfolio now amounts to: " + "$" + money);
         }
+    }
+    
+    
+    public void printActions(List<Action> actions) {
+        Utils.equalsWall();
+    	for(Action a : actions) {
+    		System.out.println(a);
+    	}
+        Utils.equalsWall();
     }
 }

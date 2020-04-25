@@ -1,10 +1,13 @@
 package model.life;
 
+import javax.swing.text.DefaultEditorKit.CopyAction;
+
 public class Time {
+	
 	public int minutes;
 	public int hours;
 	public int day;
-	public int totalMinutes;
+	
 	public Time() {
 		minutes = 0;
 		hours = 8;
@@ -12,14 +15,11 @@ public class Time {
 	}
 
 	public Time(Time t) {
-		this.day = t.day;
-		this.hours= t.hours;
-		this.minutes = t.minutes;
+		copy(t);
 	}
 
 	public void addTime(int minutes) {
 		this.minutes += Math.abs(minutes);
-		totalMinutes += Math.abs(minutes);
 		while (this.minutes >= 60) {
 			this.minutes -= 60;
 			this.hours += 1;
@@ -28,6 +28,19 @@ public class Time {
 			this.hours -= 24;
 			this.day += 1;
 		}
+	}
+	
+	public void copy(Time t) {
+		this.day = t.day;
+		this.hours= t.hours;
+		this.minutes = t.minutes;
+	}
+	
+	/**
+	 * Returns the difference (in minutes) of the two times
+	 */
+	public int minus(Time t) {
+		return this.totalMinutes() - t.totalMinutes();
 	}
 
 	@Override
@@ -42,6 +55,10 @@ public class Time {
 		}
 		return "It's: " + aux1 + ":" + aux2 + " of day " + day;
 
+	}
+	
+	private int totalMinutes() {
+		return this.day * 3600 + this.hours * 60 + this.minutes;
 	}
 
 }

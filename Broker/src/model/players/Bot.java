@@ -1,6 +1,12 @@
 package model.players;
 
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import controller.Game;
+import model.actions.Action;
 import model.locations.WorldMap;
 import model.players.marketstrategies.MarketStrategy;
 import model.players.marketstrategies.randomStrategy;
@@ -22,11 +28,29 @@ public class Bot extends Player {
     public void update() {
         Utils.minusWall();
         askActions();
+        //System.out.println(ownTime);
         askNewLocation();
     }
 
     private void askActions() {
-        currLoc.performAction(this, Utils.randomNum(currLoc.getNumOfActions()));
+
+    	List<Action> actions = new ArrayList<>(currLoc.getActions());	// Call returns an unmodif. list
+    	int availableTime = Game.t.minus(ownTime);
+    	
+    	// Remove actions that take longer than available time
+    	Iterator<Action> i = actions.iterator();
+    	while (i.hasNext()) {
+    		Action a = i.next();
+    		if (a.getTime() > availableTime) {
+    			i.remove();
+    		}
+    	}
+    	
+    	// Choose an action randomly (maybe later using a strategy)
+    	if (!actions.isEmpty()) {
+    		int idx = Utils.randomNum(actions.size());
+    		actions.get(idx).perform(this, false);
+    	}    	
     }
 
     public String endMessage() {

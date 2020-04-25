@@ -34,9 +34,11 @@ public class Game {
     public static Time getTimeClone(){
         return new Time(t);
     }
+    
     public void run(){
         while (player.canContinue(true) && !playerIsWinner()) {
             player.update(); //comment this out if you want to check bots
+            t.copy(player.getTime());	// Game time always match the player's time
             for (Bot b : bots) {
                 b.update();
             }
