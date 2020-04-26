@@ -1,27 +1,36 @@
 package model.players;
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import controller.Game;
 import model.actions.Action;
 import model.locations.WorldMap;
 import model.players.marketstrategies.MarketStrategy;
+import model.players.marketstrategies.dumbassStrategy;
 import model.players.marketstrategies.randomStrategy;
 import model.utils.Utils;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class Bot extends Player {
     private MarketStrategy strategy;
 
     public Bot() {
         super(Utils.generateName(), Utils.generateSurname(), WorldMap.HOMEIDX, 1000);
-        this.strategy = strategyDefine(/*difficulty of level to create more aggresive personalities(?)*/);
+        this.strategy = strategyDefine();
+    }
+
+    public Bot(MarketStrategy strat){
+        super(Utils.generateName(), Utils.generateSurname(), WorldMap.HOMEIDX, 1000);
+        this.strategy = strat;
     }
 
     private MarketStrategy strategyDefine() {
-        return new randomStrategy(); //TODO
+        if (Utils.randomNum(10)>5) //sketchy still
+            return new randomStrategy();
+        else
+            return new dumbassStrategy();
     }
 
     @Override
@@ -34,7 +43,8 @@ public class Bot extends Player {
 
     private void askActions() {
 
-    	List<Action> actions = new ArrayList<>(currLoc.getActions());	// Call returns an unmodif. list
+        List<Action> actions = new ArrayList<>(currLoc.getActions());	// Call returns an unmodif. list
+
     	int availableTime = Game.t.minus(ownTime);
     	
     	// Remove actions that take longer than available time
@@ -45,7 +55,7 @@ public class Bot extends Player {
     			i.remove();
     		}
     	}
-    	
+
     	// Choose an action randomly (maybe later using a strategy)
     	if (!actions.isEmpty()) {
     		int idx = Utils.randomNum(actions.size());

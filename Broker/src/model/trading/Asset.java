@@ -101,4 +101,12 @@ public class Asset {
     public void setBankrupt() {
         bankrupt = true;
     }
+
+    public int getBankruptcyIndex(){
+        return bankruptcyIndex;
+    }
+
+    public int getPrice() {
+        return this.price;
+    }
 }
