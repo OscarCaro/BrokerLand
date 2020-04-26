@@ -42,6 +42,10 @@ public class Time {
 	public int minus(Time t) {
 		return this.totalMinutes() - t.totalMinutes();
 	}
+	
+	public boolean isBeforeThan (Time t) {
+		return this.minus(t) < 0;
+	}
 
 	@Override
 	public String toString() {
