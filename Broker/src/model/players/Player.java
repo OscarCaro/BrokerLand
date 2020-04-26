@@ -1,5 +1,6 @@
 package model.players;
 
+import model.life.Hunger;
 import model.life.MentalHealth;
 import model.life.Time;
 import model.locations.Location;
@@ -20,8 +21,9 @@ public abstract class Player {
     protected LocationChanger map;
     protected Market globalMarket;
     protected MentalHealth mentalH;
+    protected Hunger hunger;
     protected int money;
-    protected Time ownTime;        
+    protected Time ownTime;
     protected String name;
     protected String surname;
     protected List<Pair<Asset, Integer>> portfolio;
@@ -34,6 +36,7 @@ public abstract class Player {
         this.money = money;
         this.globalMarket = Market.getInstance();
         this.mentalH = new MentalHealth(100);
+        this.hunger = new Hunger(100);
         this.ownTime = new Time();
         this.portfolio = new ArrayList<>();
     }
@@ -50,7 +53,7 @@ public abstract class Player {
 
     public boolean canContinue(boolean isUser) {
         if (isUser) {
-            return !this.mentalH.insane() && this.getMoney() > 0;
+            return !this.mentalH.insane() && this.getMoney() > 0 && !this.hunger.starved();
         } else {
             boolean aux = false;
             for (Asset a : this.globalMarket.assets) {
@@ -58,7 +61,7 @@ public abstract class Player {
                     aux = true;
                 }
             }
-            return aux && !this.mentalH.insane();
+            return aux && !this.mentalH.insane() && !this.hunger.starved();
         }
     }
 
@@ -72,6 +75,10 @@ public abstract class Player {
 
     public void modifyHealth(int amount) {
         this.mentalH.add(amount);
+    }
+
+    public void modifyHunger(int amount) {
+        this.hunger.add(amount);
     }
 
     public int getMoney() {
@@ -89,9 +96,9 @@ public abstract class Player {
     public Market getGlobalMarket() {
         return this.globalMarket;
     }
-    
+
     public Time getTime() {
-    	return this.ownTime;
+        return this.ownTime;
     }
 
     public String getName() {
@@ -123,21 +130,20 @@ public abstract class Player {
         }
     }
 
-    public void flushAssets(boolean isUser){
+    public void flushAssets(boolean isUser) {
         Iterator<Pair<Asset, Integer>> iter = portfolio.iterator();
         while (iter.hasNext()) {
             Pair<Asset, Integer> p = iter.next();
             if (p.getKey().isBankrupt()) {
 
-                if (isUser){
+                if (isUser) {
                     Utils.minusWall();
                     System.out.println("You got rid of " + p.getValue() + " assets of " + p.getKey().name + " since it went bankrupt.");
                     Utils.minusWall();
-                }
-                else{
+                } else {
                     System.out.println(this.getName() + " was affected by the bankruptcy of " + p.getKey().name + ".");
                 }
-                this.modifyMoney( p.getKey().price*p.getValue());
+                this.modifyMoney(p.getKey().price * p.getValue());
                 this.modifyHealth(-10);
                 iter.remove();
             }

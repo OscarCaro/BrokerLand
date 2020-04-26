@@ -23,7 +23,7 @@ public class Broker extends Player {
         Utils.minusWall();
         System.out.println(ownTime + ". You're now at: " + currLoc);
         Utils.minusWall();
-        System.out.println(mentalH + " Money:" + money);
+        System.out.println(mentalH + " " + hunger + " Money:" + money);
         Utils.minusWall();
         showPortfolio();
         Utils.minusWall();
@@ -46,7 +46,7 @@ public class Broker extends Player {
     }
 
     private void askNewLocation() {
-        System.out.println(ownTime + ". You're now at: " + currLoc);
+        System.out.println("You're now at: " + currLoc);
         System.out.println("\nDo you want to move? (y/n)");
         String input = in.nextLine();
         if (input.toUpperCase().equals("Y")) {
@@ -70,8 +70,15 @@ public class Broker extends Player {
             aux += "\n-------------- You are done ---------------";
         } else if (mentalH.insane()) {
             aux = "The life you chose has seemed unbearable for a time now,\n" +
-                    " and after considering suicide several times too many you decide to get help.\n" +
-                    " The first thing you do to change your life around is give up trading.\n ";
+                    "and after considering suicide several times too many you decide to get help.\n" +
+                    "The first thing you do to change your life around is give up trading.\n ";
+            aux += "\n-------------- You are done ---------------";
+        }
+        else if (hunger.starved()){
+            aux = "You were so focused on your work and social life\n" +
+                    "you have totally forgotten about your own physical health.\n" +
+                    "You were hospitalized and the doctors say you'll have to be there\n " +
+                    "some months. The first thing they dictate you to do is give up trading.\n";
             aux += "\n-------------- You are done ---------------";
         }
         else{
@@ -89,7 +96,7 @@ public class Broker extends Player {
     @Override
     public void buy() {
         globalMarket.print();
-        System.out.println("Do you want to buy any asset? (y/n)");
+        System.out.println("Do you want to buy any of them? (y/n)");
         String input = in.nextLine();
         while (input.toUpperCase().equals("Y")) {
             mentalH.add(-10);
@@ -122,7 +129,7 @@ public class Broker extends Player {
                 System.out.println("Which one? (index)");
                 input = in.nextLine();
                 int idx = Integer.parseInt(input);
-                while (idx < 0 && idx >= portfolio.size()) {
+                while (idx < 0 || idx >= portfolio.size()) {
                     System.out.println("Invalid option. Which one? (index)");
                     input = in.nextLine();
                     idx = Integer.parseInt(input);

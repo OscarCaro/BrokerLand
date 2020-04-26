@@ -11,7 +11,7 @@ public class MentalHealth {
 	public boolean insane() {
 		return this.health <= 0;
 	}
-	
+	@Override
 	public String toString() {
 		if (this.health>80) {
 			return "You are in a stoic state of mind.";

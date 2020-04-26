@@ -60,12 +60,11 @@ public class Game {
 
     public void run() {
         while (player.canContinue(true) && !playerIsWinner()) {
-            player.update(); //comment this out if you want to check bots
+            player.update();
             for (Bot b : bots) {
                 b.update();
             }
-            t.copy(player.getTime());    // Modify AFTER the bot's update but BEFORE the executeEvent
-            eventHandler.executeEvents();
+            t = eventHandler.executeEvents();
             market.refresh();
             this.flushAssets();
             flushBots();

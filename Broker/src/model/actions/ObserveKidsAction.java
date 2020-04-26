@@ -1,13 +1,11 @@
 package model.actions;
 
-import model.players.Bot;
-import model.players.Broker;
 import model.players.Player;
 
 public class ObserveKidsAction extends Action {
 	
 	public ObserveKidsAction() {
-		super("Observe", "OBSERVE the kids", "Look at the kids and reminisce of the times where you were one of them.", 30, 1);
+		super("Observe", "OBSERVE the kids", "Look at the kids and reminisce of the times where you were one of them.", 30, 1,0);
 	}
 	
 	@Override

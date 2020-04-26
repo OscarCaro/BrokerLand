@@ -1,13 +1,11 @@
 package model.actions;
 
-import model.players.Bot;
-import model.players.Broker;
 import model.players.Player;
 
 public class RideSwingAction extends Action {
 	
 	public RideSwingAction() {
-		super("Ride", "RIDE the swing", "Get on the swing and pretend you're a kid and life's not difficult.", 10, -10);
+		super("Ride", "RIDE the swing", "Get on the swing and pretend you're a kid and life's not difficult.", 10, -10,0);
 	}
 	
 	@Override

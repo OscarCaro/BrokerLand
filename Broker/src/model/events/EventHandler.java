@@ -1,7 +1,8 @@
 package model.events;
 
-import controller.Game;
+import model.life.Time;
 import model.utils.SortedArrayList;
+import model.utils.Utils;
 
 import java.util.List;
 
@@ -37,10 +38,15 @@ public class EventHandler {
         }
     }
 
-    public void executeEvents() {
-        while ((!eventList.isEmpty()) && (eventList.get(0).getTime().isBeforeThan(Game.getTimeClone()))) {
+    public Time executeEvents() {
+        while (!eventList.get(0).stopHere() && eventList.size() > 1) {
             eventList.remove(0).execute();
         }
+        Utils.minusWall();
+        Time gameTime = eventList.get(0).getTime();
+        eventList.remove(0).execute(); // execute last event which should be player's and expect input
+        Utils.minusWall();
+        return gameTime;
     }
 
 }

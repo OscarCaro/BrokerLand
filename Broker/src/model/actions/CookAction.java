@@ -1,13 +1,11 @@
 package model.actions;
 
-import model.players.Bot;
-import model.players.Broker;
 import model.players.Player;
 
 public class CookAction extends Action {
 	
 	public CookAction() {
-		super("Cook", "COOK meal", "Spend 2 hours cooking and eating food.", 60*2, 5);
+		super("Cook", "COOK meal", "Spend 2 hours cooking and eating food.", 60*2, 5,65);
 	}
 	
 	@Override

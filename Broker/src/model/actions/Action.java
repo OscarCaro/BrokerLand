@@ -1,8 +1,5 @@
 package model.actions;
 
-import controller.Game;
-import model.players.Bot;
-import model.players.Broker;
 import model.players.Player;
 
 public abstract class Action{
@@ -10,21 +7,22 @@ public abstract class Action{
 	protected String parsingName;
     protected String name;
     protected String desc;
-    protected int time, mental;
+    protected int time, mental, hunger;
 
 
-    public Action(String parsingName, String name, String desc, int time, int mental) {
+    public Action(String parsingName, String name, String desc, int time, int mental, int hunger) {
     	this.parsingName = parsingName;
         this.name = name;
         this.desc = desc;
         this.time = time;
         this.mental = mental;
+        this.hunger = (hunger == 0) ? -time/10 : hunger;
     }
     
     public void perform(Player player, boolean isUser) {
     	player.modifyHealth(mental);
     	player.addTime(time);
-        
+    	player.modifyHunger(hunger);
     	performSpecificAction(player, isUser);
     }
     

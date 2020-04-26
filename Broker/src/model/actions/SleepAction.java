@@ -1,13 +1,11 @@
 package model.actions;
 
-import model.players.Bot;
-import model.players.Broker;
 import model.players.Player;
 
 public class SleepAction extends Action {
 	
 	public SleepAction() {
-		super("Sleep", "SLEEP", "Spend 6 hours getting a good hardworking person sleep.", 60*6, 5);
+		super("Sleep", "SLEEP", "Spend 6 hours getting a good hardworking person sleep.", 60*6, 5,0);
 	}
 	
 	@Override

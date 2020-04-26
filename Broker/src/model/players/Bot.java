@@ -14,7 +14,6 @@ import model.players.marketstrategies.randomStrategy;
 import model.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Bot extends Player {
@@ -42,7 +41,6 @@ public class Bot extends Player {
 
     @Override
     public void update() {
-        
         if (!hasActionScheduled) {
 			List<Action> actions = new ArrayList<>(currLoc.getActions()); // Call returns an unmodif. list
 			Action action = actions.get(Utils.randomNum(actions.size()));
@@ -58,7 +56,6 @@ public class Bot extends Player {
 
     public String endMessage() {
         String aux = null;
-
         if (mentalH.insane()) {
             int rSuicide = Utils.randomNum(100);
             if (rSuicide < 10) {
@@ -66,7 +63,20 @@ public class Bot extends Player {
             } else {
                 aux = this.getName() + " went insane and deeply depressed, he quit trading and entered therapy.";
             }
-        } else {
+        }
+        else if(this.hunger.starved()){
+            int rStarvation = Utils.randomNum(100);
+            if (rStarvation < 10) {
+                aux = this.getName() + " was hospitalized too late,\n his body rejected food and he died of famine.";
+            }
+            else if (rStarvation < 40){
+                aux = this.getName() + " was so focused on work he didn't eat for a while.\n He fainted and fell, and is now hospitalized with a severe head trauma.";
+            }
+            else{
+                aux = this.getName() + " was very focused on work and forgot to eat.\n He has been hospitalized, and for his own well-being has been recommended to give up trading.";
+            }
+        }
+        else {
             aux = this.getName() + " went bankrupt and fled.";
         }
         return aux;
