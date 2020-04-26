@@ -4,13 +4,9 @@ import model.life.Time;
 
 public abstract class Event {
 	
-	private String title;
-	private String description;
 	private Time triggerTime;
 	
-	public Event(String title, String desc, Time triggerTime) {
-		this.title = title;
-		this.description = desc;
+	public Event(Time triggerTime) {
 		this.triggerTime = triggerTime;
 	}
 	

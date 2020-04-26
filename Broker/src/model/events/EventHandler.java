@@ -24,7 +24,7 @@ public class EventHandler {
         });
     }
 
-    public EventHandler getInstance() {
+    public static EventHandler getInstance() {
         if (instance == null) {
             instance = new EventHandler();
         }
@@ -38,7 +38,7 @@ public class EventHandler {
     }
 
     public void executeEvents() {
-        while ((!eventList.isEmpty()) && (eventList.get(0).getTime().equals(Game.getTimeClone()))) {
+        while ((!eventList.isEmpty()) && (eventList.get(0).getTime().isBeforeThan(Game.getTimeClone()))) {
             eventList.remove(0).execute();
         }
     }

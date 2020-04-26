@@ -3,6 +3,10 @@ package model.players;
 
 import controller.Game;
 import model.actions.Action;
+import model.events.BotUpdateEvent;
+import model.events.Event;
+import model.events.EventHandler;
+import model.life.Time;
 import model.locations.WorldMap;
 import model.players.marketstrategies.MarketStrategy;
 import model.players.marketstrategies.dumbassStrategy;
@@ -14,11 +18,14 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Bot extends Player {
+	
     private MarketStrategy strategy;
+    private boolean hasActionScheduled;
 
     public Bot() {
         super(Utils.generateName(), Utils.generateSurname(), WorldMap.HOMEIDX, 1000);
         this.strategy = strategyDefine();
+        hasActionScheduled = false;
     }
 
     public Bot(MarketStrategy strat){
@@ -35,32 +42,18 @@ public class Bot extends Player {
 
     @Override
     public void update() {
-        Utils.minusWall();
-        askActions();
-        //System.out.println(ownTime);
-        askNewLocation();
-    }
-
-    private void askActions() {
-
-        List<Action> actions = new ArrayList<>(currLoc.getActions());	// Call returns an unmodif. list
-
-    	int availableTime = Game.t.minus(ownTime);
-    	
-    	// Remove actions that take longer than available time
-    	Iterator<Action> i = actions.iterator();
-    	while (i.hasNext()) {
-    		Action a = i.next();
-    		if (a.getTime() > availableTime) {
-    			i.remove();
-    		}
-    	}
-
-    	// Choose an action randomly (maybe later using a strategy)
-    	if (!actions.isEmpty()) {
-    		int idx = Utils.randomNum(actions.size());
-    		actions.get(idx).perform(this, false);
-    	}    	
+        
+        if (!hasActionScheduled) {
+			List<Action> actions = new ArrayList<>(currLoc.getActions()); // Call returns an unmodif. list
+			Action action = actions.get(Utils.randomNum(actions.size()));
+			Time triggerTime = Game.getTimeClone();
+			triggerTime.addTime(action.getTime());
+			
+			int newLocIdx = Utils.randomNum(map.getNumOfLocs());
+			
+			Event event = new BotUpdateEvent(triggerTime, action, currLoc, newLocIdx, map, this);
+			EventHandler.getInstance().addEvent(event);	       
+		} 
     }
 
     public String endMessage() {
@@ -79,15 +72,6 @@ public class Bot extends Player {
         return aux;
     }
 
-    private void askNewLocation() {
-        if (Utils.randomNum(101) > 50) {
-            String auxn = currLoc.name;
-            map.moveTo(this, Utils.randomNum(map.getNumOfLocs()));
-            if (auxn != currLoc.name)
-                System.out.println(getName() + " went to " + currLoc + ".");        // TODO: change janky implementation
-        }
-    }
-
     @Override
     public void buy() {
         this.strategy.buyAsset(this);
@@ -102,5 +86,8 @@ public class Bot extends Player {
         }
     }
 
+    public void setHasActionScheduled(boolean b) {
+    	this.hasActionScheduled = b;
+    }
 
 }

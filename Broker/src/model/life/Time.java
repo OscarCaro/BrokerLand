@@ -67,6 +67,6 @@ public class Time {
 
 
 	public boolean equals(Time obj){
-		return this.day == obj.day && this.minutes == obj.minutes;
+		return this.day == obj.day && this.hours == obj.hours && this.minutes == obj.minutes;
 	}
 }

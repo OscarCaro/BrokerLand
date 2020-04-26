@@ -1,5 +1,6 @@
 package controller;
 
+import model.events.EventHandler;
 import model.life.Time;
 import model.players.Bot;
 import model.players.Broker;
@@ -18,12 +19,14 @@ public class Game {
     private Broker player;
     private Market market;
     private List<Bot> bots;
+    private EventHandler eventHandler;
 
     public Game(int botsNum, Difficulty diff) {
         t = new Time();
         market = Market.getInstance();
         player = new Broker();
         bots = new ArrayList<>();
+        this.eventHandler = EventHandler.getInstance();
         if (diff == null) {
             for (int i = 0; i < botsNum; i++) {
                 bots.add(new Bot());
@@ -51,9 +54,6 @@ public class Game {
 
     }
 
-
-
-
     public static Time getTimeClone() {
         return new Time(t);
     }
@@ -61,11 +61,11 @@ public class Game {
     public void run() {
         while (player.canContinue(true) && !playerIsWinner()) {
             player.update(); //comment this out if you want to check bots
-            t.copy(player.getTime());    // Game time always match the player's time
-            t.addTime(200);
             for (Bot b : bots) {
                 b.update();
             }
+            t.copy(player.getTime());    // Modify AFTER the bot's update but BEFORE the executeEvent
+            eventHandler.executeEvents();
             market.refresh();
             this.flushAssets();
             flushBots();
