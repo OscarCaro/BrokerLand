@@ -9,18 +9,23 @@ public class randomStrategy implements MarketStrategy {
 
     @Override
     public void buyAsset(Bot b) {
-        Market maux = Market.getInstance();
-        int rAsset = Utils.randomNum(maux.assets.size());
-        Asset aaux = maux.assets.get(rAsset);
-        while (aaux.price > b.getMoney()) {
-            rAsset = Utils.randomNum(maux.assets.size());
-            aaux = maux.assets.get(rAsset);
+        if (Market.getInstance().canBuyAnyWith(b.getMoney())) {
+            Market maux = Market.getInstance();
+            int rAsset = Utils.randomNum(maux.assets.size());
+            Asset aaux = maux.assets.get(rAsset);
+            while (aaux.price > b.getMoney()) {
+                rAsset = Utils.randomNum(maux.assets.size());
+                aaux = maux.assets.get(rAsset);
+            }
+            int rQuant = Math.max(Utils.randomNum(b.getMoney() / aaux.price), 1); //He buys either 1 or a random amount he can afford
+            if (!b.playerBuyAsset(rAsset, rQuant)) {
+                throw new IllegalArgumentException("Bot " + this + " cannot make such a transaction.");
+            }
+            System.out.println(b.getName() + " rashly bought " + rQuant + " shares of " + aaux.name + ".");
         }
-        int rQuant = Math.max(Utils.randomNum(b.getMoney() / aaux.price), 1); //He buys either 1 or a random amount he can afford
-        if (!b.playerBuyAsset(rAsset, rQuant)) {
-            throw new IllegalArgumentException("Bot " + this + " cannot make such a transaction.");
+        else{
+            System.out.println(b.getName() + " wants to buy shares but is very short on cash, what a joker.");
         }
-        System.out.println(b.getName() + " rashly bought " + rQuant + " shares of " + aaux.name + ".");
     }
 
     @Override

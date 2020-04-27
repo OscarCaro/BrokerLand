@@ -16,7 +16,7 @@ public abstract class Action{
         this.desc = desc;
         this.time = time;
         this.mental = mental;
-        this.hunger = (hunger == 0) ? -time/10 : hunger;
+        this.hunger = (hunger == 0) ? -time/8 : hunger;
     }
     
     public void perform(Player player, boolean isUser) {

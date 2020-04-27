@@ -113,4 +113,11 @@ public class Market {
         return -1;
     }
 
+    public boolean canBuyAnyWith(int money) {
+        for (Asset a : assets){
+            if (a.price <= money)
+                return true;
+        }
+        return false;
+    }
 }

@@ -1,9 +1,9 @@
 package model.locations;
 
+import model.players.Player;
+
 import java.util.ArrayList;
 import java.util.List;
-import model.players.Player;
-import model.trading.Market;
 
 public class WorldMap implements LocationChanger{
 	
@@ -12,14 +12,17 @@ public class WorldMap implements LocationChanger{
 	public static final int HOMEIDX = 0;
 	public static final int OFFICEIDX = 1;
 	public static final int PARKIDX = 2;
-	
+	public static final int BANKIDX = 3;
+	public static final int BARIDX = 4;
 	private List<Location> locations;
 	
 	private WorldMap() {
 		locations = new ArrayList<>();
 		locations.add(HOMEIDX, new Home());
 		locations.add(OFFICEIDX, new Office());
-		locations.add(PARKIDX, new Park());		
+		locations.add(PARKIDX, new Park());
+		locations.add(BANKIDX, new Bank());
+		locations.add(BARIDX, new Bar());
 	}
 	
 	public static WorldMap getInstance() {

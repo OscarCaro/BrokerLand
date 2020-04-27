@@ -64,14 +64,14 @@ public class Game {
             for (Bot b : bots) {
                 b.update();
             }
-            t = eventHandler.executeEvents();
+            flushBots();
             market.refresh();
             this.flushAssets();
-            flushBots();
-            System.out.println("\n");
+            t = eventHandler.executeEvents();
         }
         System.out.println(player.endMessage());
     }
+
 
     private void flushAssets() {
         if (market.flushAssets()) {

@@ -7,6 +7,8 @@ import model.locations.Location;
 import model.locations.LocationChanger;
 import model.locations.WorldMap;
 import model.trading.Asset;
+import model.trading.Banker;
+import model.trading.Loan;
 import model.trading.Market;
 import model.utils.Pair;
 import model.utils.Utils;
@@ -27,6 +29,7 @@ public abstract class Player {
     protected String name;
     protected String surname;
     protected List<Pair<Asset, Integer>> portfolio;
+    protected Loan loan;
 
     public Player(String name, String surname, int locIdx, int money) {
         this.map = WorldMap.getInstance();
@@ -39,6 +42,7 @@ public abstract class Player {
         this.hunger = new Hunger(100);
         this.ownTime = new Time();
         this.portfolio = new ArrayList<>();
+        this.loan = null;
     }
 
     public abstract void update();
@@ -52,17 +56,10 @@ public abstract class Player {
     }
 
     public boolean canContinue(boolean isUser) {
-        if (isUser) {
-            return !this.mentalH.insane() && this.getMoney() > 0 && !this.hunger.starved();
-        } else {
-            boolean aux = false;
-            for (Asset a : this.globalMarket.assets) {
-                if (this.money > a.price) {
-                    aux = true;
-                }
-            }
-            return aux && !this.mentalH.insane() && !this.hunger.starved();
+        if  (this.getMoney()< 0 && !this.hasLoan()){
+            Banker.getInstance().savingLoan(this.getMoney(),this, isUser);
         }
+        return !this.mentalH.insane() && this.getMoney() > 0 && !this.hunger.starved();
     }
 
     public Location getCurrLoc() {
@@ -109,6 +106,8 @@ public abstract class Player {
         return portfolio;
     }
 
+    public abstract boolean takeLoan();
+
     public boolean playerSellAsset(int portfolioIndex, int qtty) { //NEEDS TO BE ACCESSED FROM BOT STRATEGIES
         if (globalMarket.sell(this, globalMarket.marketIndex(portfolio.get(portfolioIndex).getKey()), qtty)) {
             Pair<Asset, Integer> p = new Pair<>(portfolio.get(portfolioIndex).getKey(), portfolio.get(portfolioIndex).getValue() - qtty);
@@ -135,7 +134,6 @@ public abstract class Player {
         while (iter.hasNext()) {
             Pair<Asset, Integer> p = iter.next();
             if (p.getKey().isBankrupt()) {
-
                 if (isUser) {
                     Utils.minusWall();
                     System.out.println("You got rid of " + p.getValue() + " assets of " + p.getKey().name + " since it went bankrupt.");
@@ -149,4 +147,34 @@ public abstract class Player {
             }
         }
     }
+
+    public abstract boolean payBackLoan();
+
+    public boolean hasLoan() {
+        return loan != null;
+    }
+
+    protected void payLoanAmount(int amount) {
+        loan.pay(amount);
+        this.modifyMoney(-amount);
+    }
+
+    public void payInstallment(boolean isUser, int installment) {
+        if (this.hasLoan()) {
+            if (isUser) {
+                System.out.println("You paid $ " + loan.getInstallment() + " off of your loan debt.");
+            }
+            else{
+                System.out.println(this.getName() +" is being crushed by debt.");
+            }
+            this.payLoanAmount(installment);
+        }
+    }
+
+    public void takeSavingLoan(Loan loan) {
+        this.loan = loan;
+    }
+
 }
+
+
