@@ -1,8 +1,8 @@
 package model.locations;
 
-import model.actions.FeedPidgeonsAction;
-import model.actions.ObserveKidsAction;
-import model.actions.RideSwingAction;
+import model.actions.parkActions.FeedPidgeonsAction;
+import model.actions.parkActions.ObserveKidsAction;
+import model.actions.parkActions.RideSwingAction;
 
 public class Park extends Location {
 	

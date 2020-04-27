@@ -1,5 +1,6 @@
-package model.actions;
+package model.actions.officeActions;
 
+import model.actions.Action;
 import model.players.Player;
 
 public class StareWallAction extends Action {

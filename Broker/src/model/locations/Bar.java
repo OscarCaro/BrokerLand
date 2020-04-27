@@ -1,9 +1,9 @@
 package model.locations;
 
-import model.actions.EatSnacksAction;
-import model.actions.GetADrinkAction;
-import model.actions.OrderAMealAction;
-import model.actions.TalkToTheBarmanAction;
+import model.actions.barActions.EatSnacksAction;
+import model.actions.barActions.GetADrinkAction;
+import model.actions.barActions.OrderAMealAction;
+import model.actions.barActions.TalkToTheBarmanAction;
 
 public class Bar extends Location {
 

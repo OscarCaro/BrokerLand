@@ -1,5 +1,6 @@
-package model.actions;
+package model.actions.devActions;
 
+import model.actions.Action;
 import model.players.Player;
 import model.trading.Asset;
 import model.trading.Market;

@@ -1,8 +1,8 @@
 package model.locations;
 
 
-import model.actions.ReturnLoanAction;
-import model.actions.TakeLoanAction;
+import model.actions.bankActions.ReturnLoanAction;
+import model.actions.bankActions.TakeLoanAction;
 
 public class Bank extends Location {
 

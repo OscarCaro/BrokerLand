@@ -1,5 +1,6 @@
-package model.actions;
+package model.actions.parkActions;
 
+import model.actions.Action;
 import model.players.Player;
 
 public class RideSwingAction extends Action {

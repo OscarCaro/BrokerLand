@@ -1,8 +1,9 @@
-package model.actions;
+package model.actions.bankActions;
 
+import model.actions.Action;
 import model.players.Player;
 
-public class TakeLoanAction extends Action{
+public class TakeLoanAction extends Action {
     public TakeLoanAction() {
         super("Take", "TAKE a loan", "Take a loan from the bank you will have to pay back.", 20, -4,0);
     }

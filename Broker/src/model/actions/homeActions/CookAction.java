@@ -1,5 +1,6 @@
-package model.actions;
+package model.actions.homeActions;
 
+import model.actions.Action;
 import model.players.Player;
 
 public class CookAction extends Action {

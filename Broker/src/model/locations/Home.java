@@ -1,11 +1,9 @@
 package model.locations;
 
-import model.actions.Action;
-import model.actions.CookAction;
-import model.actions.OrderTakeawayAction;
-import model.actions.SleepAction;
-import model.actions.TakeShowerAction;
-import model.players.Broker;
+import model.actions.homeActions.CookAction;
+import model.actions.homeActions.OrderTakeawayAction;
+import model.actions.homeActions.SleepAction;
+import model.actions.homeActions.TakeShowerAction;
 
 public class Home extends Location {
 

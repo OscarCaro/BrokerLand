@@ -1,5 +1,6 @@
-package model.actions;
+package model.actions.barActions;
 
+import model.actions.Action;
 import model.players.Player;
 
 public class EatSnacksAction extends Action {

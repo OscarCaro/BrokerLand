@@ -1,9 +1,6 @@
 package model.locations;
 
-import controller.Game;
-import model.actions.*;
-import model.players.Broker;
-import model.trading.Market;
+import model.actions.officeActions.*;
 
 public class Office extends Location {
 
