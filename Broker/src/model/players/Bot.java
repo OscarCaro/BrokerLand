@@ -22,22 +22,9 @@ public class Bot extends Player {
     private MarketStrategy strategy;
     private boolean hasActionScheduled;
 
-    public Bot() {
-        super(Utils.generateName(), Utils.generateSurname(), WorldMap.HOMEIDX, 1000);
-        this.strategy = strategyDefine();
-        hasActionScheduled = false;
-    }
-
     public Bot(MarketStrategy strat) {
         super(Utils.generateName(), Utils.generateSurname(), WorldMap.HOMEIDX, 1000);
         this.strategy = strat;
-    }
-
-    private MarketStrategy strategyDefine() {
-        if (Utils.randomNum(10) > 5) //sketchy still
-            return new randomStrategy();
-        else
-            return new dumbassStrategy();
     }
 
     @Override

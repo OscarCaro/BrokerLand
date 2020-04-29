@@ -3,7 +3,6 @@ package controller;
 import org.apache.commons.cli.*;
 
 public class main {
-    private static final int BOTSDEFAULTNUM = 50;
     private static int numbots = -1;
     private static Difficulty difficulty = null;
 
@@ -56,13 +55,15 @@ public class main {
         if (line.hasOption("b")) {
             numbots = Integer.parseInt(line.getOptionValue("b"));
         } else {
-            numbots = BOTSDEFAULTNUM;
+            numbots = BotBuilder.BOTSDEFAULTNUM;
         }
     }
 
     private static void parseDiffOption(CommandLine line) {
         if (line.hasOption("d")) {
             difficulty = Difficulty.parse(line.getOptionValue("d"));
+        } else {
+        	difficulty = BotBuilder.DEFAULT_DIFFICULTY;
         }
     }
 

@@ -27,31 +27,7 @@ public class Game {
         player = new Broker();
         bots = new ArrayList<>();
         this.eventHandler = EventHandler.getInstance();
-        if (diff == null) {
-            for (int i = 0; i < botsNum; i++) {
-                bots.add(new Bot());
-            }
-        } else {
-            for (int i = 0; i < botsNum * diff.aggressiveRatio; i++) {
-                bots.add(new Bot(new aggressiveStrategy()));
-            }
-            for (int i = 0; i < botsNum * diff.dumbassRatio; i++) {
-                bots.add(new Bot(new dumbassStrategy()));
-            }
-            for (int i = 0; i < botsNum * diff.knowledgeableRatio; i++) {
-                bots.add(new Bot(new knowledgeableStrategy()));
-            }
-            for (int i = 0; i < botsNum * diff.greedyRatio; i++) {
-                bots.add(new Bot(new greedyStrategy()));
-            }
-            for (int i = 0; i < botsNum * diff.randomRatio; i++) {
-                bots.add(new Bot(new randomStrategy()));
-            }
-            while (bots.size() < botsNum) {
-                bots.add(new Bot());
-            }
-        }
-
+        this.bots = new BotBuilder(botsNum, diff).build();
     }
 
     public static Time getTimeClone() {
