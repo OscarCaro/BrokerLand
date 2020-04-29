@@ -1,5 +1,6 @@
 package model.locations;
 
+import model.actions.moveActions.*;
 import model.actions.officeActions.*;
 
 public class Office extends Location {
@@ -11,6 +12,10 @@ public class Office extends Location {
     	addAction(new SellAction());
     	addAction(new CheckMarketAction());
     	addAction(new StareWallAction());
+        addAction(new goHomeAction());
+        addAction(new goParkAction());
+        addAction(new goBankAction());
+        addAction(new goBarAction());
     }
 
 }

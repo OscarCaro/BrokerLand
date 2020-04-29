@@ -71,9 +71,7 @@ public class Bot extends Player {
             Time triggerTime = Game.getTimeClone();
             triggerTime.addTime(action.getTime());
 
-            int newLocIdx = Utils.randomNum(map.getNumOfLocs());
-
-            Event event = new BotUpdateEvent(triggerTime, action, currLoc, newLocIdx, map, this);
+            Event event = new BotUpdateEvent(triggerTime, action, this);
             EventHandler.getInstance().addEvent(event);
         }
     }

@@ -31,7 +31,6 @@ public class Broker extends Player {
         Utils.minusWall();
         System.out.println();
         askActions();
-        askNewLocation();
     }
 
     private void askActions() {
@@ -46,24 +45,6 @@ public class Broker extends Player {
             aux = in.nextLine();
         }
     }
-
-    private void askNewLocation() {
-        System.out.println("You're now at: " + currLoc);
-        System.out.println("\nDo you want to move? (y/n)");
-        String input = in.nextLine();
-        if (input.toUpperCase().equals("Y")) {
-            map.printLocations();
-            System.out.println("Where to?");
-            input = in.nextLine();
-            while (Integer.parseInt(input) < 0 || Integer.parseInt(input) >= map.getNumOfLocs()) {
-                System.out.println("Invalid option");
-                System.out.println("Where to?");
-                input = in.nextLine();
-            }
-            map.moveTo(this, Integer.parseInt(input));
-        }
-    }
-
 
     public String endMessage() {
         String aux = null;

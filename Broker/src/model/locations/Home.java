@@ -4,6 +4,7 @@ import model.actions.homeActions.CookAction;
 import model.actions.homeActions.OrderTakeawayAction;
 import model.actions.homeActions.SleepAction;
 import model.actions.homeActions.TakeShowerAction;
+import model.actions.moveActions.*;
 
 public class Home extends Location {
 
@@ -13,25 +14,9 @@ public class Home extends Location {
     	addAction(new CookAction());
     	addAction(new OrderTakeawayAction());
     	addAction(new TakeShowerAction());
+        addAction(new goOfficeAction());
+        addAction(new goParkAction());
+        addAction(new goBankAction());
+        addAction(new goBarAction());
     }
-
-//    @Override
-//    void enactAction(int i, Broker b) {
-//        b.addMental(actions.get(i).mental);
-//        Game.t.addTime(actions.get(i).time);
-//        switch (i){
-//            case 0:
-//                System.out.println("You got an ok rest.");
-//                break;
-//            case 1:
-//                System.out.println("The meal was fine.");
-//                break;
-//            case 2:
-//                System.out.println("The meal was just ok. What you'd expect from a takeaway meal.");
-//                break;
-//            case 3:
-//                System.out.println("You relax while taking a hot shower.");
-//                break;
-//        }
-//    }
 }

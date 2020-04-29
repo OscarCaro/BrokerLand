@@ -45,24 +45,4 @@ public class WorldMap implements LocationChanger{
 		player.setCurrLoc(loc);
 		loc.enterPlayer(player);		
 	}
-	
-	@Override
-	public Location getLocation(int idx) {
-		if(idx >= 0 && idx < locations.size()) {
-			return locations.get(idx);
-		}
-		return null;
-	}
-	
-	@Override
-	public void printLocations() {
-		for(int i = 0; i < locations.size(); i++) {
-			System.out.println(i + ". " + locations.get(i));
-		}		
-	}
-	
-	@Override
-	public int getNumOfLocs() {
-		return this.locations.size();
-	}
 }

@@ -174,6 +174,10 @@ public abstract class Player {
     public void takeSavingLoan(Loan loan) {
         this.loan = loan;
     }
+    
+    public LocationChanger getLocationChanger() {
+    	return this.map;
+    }
 
 }
 

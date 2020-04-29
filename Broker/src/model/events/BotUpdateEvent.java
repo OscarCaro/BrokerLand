@@ -10,18 +10,11 @@ import model.utils.Utils;
 public class BotUpdateEvent extends Event{
 	
 	private Action action;
-	private Location currLoc;
-	private int newLocIdc;
-	private LocationChanger map; 
 	private Bot bot;
 
-	public BotUpdateEvent(Time triggerTime, Action action, Location currLoc,
-			int newLocIdx, LocationChanger map, Bot bot) {
+	public BotUpdateEvent(Time triggerTime, Action action, Bot bot) {
 		super(triggerTime);
 		this.action = action;
-		this.currLoc = currLoc;
-		this.newLocIdc = newLocIdx;
-		this.map = map;
 		this.bot = bot;
 		this.stopHere = false;
 	}
@@ -31,9 +24,5 @@ public class BotUpdateEvent extends Event{
 		Utils.minusWall();
 		action.perform(bot, false);
 		bot.setHasActionScheduled(false);
-		if (Utils.randomNum(101) > 50 && currLoc != map.getLocation(newLocIdc)) {
-			map.moveTo(bot, newLocIdc);                   	
-            System.out.println(bot.getName() + " is now at: " + map.getLocation(newLocIdc) + ".");
-        }
 	}
 }
