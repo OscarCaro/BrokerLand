@@ -11,9 +11,9 @@ public class Bank extends Location {
         super("Bank");
         addAction(new TakeLoanAction());
         addAction(new ReturnLoanAction());
-        addAction(new goHomeAction());
-        addAction(new goOfficeAction());
-        addAction(new goParkAction());
-        addAction(new goBarAction());
+        addMoveAction(new goHomeAction());
+        addMoveAction(new goOfficeAction());
+        addMoveAction(new goParkAction());
+        addMoveAction(new goBarAction());
     }
 }

@@ -14,9 +14,9 @@ public class Home extends Location {
     	addAction(new CookAction());
     	addAction(new OrderTakeawayAction());
     	addAction(new TakeShowerAction());
-        addAction(new goOfficeAction());
-        addAction(new goParkAction());
-        addAction(new goBankAction());
-        addAction(new goBarAction());
+    	addMoveAction(new goOfficeAction());
+    	addMoveAction(new goParkAction());
+    	addMoveAction(new goBankAction());
+    	addMoveAction(new goBarAction());
     }
 }

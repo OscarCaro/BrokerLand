@@ -35,11 +35,13 @@ public class Broker extends Player {
 
     private void askActions() {
         List<Action> actions = currLoc.getActions();    // Call returns an unmodifiable list
+        List<Action> moveActions = currLoc.getMoveActions();
         System.out.println("What do you want to do?");
-        printActions(actions);
+        printActions(actions, moveActions);
         System.out.println("Select: ");
         String aux = in.nextLine();
-        while (!ActionParser.parseAction(aux, actions, this, true)) {
+        while (!ActionParser.parseAction(aux, actions, this, true) 
+        	 && !!ActionParser.parseAction(aux, moveActions, this, true)) {
             System.out.println("Invalid option");
             System.out.println("What do you want to do?");
             aux = in.nextLine();
@@ -200,9 +202,13 @@ public class Broker extends Player {
     }
 
 
-    public void printActions(List<Action> actions) {
+    public void printActions(List<Action> actions, List<Action> moveActions) {
         Utils.equalsWall();
         for (Action a : actions) {
+            System.out.println(a);
+        }
+        Utils.minusWall();
+        for (Action a : moveActions) {
             System.out.println(a);
         }
         Utils.equalsWall();

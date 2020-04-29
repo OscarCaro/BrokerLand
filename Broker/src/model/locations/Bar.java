@@ -14,10 +14,10 @@ public class Bar extends Location {
         addAction(new TalkToTheBarmanAction());
         addAction(new EatSnacksAction());
         addAction(new OrderAMealAction());
-        addAction(new goHomeAction());
-        addAction(new goOfficeAction());
-        addAction(new goParkAction());
-        addAction(new goBankAction());
+        addMoveAction(new goHomeAction());
+        addMoveAction(new goOfficeAction());
+        addMoveAction(new goParkAction());
+        addMoveAction(new goBankAction());
     }
 
 }

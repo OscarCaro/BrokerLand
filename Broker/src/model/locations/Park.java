@@ -12,10 +12,10 @@ public class Park extends Location {
     	addAction(new FeedPidgeonsAction());
     	addAction(new ObserveKidsAction());
     	addAction(new RideSwingAction());
-        addAction(new goHomeAction());
-        addAction(new goOfficeAction());
-        addAction(new goBankAction());
-        addAction(new goBarAction());
+    	addMoveAction(new goHomeAction());
+    	addMoveAction(new goOfficeAction());
+    	addMoveAction(new goBankAction());
+    	addMoveAction(new goBarAction());
     }
 
 }

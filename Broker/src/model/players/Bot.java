@@ -65,8 +65,20 @@ public class Bot extends Player {
 
     @Override
     public void update() {
-        if (!hasActionScheduled) {
-            List<Action> actions = new ArrayList<>(currLoc.getActions()); // Call returns an unmodif. list
+        if (!hasActionScheduled) {        	
+        	/* To be able to manage the probability in which a bot changes location.
+        	 * If not dealt in this way, the prob would be so high that bots spend the day moving
+        	 * and doing nothing.
+        	 * TODO: Add this feature as part of bot's personality strategy
+        	 */
+        	List<Action> actions;
+        	if (Utils.randomNum(100) > 30) {
+        		actions = new ArrayList<>(currLoc.getActions());
+        	}
+        	else {
+        		actions = new ArrayList<>(currLoc.getMoveActions());
+        	}
+            
             Action action = actions.get(Utils.randomNum(actions.size()));
             Time triggerTime = Game.getTimeClone();
             triggerTime.addTime(action.getTime());

@@ -12,10 +12,10 @@ public class Office extends Location {
     	addAction(new SellAction());
     	addAction(new CheckMarketAction());
     	addAction(new StareWallAction());
-        addAction(new goHomeAction());
-        addAction(new goParkAction());
-        addAction(new goBankAction());
-        addAction(new goBarAction());
+    	addMoveAction(new goHomeAction());
+    	addMoveAction(new goParkAction());
+    	addMoveAction(new goBankAction());
+    	addMoveAction(new goBarAction());
     }
 
 }
