@@ -4,6 +4,8 @@ import model.events.EventHandler;
 import model.life.Time;
 import model.players.Bot;
 import model.players.Broker;
+import model.players.botBuild.BotBuildDirector;
+import model.players.botBuild.BotBuilder;
 import model.players.marketstrategies.*;
 import model.trading.Market;
 import model.utils.Utils;
@@ -27,7 +29,7 @@ public class Game {
         player = new Broker();
         bots = new ArrayList<>();
         this.eventHandler = EventHandler.getInstance();
-        this.bots = new BotBuilder(botsNum, diff).build();
+        this.bots = new BotBuildDirector(new BotBuilder()).build(botsNum, diff);
     }
 
     public static Time getTimeClone() {

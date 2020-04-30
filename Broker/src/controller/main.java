@@ -2,6 +2,9 @@ package controller;
 
 import org.apache.commons.cli.*;
 
+import model.players.botBuild.BotBuildDirector;
+import model.players.botBuild.BotBuilder;
+
 public class main {
     private static int numbots = -1;
     private static Difficulty difficulty = null;
@@ -55,7 +58,7 @@ public class main {
         if (line.hasOption("b")) {
             numbots = Integer.parseInt(line.getOptionValue("b"));
         } else {
-            numbots = BotBuilder.BOTSDEFAULTNUM;
+            numbots = BotBuildDirector.BOTSDEFAULTNUM;
         }
     }
 
@@ -63,7 +66,7 @@ public class main {
         if (line.hasOption("d")) {
             difficulty = Difficulty.parse(line.getOptionValue("d"));
         } else {
-        	difficulty = BotBuilder.DEFAULT_DIFFICULTY;
+        	difficulty = BotBuildDirector.DEFAULT_DIFFICULTY;
         }
     }
 

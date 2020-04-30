@@ -22,8 +22,8 @@ public class Bot extends Player {
     private MarketStrategy strategy;
     private boolean hasActionScheduled;
 
-    public Bot(MarketStrategy strat) {
-        super(Utils.generateName(), Utils.generateSurname(), WorldMap.HOMEIDX, 1000);
+    public Bot(String name, String surname, int locIdx, int money, MarketStrategy strat) {
+        super(name, surname, locIdx, money);
         this.strategy = strat;
     }
 
