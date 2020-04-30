@@ -50,6 +50,12 @@ public abstract class Player {
     public abstract void buy();
 
     public abstract void sell();
+    
+    public abstract void reactToGreeting(Player other, String message);
+    
+    public abstract String getMessageToSay();
+    
+    public abstract Player choosePlayerToGreet(List<Player> players);
 
     protected void moveTo(int locIdx) {
         map.moveTo(this, locIdx);

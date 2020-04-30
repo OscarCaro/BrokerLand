@@ -11,6 +11,7 @@ import model.locations.WorldMap;
 import model.players.marketstrategies.MarketStrategy;
 import model.players.marketstrategies.dumbassStrategy;
 import model.players.marketstrategies.randomStrategy;
+import model.players.socialStrategies.SocialStrategy;
 import model.trading.Banker;
 import model.utils.Utils;
 
@@ -19,12 +20,15 @@ import java.util.List;
 
 public class Bot extends Player {
 
-    private MarketStrategy strategy;
+    private MarketStrategy marketStrategy;
+    private SocialStrategy socialStrategy;
     private boolean hasActionScheduled;
 
-    public Bot(String name, String surname, int locIdx, int money, MarketStrategy strat) {
+    public Bot(String name, String surname, int locIdx, int money, 
+    		MarketStrategy marketStrategy, SocialStrategy socialStrategy) {
         super(name, surname, locIdx, money);
-        this.strategy = strat;
+        this.marketStrategy = marketStrategy;
+        this.socialStrategy = socialStrategy;
     }
 
     @Override
@@ -74,6 +78,21 @@ public class Bot extends Player {
             EventHandler.getInstance().addEvent(event);
         }
     }
+    
+    @Override
+    public void reactToGreeting(Player other, String message) {
+    	this.socialStrategy.reactToGreeting(this, other);    	
+    }
+    
+    @Override
+    public String getMessageToSay() {
+    	return this.socialStrategy.getMessageToSay(); 
+    }
+    
+    @Override
+    public Player choosePlayerToGreet(List<Player> players) {    	
+    	return players.get(Utils.randomNum(players.size())); 
+    }
 
     public String endMessage() {
         String aux;
@@ -101,13 +120,13 @@ public class Bot extends Player {
 
     @Override
     public void buy() {
-        this.strategy.buyAsset(this);
+        this.marketStrategy.buyAsset(this);
     }
 
     @Override
     public void sell() {
         if (!this.portfolio.isEmpty()) {
-            this.strategy.sellAsset(this);
+            this.marketStrategy.sellAsset(this);
         } else {
             System.out.println(getName() + " looked to his portfolio and found it empty.");
         }

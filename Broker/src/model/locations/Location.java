@@ -36,6 +36,10 @@ public abstract class Location {
     	this.playersInside.remove(player);
     }
     
+    public List<Player> getPlayersInside(){
+    	return Collections.unmodifiableList(playersInside);
+    }
+    
     public List<Action> getActions(){
     	return Collections.unmodifiableList(actions);
     }

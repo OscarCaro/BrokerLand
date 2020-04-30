@@ -17,7 +17,7 @@ public class Broker extends Player {
     private Scanner in;
 
     public Broker() {
-        super("You", "", WorldMap.HOMEIDX, 1000);
+        super("you", "", WorldMap.HOMEIDX, 1000);
         in = new Scanner(System.in);
     }
 
@@ -41,11 +41,38 @@ public class Broker extends Player {
         System.out.println("Select: ");
         String aux = in.nextLine();
         while (!ActionParser.parseAction(aux, actions, this, true) 
-        	 && !!ActionParser.parseAction(aux, moveActions, this, true)) {
+        	 && !ActionParser.parseAction(aux, moveActions, this, true)) {
             System.out.println("Invalid option");
             System.out.println("What do you want to do?");
             aux = in.nextLine();
         }
+    }
+    
+    @Override
+    public void reactToGreeting(Player other, String message) {
+    	// TODO: Add functionality (maybe accept input from user as response)    	
+    }
+    
+    @Override
+    public String getMessageToSay() {
+    	System.out.println("What do you want to say: ");
+        return in.nextLine();
+    }
+    
+    @Override
+    public Player choosePlayerToGreet(List<Player> players) {
+    	System.out.println("Who do you want to talk to:");
+        for (int i = 0; i < players.size(); i++) {
+        	System.out.println(i + ". " + players.get(i).getName());
+        }
+        System.out.println("Select: ");
+        String aux = in.nextLine();
+        while (Integer.parseInt(aux) < 0 || Integer.parseInt(aux) >= players.size()) {
+        	System.out.println("Invalid option");
+        	System.out.println("Select: ");
+        	aux = in.nextLine();
+        }
+    	return players.get(Integer.parseInt(aux));
     }
 
     public String endMessage() {
