@@ -50,7 +50,8 @@ public class Broker extends Player {
     
     @Override
     public void reactToGreeting(Player other, String message) {
-    	// TODO: Add functionality (maybe accept input from user as response)    	
+    	System.out.println("What do you respond back: ");
+       	System.out.println(in.nextLine());
     }
     
     @Override
