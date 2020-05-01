@@ -7,6 +7,7 @@ import model.utils.Pair;
 import model.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class dumbassStrategy implements MarketStrategy {
     private ArrayList<Pair<Asset, Integer>> memory = new ArrayList<>();
@@ -65,11 +66,23 @@ public class dumbassStrategy implements MarketStrategy {
         }
     }
 
+    @Override
+    public void updateMemory(Bot b) {
+        Iterator<Pair<Asset, Integer>> iter = memory.iterator();
+        while (iter.hasNext()) {
+            Asset a = iter.next().getKey();
+            if (a.isBankrupt()){
+                iter.remove();
+            }
+        }
+    }
+
     private int findProfitableAssetInPortfolio(Bot b) {
         for (Pair<Asset, Integer> p : memory) {
             if (p.getKey().price > p.getValue()) {
                 for (Pair<Asset, Integer> p2 : b.getPortfolio()) {
                     if (p.getKey().equals(p2.getKey())) {
+                        memory.remove(p);
                         return b.getPortfolio().indexOf(p2);
                     }
                 }

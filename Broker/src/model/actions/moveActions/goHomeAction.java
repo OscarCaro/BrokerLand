@@ -16,6 +16,9 @@ public class goHomeAction extends Action {
 		if(!isUser) {
 			System.out.println(player.getName() + " is now at home.");
 		}
+		else{
+			System.out.println("You went Home.");
+		}
 	}
 
 }

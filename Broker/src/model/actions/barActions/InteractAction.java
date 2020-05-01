@@ -1,10 +1,10 @@
 package model.actions.barActions;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import model.actions.Action;
 import model.players.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class InteractAction extends Action {
     public InteractAction() {
@@ -15,10 +15,18 @@ public class InteractAction extends Action {
     @Override
     protected void performSpecificAction(Player player, boolean isUser) {
     	List<Player> playersInside = new ArrayList<>(player.getCurrLoc().getPlayersInside());
-    	playersInside.remove(player);
-    	Player other = player.choosePlayerToGreet(playersInside);
-    	String message = player.getMessageToSay();
-    	System.out.println(player.getName() +" said '" + message + "' to " + other.getName() );
-        other.reactToGreeting(player, message);
+    	if (playersInside.size() != 1) {
+            playersInside.remove(player);
+            Player other = player.choosePlayerToGreet(playersInside);
+            String message = player.getMessageToSay();
+            System.out.println(player.getName() + " said '" + message + "' to " + other.getName());
+            other.reactToGreeting(player, message);
+        }
+    	else if(isUser) {
+            System.out.println("Only the barman's here.");
+        }
+    	else{
+    	    System.out.println(player.getName() + " is craving for some conversation.");
+        }
     }
 }

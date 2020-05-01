@@ -1,9 +1,7 @@
 package controller;
 
-import org.apache.commons.cli.*;
-
 import model.players.botBuild.BotBuildDirector;
-import model.players.botBuild.BotBuilder;
+import org.apache.commons.cli.*;
 
 public class main {
     private static int numbots = -1;
@@ -17,9 +15,6 @@ public class main {
             parseHelpOption(line, cmdLineOptions);
             parseBotsOption(line);
             parseDiffOption(line);
-            // if there are some remaining arguments, then something wrong is
-            // provided in the command line!
-            //
             String[] remaining = line.getArgs();
             if (remaining.length > 0) {
                 String error = "Illegal arguments:";
@@ -58,7 +53,7 @@ public class main {
         if (line.hasOption("b")) {
             numbots = Integer.parseInt(line.getOptionValue("b"));
         } else {
-            numbots = BotBuildDirector.BOTSDEFAULTNUM;
+            numbots = -1;
         }
     }
 

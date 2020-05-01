@@ -2,8 +2,6 @@ package model.events;
 
 import model.actions.Action;
 import model.life.Time;
-import model.locations.Location;
-import model.locations.LocationChanger;
 import model.players.Bot;
 import model.utils.Utils;
 
@@ -21,8 +19,11 @@ public class BotUpdateEvent extends Event{
 	
 	@Override
 	public void execute() {
-		Utils.minusWall();
-		action.perform(bot, false);
-		bot.setHasActionScheduled(false);
+		if(bot.canContinue(false)) {
+			action.perform(bot, false);
+			Utils.minusWall();
+			bot.setHasActionScheduled(false);
+			bot.update();
+		}
 	}
 }

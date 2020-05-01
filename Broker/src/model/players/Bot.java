@@ -7,10 +7,7 @@ import model.events.BotUpdateEvent;
 import model.events.Event;
 import model.events.EventHandler;
 import model.life.Time;
-import model.locations.WorldMap;
 import model.players.marketstrategies.MarketStrategy;
-import model.players.marketstrategies.dumbassStrategy;
-import model.players.marketstrategies.randomStrategy;
 import model.players.socialStrategies.SocialStrategy;
 import model.trading.Banker;
 import model.utils.Utils;
@@ -77,6 +74,8 @@ public class Bot extends Player {
             Event event = new BotUpdateEvent(triggerTime, action, this);
             EventHandler.getInstance().addEvent(event);
         }
+
+        this.marketStrategy.updateMemory(this);
     }
     
     @Override

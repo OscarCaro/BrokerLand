@@ -4,7 +4,7 @@ import model.life.Time;
 
 public abstract class Event {
 	
-	private Time triggerTime;
+	protected Time triggerTime;
 	protected boolean stopHere;
 	
 	public Event(Time triggerTime) {

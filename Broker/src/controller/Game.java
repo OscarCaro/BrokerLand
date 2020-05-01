@@ -1,12 +1,13 @@
 package controller;
 
 import model.events.EventHandler;
+import model.events.MarketRefreshEvent;
 import model.life.Time;
 import model.players.Bot;
 import model.players.Broker;
 import model.players.botBuild.BotBuildDirector;
 import model.players.botBuild.BotBuilder;
-import model.players.marketstrategies.*;
+import model.trading.Asset;
 import model.trading.Market;
 import model.utils.Utils;
 
@@ -30,33 +31,49 @@ public class Game {
         bots = new ArrayList<>();
         this.eventHandler = EventHandler.getInstance();
         this.bots = new BotBuildDirector(new BotBuilder()).build(botsNum, diff);
+        this.initBotRefreshes();
+        this.initMarketRefreshes();
     }
 
     public static Time getTimeClone() {
         return new Time(t);
     }
 
+    private void initBotRefreshes() {
+        for (Bot b : bots) {
+            b.update();
+        }
+    }
+
     public void run() {
         while (player.canContinue(true) && !playerIsWinner()) {
             player.update();
-            for (Bot b : bots) {
-                b.update();
-            }
-            flushBots();
-            market.refresh();
-            this.flushAssets();
-            t = eventHandler.executeEvents();
+            eventHandler.executeEvents(this);
         }
         System.out.println(player.endMessage());
     }
 
+    public void printScore() {
+        Utils.equalsWall();
+        System.out.println((bots.size() + 1) + " total brokers remaining.");
+        Utils.equalsWall();
+    }
 
-    private void flushAssets() {
-        if (market.flushAssets()) {
+
+    private void initMarketRefreshes() {
+        eventHandler.addEvent(new MarketRefreshEvent(getTimeClone(), this)); //periodical market refreshing event
+    }
+
+
+    public void flushAssets() {
+        Asset a = market.bankruptAsset();
+        if (a != null) {
             for (Bot b : bots) {
-                b.flushAssets(false);
+                b.flushAsset(a, false);
             }
-            player.flushAssets(true);
+            player.flushAsset(a, true);
+            Market.getInstance().assets.remove(a);
+            flushAssets();
         }
     }
 
@@ -64,8 +81,7 @@ public class Game {
         return bots.isEmpty();
     }
 
-    private void flushBots() {
-        Utils.equalsWall();
+    public void flushBots() {
         Iterator<Bot> iter = bots.iterator();
         while (iter.hasNext()) {
             Bot b = iter.next();
@@ -75,7 +91,13 @@ public class Game {
                 iter.remove();
             }
         }
-        System.out.println((bots.size() + 1) + " total brokers remaining.");
-        Utils.equalsWall();
+    }
+
+    public void setTime(Time triggerTime) {
+        t = triggerTime;
+    }
+
+    public boolean noBotsRemaining() {
+        return bots.isEmpty();
     }
 }

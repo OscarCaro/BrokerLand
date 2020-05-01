@@ -1,6 +1,6 @@
 package model.events;
 
-import model.life.Time;
+import controller.Game;
 import model.utils.SortedArrayList;
 import model.utils.Utils;
 
@@ -38,15 +38,15 @@ public class EventHandler {
         }
     }
 
-    public Time executeEvents() {
-        while (!eventList.get(0).stopHere() && eventList.size() > 1) {
+    public void executeEvents(Game game) {
+        Utils.minusWall();
+        while (!eventList.get(0).stopHere() && eventList.size() > 1 && !game.noBotsRemaining()) {
+            game.setTime(eventList.get(0).triggerTime);
             eventList.remove(0).execute();
+            game.flushBots();
         }
-        Utils.minusWall();
-        Time gameTime = eventList.get(0).getTime();
+        game.printScore();
         eventList.remove(0).execute(); // execute last event which should be player's and expect input
-        Utils.minusWall();
-        return gameTime;
     }
 
 }

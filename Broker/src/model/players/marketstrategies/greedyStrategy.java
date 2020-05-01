@@ -13,4 +13,9 @@ public class greedyStrategy implements MarketStrategy {
     public void sellAsset(Bot b) {
 
     }
+
+    @Override
+    public void updateMemory(Bot b) {
+
+    }
 }

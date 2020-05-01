@@ -16,6 +16,9 @@ public class goParkAction extends Action {
 		if(!isUser) {
 			System.out.println(player.getName() + " is now at a park.");
 		}
+		else{
+			System.out.println("You went to the Park.");
+		}
 	}
 
 }

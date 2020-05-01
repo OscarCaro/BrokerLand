@@ -47,34 +47,11 @@ public class Market {
         Iterator<Asset> iter = assets.iterator();
         while (iter.hasNext()) {
             Asset a = iter.next();
-            a.refreshPrice();
+            a.refreshAsset();
         }
     }
 
-    public boolean flushAssets() {
-        Iterator<Asset> iter = assets.iterator();
-        boolean isFirst = true;
-        while (iter.hasNext()) {
-            Asset a = iter.next();
-            if (a.isBankrupt()) {
-                if (isFirst) {
-                    System.out.println();
-                    Utils.equalsWall();
-                    isFirst = false;
-                    System.out.println(a.name + " declared bankruptcy!");
-                } else {
-                    Utils.minusWall();
-                    System.out.println(a.name + " declared bankruptcy!");
-                }
-                iter.remove();
-            }
-        }
-        if (!isFirst) {
-            Utils.equalsWall();
-            System.out.println();
-        }
-        return !isFirst;
-    }
+
 
 
     public void opportunity() {
@@ -119,5 +96,18 @@ public class Market {
                 return true;
         }
         return false;
+    }
+
+    public Asset bankruptAsset() {
+        Iterator<Asset> iter = assets.iterator();
+        boolean isFirst = true;
+        while (iter.hasNext()) {
+            Asset a = iter.next();
+            if (a.isBankrupt()) {
+                System.out.println("-----------------"+ a.name + " declared bankruptcy!-----------------");
+                return a;
+            }
+        }
+        return null;
     }
 }

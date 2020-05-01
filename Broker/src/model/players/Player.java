@@ -14,7 +14,6 @@ import model.utils.Pair;
 import model.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public abstract class Player {
@@ -50,11 +49,11 @@ public abstract class Player {
     public abstract void buy();
 
     public abstract void sell();
-    
+
     public abstract void reactToGreeting(Player other, String message);
-    
+
     public abstract String getMessageToSay();
-    
+
     public abstract Player choosePlayerToGreet(List<Player> players);
 
     protected void moveTo(int locIdx) {
@@ -135,24 +134,6 @@ public abstract class Player {
         }
     }
 
-    public void flushAssets(boolean isUser) {
-        Iterator<Pair<Asset, Integer>> iter = portfolio.iterator();
-        while (iter.hasNext()) {
-            Pair<Asset, Integer> p = iter.next();
-            if (p.getKey().isBankrupt()) {
-                if (isUser) {
-                    Utils.minusWall();
-                    System.out.println("You got rid of " + p.getValue() + " assets of " + p.getKey().name + " since it went bankrupt.");
-                    Utils.minusWall();
-                } else {
-                    System.out.println(this.getName() + " was affected by the bankruptcy of " + p.getKey().name + ".");
-                }
-                this.modifyMoney(p.getKey().price * p.getValue());
-                this.modifyHealth(-10);
-                iter.remove();
-            }
-        }
-    }
 
     public abstract boolean payBackLoan();
 
@@ -180,11 +161,28 @@ public abstract class Player {
     public void takeSavingLoan(Loan loan) {
         this.loan = loan;
     }
-    
+
     public LocationChanger getLocationChanger() {
     	return this.map;
     }
 
+    public void flushAsset(Asset a, boolean isUser){
+        for (Pair<Asset, Integer> p : portfolio) {
+            if (p.getKey().equals(a)) {
+                if (isUser) {
+                    Utils.minusWall();
+                    System.out.println("You got rid of " + p.getValue() + " assets of " + p.getKey().name + " since it went bankrupt.");
+                    Utils.minusWall();
+                } else {
+                    System.out.println(this.getName() + " was affected by the bankruptcy of " + p.getKey().name + ".");
+                }
+                this.modifyMoney((p.getKey().price * p.getValue()) / 2);
+                this.modifyHealth(-10);
+                portfolio.remove(p);
+                break;
+            }
+        }
+    }
 }
 
 

@@ -3,6 +3,7 @@ package model.events;
 import model.actions.Action;
 import model.life.Time;
 import model.players.Broker;
+import model.utils.Utils;
 
 
 public class BrokerUpdateEvent extends Event{
@@ -19,6 +20,8 @@ public class BrokerUpdateEvent extends Event{
 
     @Override
     public void execute() {
+        Utils.equalsWall();
         action.perform(player,true);
+        Utils.equalsWall();
     }
 }

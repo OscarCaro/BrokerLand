@@ -17,6 +17,8 @@ public class LoanInstallmentEvent extends Event {
 
     @Override
     public void execute() {
-        p.payInstallment(isUser, installmentAmount);
+        if(p.canContinue(isUser)){
+            p.payInstallment(isUser, installmentAmount);
+        }
     }
 }

@@ -30,13 +30,18 @@ public class randomStrategy implements MarketStrategy {
 
     @Override
     public void sellAsset(Bot b) {
-        int rAsset = Math.max(Utils.randomNum(b.getPortfolio().size() - 1), 0);
+        int rAsset = Utils.randomNum(b.getPortfolio().size());
         Asset aaux = b.getPortfolio().get(rAsset).getKey();
         int rQuant = Math.max(Utils.randomNum(b.getPortfolio().get(rAsset).getValue()), 1); //He sells either 1 or a random amount he has
         if (!b.playerSellAsset(rAsset, rQuant)) {
             throw new IllegalArgumentException("Bot " + this + " cannot make such a transaction.");
         }
         System.out.println(b.getName() + " rashly sold " + rQuant + " shares of " + aaux.name + ".");
+    }
+
+    @Override
+    public void updateMemory(Bot b) {
+
     }
 }
 

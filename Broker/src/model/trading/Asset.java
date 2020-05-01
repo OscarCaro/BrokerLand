@@ -17,6 +17,7 @@ public class Asset {
     public int curve10;
     private SortedArrayList<Pair<Time, Integer>> record;
     private boolean industryBoom;
+    private boolean industryCrash;
     private int bankruptcyIndex;
     private boolean bankrupt;
 
@@ -30,6 +31,7 @@ public class Asset {
             else return 0;
         });
         industryBoom = false;
+        industryCrash = false;
         bankruptcyIndex = 0;
     }
 
@@ -40,6 +42,7 @@ public class Asset {
             sharesOwned += quantity;
             record.add(new Pair<>(Game.getTimeClone(), quantity));
             updateCurve10();
+            decreaseBIndex();
             decreaseBIndex();
             return true;
         }
@@ -67,20 +70,34 @@ public class Asset {
         return true;
     }
 
-    public void refreshPrice() {
+    public void refreshAsset() {
         if (industryBoom) {
-            price += Utils.randomNum(10) * (curve10 * 2 + 10);
+            price += Math.max(Utils.randomNum(10) * (curve10 * 2 + 10), -Utils.randomNum(10) * (curve10 * 2 + 10));
             decreaseBIndex();
+        } else if (industryCrash) {
+            price += Math.min(Utils.randomNum(10) * (curve10 * 2 + 10), -Utils.randomNum(10) * (curve10 * 2 + 10));
         } else {
-            price += Utils.randomNum(10) * curve10;
+            if (curve10 == 0) {
+                int sign = Utils.randomNum(10);
+                if (sign > 5) {
+                    sign = -1;
+                } else {
+                    sign = 1;
+                }
+                price += sign * Utils.randomNum(10) * curve10;
+            } else {
+                price += Utils.randomNum(10) * curve10;
+            }
         }
-        industryBoom = Utils.randomNum(10) > 9;
 
-        if (sharesOwned == 0 || record.isEmpty() || sharesOwned < (int) (0.2 * (double) Game.getTimeClone().day) || (curve10 < - Game.getTimeClone().day/2 && sharesOwned > Game.getTimeClone().day) || (!industryBoom && Utils.randomNum(10)>7)) {
+        industryBoom = Utils.randomNum(10) > 9;
+        industryCrash = Utils.randomNum(10) > 9;
+
+        if (sharesOwned == 0 || record.isEmpty() || sharesOwned < (int) (0.01 * (double) Game.getTimeClone().day) || (!industryBoom && Utils.randomNum(10) > 7) || industryCrash) {
             bankruptcyIndex++;
         }
 
-        if (bankruptcyIndex >= BANKRUPTCYTURNS) {
+        if (bankruptcyIndex > BANKRUPTCYTURNS) {
             bankrupt = true;
         }
 
@@ -102,11 +119,15 @@ public class Asset {
         bankrupt = true;
     }
 
-    public int getBankruptcyIndex(){
+    public int getBankruptcyIndex() {
         return bankruptcyIndex;
     }
 
     public int getPrice() {
         return this.price;
+    }
+
+    public boolean isIndustryCrash() {
+        return industryCrash;
     }
 }

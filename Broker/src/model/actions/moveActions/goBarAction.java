@@ -16,6 +16,9 @@ public class goBarAction extends Action {
 		if(!isUser) {
 			System.out.println(player.getName() + " is now at a bar.");
 		}
+		else{
+			System.out.println("You went to the Bar.");
+		}
 	}
 
 }

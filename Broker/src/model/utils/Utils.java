@@ -1,9 +1,5 @@
 package model.utils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class Utils {
 
 	public static int randomNum(int upperBound) {
@@ -17,7 +13,7 @@ public class Utils {
 		System.out.println("=======================================================================================");
 	}
 	public static String generateName() {
-		int size = 16;
+		int size = 18;
 		String[] names = {
 				"Liam", "Noah", "Mason", "Logan", "James", "Ethan",
 				"Lucas", "Jacob", "Michael", "Matthew", "Alexander", "William",
@@ -27,7 +23,7 @@ public class Utils {
  	}
 	
 	public static String generateSurname() {
-		int size = 8;
+		int size = 10;
 		String[] surnames = {
 				"Smith", "Johnson", "Williams", "Jones",
 				"Miller", "Taylor", "Martin", "Anderson", "Moore", "Caro"

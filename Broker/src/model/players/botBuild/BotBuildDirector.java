@@ -1,8 +1,5 @@
 package model.players.botBuild;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import controller.Difficulty;
 import model.locations.WorldMap;
 import model.players.Bot;
@@ -13,9 +10,11 @@ import model.players.socialStrategies.ShyStrategy;
 import model.players.socialStrategies.SocialStrategy;
 import model.utils.Utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BotBuildDirector {
-	
-	public static final int BOTSDEFAULTNUM = 50;
+
     public static final Difficulty DEFAULT_DIFFICULTY = Difficulty.NORMAL;
     
     private BotBuilder builder;
@@ -26,7 +25,9 @@ public class BotBuildDirector {
 	
 	public List<Bot> build(int botsNum, Difficulty diff){
 		List<Bot> list = new ArrayList<>();
-		
+		if (botsNum == -1) {
+			botsNum = diff.getDifficultyBotsNum();
+		}
 		builder.setInitLoc(WorldMap.HOMEIDX).setMoney(1000);		// Common for all
 		
         for (int i = 0; i < botsNum * diff.getAggressiveRatio(); i++) {
@@ -69,8 +70,11 @@ public class BotBuildDirector {
         	.setMarketStrategy(new randomStrategy())
         	.setSocialStrategy(pickSocStr());
             list.add(builder.build());
-        }        
-		
+        }
+		while (list.size() > botsNum) {
+			list.remove(Utils.randomNum(list.size()));
+		}
+
 		return list;
 	}
 	
