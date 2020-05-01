@@ -2,6 +2,9 @@ package model.players;
 
 import model.actions.Action;
 import model.actions.ActionParser;
+import model.events.BrokerUpdateEvent;
+import model.events.EventHandler;
+import model.life.Time;
 import model.locations.WorldMap;
 import model.trading.Asset;
 import model.trading.Banker;
@@ -11,6 +14,8 @@ import model.utils.Utils;
 
 import java.util.List;
 import java.util.Scanner;
+
+import controller.Game;
 
 public class Broker extends Player {
 
@@ -34,18 +39,24 @@ public class Broker extends Player {
     }
 
     private void askActions() {
-        List<Action> actions = currLoc.getActions();    // Call returns an unmodifiable list
+        List<Action> actions = currLoc.getActions();    
         List<Action> moveActions = currLoc.getMoveActions();
+        
         System.out.println("What do you want to do?");
         printActions(actions, moveActions);
         System.out.println("Select: ");
-        String aux = in.nextLine();
-        while (!ActionParser.parseAction(aux, actions, this, true) 
-        	 && !ActionParser.parseAction(aux, moveActions, this, true)) {
+        String input = in.nextLine();
+        Action action = ActionParser.parseAction(input, actions, moveActions);
+        while (action == null) {
             System.out.println("Invalid option");
             System.out.println("What do you want to do?");
-            aux = in.nextLine();
+            input = in.nextLine();
+            action = ActionParser.parseAction(input, actions, moveActions);
         }
+        
+        Time actionTime = Game.getTimeClone();
+		actionTime.addTime(action.getTime());
+		EventHandler.getInstance().addEvent(new BrokerUpdateEvent(actionTime, action, this));
     }
     
     @Override

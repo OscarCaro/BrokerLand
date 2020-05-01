@@ -1,39 +1,34 @@
 package model.actions;
 
-import controller.Game;
-import model.events.BrokerUpdateEvent;
-import model.events.EventHandler;
-import model.life.Time;
-import model.players.Broker;
-
 import java.util.List;
 
 public class ActionParser {
 	
-	public static boolean parseAction (String input, List<Action> actions,
-									   Broker player, boolean isUser) {
+	public static Action parseAction (String input, List<Action> actions, List<Action> moveActions) {
 		
-		// Search in list of actions given by location
 		for (Action a : actions) {
 			if (equal(a.getParsingName(), input)) {
-				Time actionTime = Game.getTimeClone();
-				actionTime.addTime(a.getTime());
-				EventHandler.getInstance().addEvent(new BrokerUpdateEvent(actionTime, a, player));
-				return true;
+				return a;
+			}
+		}
+		
+		for (Action a : moveActions) {
+			if (equal(a.getParsingName(), input)) {
+				return a;
 			}
 		}
 		
 		// Not found in list, compare with "exit" or "help"	(common for every location)
 		if (equal(input, "help")) {
 			System.out.println("To select an action, write down the UPPERCASE part of its name");
-			return true;
+			return null;
 		}
 		else if (equal(input, "exit")) {
 			System.exit(0);
 		}
 		
-		// No match found -> return false -> ask for input again
-		return false;
+		// No match found -> return null -> ask for input again
+		return null;
 	}
 	
 	private static boolean equal (String a, String b) {
