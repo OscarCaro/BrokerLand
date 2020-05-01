@@ -1,0 +1,19 @@
+- Command Pattern: 
+	- Action class: the command
+	- ActionParser class: the command parser
+
+- Builder Pattern:
+	- Bot class: the class to be built
+	- BotBuilder class: builder that assembles together all components of Bot
+	- BotBuildDirector class: director which decides specific features of each bot
+	- Game Class: client class that ignores all the process
+
+- Strategy Pattern:
+	- SocialStrategy classes
+	- MarketStrategy classes
+
+- Singleton Pattern:
+	- EventHandler
+	- WorldMap
+	- Banker
+	- Market
