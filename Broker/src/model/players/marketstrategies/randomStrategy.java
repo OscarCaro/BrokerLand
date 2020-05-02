@@ -5,7 +5,7 @@ import model.trading.Asset;
 import model.trading.Market;
 import model.utils.Utils;
 
-public class randomStrategy implements MarketStrategy {
+public class randomStrategy extends MarketCommonKnowledge implements MarketStrategy  {
 
     @Override
     public void buyAsset(Bot b) {
@@ -37,10 +37,6 @@ public class randomStrategy implements MarketStrategy {
             throw new IllegalArgumentException("Bot " + this + " cannot make such a transaction.");
         }
         System.out.println(b.getName() + " rashly sold " + rQuant + " shares of " + aaux.name + ".");
-    }
-    @Override
-    public void updateMemory(Bot b) {
-        //default empty
     }
 }
 

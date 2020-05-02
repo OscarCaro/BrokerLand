@@ -15,14 +15,14 @@ public class Hunger {
 
     @Override
     public String toString() {
-        if (this.hunger > 80) {
+        if (this.hunger > 90) {
             return "You feel full.";
-        } else if (this.hunger > 60) {
+        } else if (this.hunger > 70) {
             return "You are starting to feel peckish.";
-        } else if (this.hunger > 40) {
+        } else if (this.hunger > 50) {
             return "You are slightly hungry.";
-        } else if (this.hunger > 20) {
-            return "You are quite hungry.";
+        } else if (this.hunger > 30) {
+            return "Your stomach hurts from the hunger.";
         } else if (this.hunger > 0) {
             return "You are starving.";
         } else return "lorem ipsum";

@@ -5,7 +5,7 @@ import model.players.Player;
 
 public class OrderAMealAction extends Action {
     public OrderAMealAction() {
-        super("MEAL", "Order a MEAL", "Get an unhealthy bar meal.", 1*60, 0,50);
+        super("MEAL", "Order a MEAL", "Get an unhealthy bar meal.", 1*60, 0,50, 25);
     }
 
     @Override

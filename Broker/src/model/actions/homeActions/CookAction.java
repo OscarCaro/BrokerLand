@@ -6,7 +6,7 @@ import model.players.Player;
 public class CookAction extends Action {
 	
 	public CookAction() {
-		super("Cook", "COOK meal", "Spend 2 hours cooking and eating food.", 60*2, 5,65);
+		super("Cook", "COOK meal", "Spend 2 hours cooking and eating food.", 60*2, 5,65, 5);
 	}
 	
 	@Override

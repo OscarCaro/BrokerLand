@@ -7,7 +7,7 @@ import model.players.Player;
 public class goOfficeAction extends Action {
 	
 	public goOfficeAction() {
-		super("office", "Go to the OFFICE", "Drive to the office", 60, -1, 0);
+		super("office", "Go to the OFFICE", "Drive to the office.", 60, -1, 0, 0);
 	}
 
 	@Override

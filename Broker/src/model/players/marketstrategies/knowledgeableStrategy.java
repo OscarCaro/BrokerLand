@@ -7,12 +7,12 @@ import model.utils.Pair;
 import model.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class knowledgeableStrategy extends MarketCommonKnowledge implements MarketStrategy{
 
     @Override
     public void buyAsset(Bot b) {
+        updateMemory(b);
         if (Market.getInstance().canBuyAnyWith(b.getMoney())) {
             Market maux = Market.getInstance();
             int rAsset = Utils.randomNum(maux.assets.size());
@@ -49,6 +49,7 @@ public class knowledgeableStrategy extends MarketCommonKnowledge implements Mark
 
     @Override
     public void sellAsset(Bot b) {
+        updateMemory(b);
         boolean soldSomething = false;
         ArrayList<Pair<Asset,Integer>> memClone = (ArrayList<Pair<Asset, Integer>>) memory.clone();
         while (!memory.isEmpty()) {
@@ -76,14 +77,5 @@ public class knowledgeableStrategy extends MarketCommonKnowledge implements Mark
         memory = memClone;
     }
 
-    @Override
-    public void updateMemory(Bot b) {
-        Iterator<Pair<Asset, Integer>> iter = memory.iterator();
-        while (iter.hasNext()) {
-            Asset a = iter.next().getKey();
-            if (a.isBankrupt()){
-                iter.remove();
-            }
-        }
-    }
+
 }

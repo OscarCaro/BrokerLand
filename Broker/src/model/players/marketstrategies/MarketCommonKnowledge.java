@@ -7,7 +7,7 @@ import model.utils.Pair;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public abstract class MarketCommonKnowledge {
+public abstract class MarketCommonKnowledge implements  MarketStrategy{
     protected ArrayList<Pair<Asset, Integer>> memory = new ArrayList<>();
 
     protected void memoryRemoveAsset(Asset a) {
@@ -32,5 +32,15 @@ public abstract class MarketCommonKnowledge {
             }
         }
         return -1;
+    }
+
+    public void updateMemory(Bot b) {
+        Iterator<Pair<Asset, Integer>> iter = memory.iterator();
+        while (iter.hasNext()) {
+            Asset a = iter.next().getKey();
+            if (a.isBankrupt()){
+                iter.remove();
+            }
+        }
     }
 }

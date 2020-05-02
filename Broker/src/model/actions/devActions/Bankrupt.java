@@ -8,7 +8,7 @@ import model.trading.Market;
 public class Bankrupt extends Action {
 
     public Bankrupt() {
-        super("b", "b", "Bankrupt everything.", 60, -5,0);
+        super("b", "b", "Bankrupt everything.", 60, -5,0, 0);
     }
 
     @Override

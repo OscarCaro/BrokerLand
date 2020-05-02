@@ -6,7 +6,7 @@ import model.players.Player;
 public class SleepAction extends Action {
 	
 	public SleepAction() {
-		super("Sleep", "SLEEP", "Spend 6 hours getting a good hardworking person sleep.", 60*6, 5,0);
+		super("Sleep", "SLEEP", "Spend 6 hours getting a good hardworking person sleep.", 60*6, 5,0, 0);
 	}
 	
 	@Override

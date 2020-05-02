@@ -5,7 +5,7 @@ import model.players.Player;
 
 public class TakeLoanAction extends Action {
     public TakeLoanAction() {
-        super("Take", "TAKE a loan", "Take a loan from the bank you will have to pay back.", 20, -4,0);
+        super("Take", "TAKE a loan", "Take a loan from the bank you will have to pay back.", 20, -4,0, 0);
     }
 
     @Override

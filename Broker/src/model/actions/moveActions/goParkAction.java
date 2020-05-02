@@ -7,7 +7,7 @@ import model.players.Player;
 public class goParkAction extends Action {
 	
 	public goParkAction() {
-		super("park", "Go to the PARK", "Take a walk to the nearest park", 15, 2, 0);
+		super("park", "Go to the PARK", "Take a walk to the nearest park.", 15, 2, 0, 0);
 	}
 
 	@Override

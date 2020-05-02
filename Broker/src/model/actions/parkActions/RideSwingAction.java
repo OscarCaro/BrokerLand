@@ -6,7 +6,7 @@ import model.players.Player;
 public class RideSwingAction extends Action {
 	
 	public RideSwingAction() {
-		super("Ride", "RIDE the swing", "Get on the swing and pretend you're a kid and life's not difficult.", 10, -10,0);
+		super("Ride", "RIDE the swing", "Get on the swing and pretend you're a kid and life's not difficult.", 10, -10,0, 0);
 	}
 	
 	@Override

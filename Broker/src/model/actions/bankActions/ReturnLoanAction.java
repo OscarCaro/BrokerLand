@@ -5,7 +5,7 @@ import model.players.Player;
 
 public class ReturnLoanAction  extends Action {
     public ReturnLoanAction() {
-        super("Pay", "PAY back a loan", "Pay back the remainder of the loan you have.", 20, -2, 0);
+        super("Pay", "PAY back a loan", "Pay back the remainder of the loan you have.", 20, -2, 0, 0);
     }
 
     @Override

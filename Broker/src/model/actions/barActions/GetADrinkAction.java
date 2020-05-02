@@ -6,7 +6,7 @@ import model.utils.Utils;
 
 public class GetADrinkAction extends Action {
     public GetADrinkAction() {
-        super("DRINK", "Get a DRINK", "Buy some alcohol and gulp it down.", 5, Utils.randomNum(10)>5 ? Utils.randomNum(7):-Utils.randomNum(7),1);
+        super("DRINK", "Get a DRINK", "Buy some alcohol and gulp it down.", 5, Utils.randomNum(10)>5 ? Utils.randomNum(7):-Utils.randomNum(7),1, 7);
     }
 
     @Override

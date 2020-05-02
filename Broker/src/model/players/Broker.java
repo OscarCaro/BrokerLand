@@ -1,5 +1,6 @@
 package model.players;
 
+import controller.Game;
 import model.actions.Action;
 import model.actions.ActionParser;
 import model.events.BrokerUpdateEvent;
@@ -15,8 +16,6 @@ import model.utils.Utils;
 import java.util.List;
 import java.util.Scanner;
 
-import controller.Game;
-
 public class Broker extends Player {
 
     private Scanner in;
@@ -30,7 +29,7 @@ public class Broker extends Player {
         Utils.minusWall();
         System.out.println(ownTime + ". You're now at: " + currLoc);
         Utils.minusWall();
-        System.out.println(mentalH + " " + hunger + " Money:" + money);
+        System.out.println(mentalH + " " + hunger + " Money: $" + money);
         Utils.minusWall();
         showPortfolio();
         Utils.minusWall();
@@ -118,7 +117,7 @@ public class Broker extends Player {
     @Override
     public void buy() {
         globalMarket.print();
-        System.out.println("Do you want to buy any of them? (y/n)");
+        System.out.println("You're sure you want to buy one of them? (y/n)");
         String input = in.nextLine();
         while (input.toUpperCase().equals("Y")) {
             mentalH.add(-10);
@@ -145,7 +144,7 @@ public class Broker extends Player {
     public void sell() {
         showPortfolio();
         if (portfolio.size() > 0) {
-            System.out.println("Do you want to sell any? (y/n)");
+            System.out.println("Are you sure you want to sell one of them? (y/n)");
             String input = in.nextLine();
             while (!input.toUpperCase().equals("N")) {
                 mentalH.add(-10);

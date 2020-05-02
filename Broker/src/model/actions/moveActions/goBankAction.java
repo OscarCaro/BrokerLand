@@ -7,7 +7,7 @@ import model.players.Player;
 public class goBankAction extends Action {
 	
 	public goBankAction() {
-		super("bank", "Go to the BANK", "Get to a bank to manage your loans", 25, -1, 0);
+		super("bank", "Go to the BANK", "Go to a bank to manage your loans.", 25, -1, 0, 0);
 	}
 
 	@Override

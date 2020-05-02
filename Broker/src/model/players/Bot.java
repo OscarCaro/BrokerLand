@@ -74,8 +74,6 @@ public class Bot extends Player {
             Event event = new BotUpdateEvent(triggerTime, action, this);
             EventHandler.getInstance().addEvent(event);
         }
-
-        this.marketStrategy.updateMemory(this);
     }
     
     @Override

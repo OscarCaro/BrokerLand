@@ -6,7 +6,7 @@ import model.players.Player;
 public class CheckMarketAction extends Action {
 	
 	public CheckMarketAction() {
-		super("Check", "CHECK the market", "Look at the current state of the market.", 1*60, -2,0);
+		super("Check", "CHECK the market", "Look at the current state of the market.", 1*60, -2,0, 0);
 	}
 
 	@Override

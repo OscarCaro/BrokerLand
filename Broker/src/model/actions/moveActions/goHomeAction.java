@@ -7,7 +7,7 @@ import model.players.Player;
 public class goHomeAction extends Action {
 	
 	public goHomeAction() {
-		super("home", "Go HOME", "Drive home to take a rest", 60, 1, 0);
+		super("home", "Go HOME", "Drive back home.", 60, 1, 0, 0);
 	}
 
 	@Override

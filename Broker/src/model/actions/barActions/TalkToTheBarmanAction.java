@@ -5,7 +5,7 @@ import model.players.Player;
 
 public class TalkToTheBarmanAction extends Action {
     public TalkToTheBarmanAction() {
-        super("TALK", "TALK to the barman", "Tell the barman your problems as if he didn't have any of his own.", 15, 7,0);
+        super("TALK", "TALK to the barman", "Tell the barman your problems as if he didn't have any of his own.", 15, 7,0, 0);
     }
 
     @Override

@@ -6,7 +6,7 @@ import model.players.Player;
 public class FeedPidgeonsAction extends Action {
 	
 	public FeedPidgeonsAction() {
-		super("Feed", "FEED the pigeons", "Take a time off your stressful lifestyle feeding the pigeons.", 15, 4,0);
+		super("Feed", "FEED the pigeons", "Take a time off your stressful lifestyle feeding the pigeons.", 15, 4,0, 3);
 	}
 	
 	@Override

@@ -9,7 +9,7 @@ import java.util.List;
 public class InteractAction extends Action {
     public InteractAction() {
         super("Interact", "INTERACT with someone",
-        		"Entablish a conversation with someone on this room.", 10, 1,0);
+        		"Entablish a conversation with someone on this room.", 10, 1,0, 0);
     }
 
     @Override

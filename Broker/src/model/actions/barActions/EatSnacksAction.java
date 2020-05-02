@@ -5,7 +5,7 @@ import model.players.Player;
 
 public class EatSnacksAction extends Action {
     public EatSnacksAction() {
-        super("SNACK", "Eat some SNACKs", "Order and eat some peanuts or chips.", 5, -1,9);
+        super("SNACK", "Eat some SNACKs", "Order and eat some peanuts or chips.", 5, -1,9, 4);
     }
 
     @Override

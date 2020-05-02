@@ -7,7 +7,7 @@ import model.players.Player;
 public class goBarAction extends Action {
 	
 	public goBarAction() {
-		super("bar", "Go to a BAR", "Get some fun at your favourite bar", 15, 1, 0);
+		super("bar", "Go to a BAR", "Go have a nice time at the bar.", 15, 1, 0, 0);
 	}
 
 	@Override
