@@ -1,7 +1,6 @@
 package model.trading;
 
 import model.players.Player;
-import model.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,12 +12,14 @@ public class Market {
     private static final int startingAssetsNum = 10;
     private static Market instance;
     public List<Asset> assets;
+    private int priceMean;
 
     private Market() {
         assets = new ArrayList<>();
         for (int i = 0; i < startingAssetsNum; i++) {
             this.addNewAsset();
         }
+        refreshPriceMean();
     }
 
     public static Market getInstance() {
@@ -49,9 +50,16 @@ public class Market {
             Asset a = iter.next();
             a.refreshAsset();
         }
+        refreshPriceMean();
     }
 
-
+    private void refreshPriceMean() {
+        priceMean=0;
+        for (Asset a : assets){
+            priceMean += a.price;
+        }
+        priceMean /= assets.size();
+    }
 
 
     public void opportunity() {
@@ -109,5 +117,9 @@ public class Market {
             }
         }
         return null;
+    }
+
+    public int getPriceMean() {
+        return priceMean;
     }
 }

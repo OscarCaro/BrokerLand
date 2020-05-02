@@ -20,7 +20,8 @@ public class Asset {
     private boolean industryCrash;
     private int bankruptcyIndex;
     private boolean bankrupt;
-
+    private int industryTurns;
+    private final int maxIndustryTurns;
     public Asset() {
         price = priceGen();
         name = Utils.assetNameGen();
@@ -33,6 +34,8 @@ public class Asset {
         industryBoom = false;
         industryCrash = false;
         bankruptcyIndex = 0;
+        industryTurns = 0;
+        maxIndustryTurns = Math.max(Utils.randomNum(4), 2); //3 or 2 turns randomly
     }
 
     public boolean buy(Player player, int quantity) {
@@ -74,8 +77,10 @@ public class Asset {
         if (industryBoom) {
             price += Math.max(Utils.randomNum(10) * (curve10 * 2 + 10), -Utils.randomNum(10) * (curve10 * 2 + 10));
             decreaseBIndex();
+            industryTurns +=1;
         } else if (industryCrash) {
             price += Math.min(Utils.randomNum(10) * (curve10 * 2 + 10), -Utils.randomNum(10) * (curve10 * 2 + 10));
+            industryTurns +=1;
         } else {
             if (curve10 == 0) {
                 int sign = Utils.randomNum(10);
@@ -90,8 +95,19 @@ public class Asset {
             }
         }
 
+        if (industryTurns > maxIndustryTurns){
+            industryBoom = false;
+            industryCrash = false;
+            industryTurns = 0;
+        }
+
         industryBoom = Utils.randomNum(10) > 9;
         industryCrash = Utils.randomNum(10) > 9;
+
+        if (industryCrash && industryBoom){
+            industryBoom = false;
+            industryTurns = 0;
+        }
 
         if (sharesOwned == 0 || record.isEmpty() || sharesOwned < (int) (0.01 * (double) Game.getTimeClone().day) || (!industryBoom && Utils.randomNum(10) > 7) || industryCrash) {
             bankruptcyIndex++;
@@ -129,5 +145,9 @@ public class Asset {
 
     public boolean isIndustryCrash() {
         return industryCrash;
+    }
+
+    public boolean isIndustryBoom() {
+        return industryBoom;
     }
 }

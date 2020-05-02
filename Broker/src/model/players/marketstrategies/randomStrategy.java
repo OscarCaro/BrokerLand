@@ -38,10 +38,9 @@ public class randomStrategy implements MarketStrategy {
         }
         System.out.println(b.getName() + " rashly sold " + rQuant + " shares of " + aaux.name + ".");
     }
-
     @Override
     public void updateMemory(Bot b) {
-
+        //default empty
     }
 }
 

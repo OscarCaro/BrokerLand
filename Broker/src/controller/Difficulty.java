@@ -60,4 +60,3 @@ public enum Difficulty {
         return difficultyBotsNum;
     }
 }
-

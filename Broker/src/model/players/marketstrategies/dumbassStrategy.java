@@ -6,11 +6,9 @@ import model.trading.Market;
 import model.utils.Pair;
 import model.utils.Utils;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
-public class dumbassStrategy implements MarketStrategy {
-    private ArrayList<Pair<Asset, Integer>> memory = new ArrayList<>();
+public class dumbassStrategy extends MarketCommonKnowledge implements MarketStrategy  {
 
     @Override
     public void buyAsset(Bot b) {
@@ -55,7 +53,8 @@ public class dumbassStrategy implements MarketStrategy {
         int profitableAssetInPortfolio = findProfitableAssetInPortfolio(b);
         if (profitableAssetInPortfolio != -1) { //Found one
             Asset aaux = b.getPortfolio().get(profitableAssetInPortfolio).getKey();
-            int rQuant = b.getPortfolio().get(profitableAssetInPortfolio).getValue(); //He sells all of them
+            int rQuant = Math.max(Utils.randomNum(b.getPortfolio().get(profitableAssetInPortfolio).getValue()), 1); //He sells a random amount cause he's a dumbass
+            this.memoryRemoveAsset(aaux);
             if (!b.playerSellAsset(profitableAssetInPortfolio, rQuant)) {
                 throw new IllegalArgumentException("Bot " + this + " cannot make such a transaction.");
             }
@@ -65,6 +64,7 @@ public class dumbassStrategy implements MarketStrategy {
             System.out.println(b.getName() + " wants to sell but he can't decide on what to.");
         }
     }
+
 
     @Override
     public void updateMemory(Bot b) {
@@ -77,17 +77,5 @@ public class dumbassStrategy implements MarketStrategy {
         }
     }
 
-    private int findProfitableAssetInPortfolio(Bot b) {
-        for (Pair<Asset, Integer> p : memory) {
-            if (p.getKey().price > p.getValue()) {
-                for (Pair<Asset, Integer> p2 : b.getPortfolio()) {
-                    if (p.getKey().equals(p2.getKey())) {
-                        memory.remove(p);
-                        return b.getPortfolio().indexOf(p2);
-                    }
-                }
-            }
-        }
-        return -1;
-    }
+
 }
