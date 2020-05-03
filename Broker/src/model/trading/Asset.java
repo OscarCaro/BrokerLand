@@ -3,6 +3,11 @@ package model.trading;
 import controller.Game;
 import model.life.Time;
 import model.players.Player;
+import model.trading.assetStates.AssetState;
+import model.trading.assetStates.BankruptState;
+import model.trading.assetStates.IndustryBoomState;
+import model.trading.assetStates.IndustryCrashState;
+import model.trading.assetStates.NormalState;
 import model.utils.Pair;
 import model.utils.SortedArrayList;
 import model.utils.Utils;
@@ -11,18 +16,21 @@ public class Asset {
 
     private static final int maxSquaringSize = 18;
     private static final int BANKRUPTCYTURNS = 3;
+    
+    private AssetState state;
     public int price;
     public String name;
     public int sharesOwned; //number of shares that are sold and are brokers properties as of now
     public int curve10;
     private SortedArrayList<Pair<Time, Integer>> record;
-    private boolean industryBoom;
-    private boolean industryCrash;
+
+    // State change markers
     private int bankruptcyIndex;
-    private boolean bankrupt;
     private int industryTurns;
     private final int maxIndustryTurns;
+    
     public Asset() {
+    	state = new NormalState();
         price = priceGen();
         name = Utils.assetNameGen();
         sharesOwned = 0;
@@ -31,8 +39,6 @@ public class Asset {
             if (o1.getKey().day > o2.getKey().day) return 1;
             else return 0;
         });
-        industryBoom = false;
-        industryCrash = false;
         bankruptcyIndex = 0;
         industryTurns = 0;
         maxIndustryTurns = Math.max(Utils.randomNum(4), 2); //3 or 2 turns randomly
@@ -74,54 +80,41 @@ public class Asset {
     }
 
     public void refreshAsset() {
-        if (industryBoom) {
-            price += Math.max(Utils.randomNum(10) * (curve10 * 2 + 10), -Utils.randomNum(10) * (curve10 * 2 + 10));
-            decreaseBIndex();
-            industryTurns +=1;
-        } else if (industryCrash) {
-            price += Math.min(Utils.randomNum(10) * (curve10 * 2 + 10), -Utils.randomNum(10) * (curve10 * 2 + 10));
-            industryTurns +=1;
-        } else {
-            if (curve10 == 0) {
-                int sign = Utils.randomNum(10);
-                if (sign > 5) {
-                    sign = -1;
-                } else {
-                    sign = 1;
-                }
-                price += sign * Utils.randomNum(10) * curve10;
-            } else {
-                price += Utils.randomNum(10) * curve10;
-            }
-        }
+    	this.price = state.getNewPrice(this);
+    	refreshState();
+    }
+    
+    private void refreshState() {
 
+    	industryTurns = state.getNewIndustryTurns(industryTurns);
+    	bankruptcyIndex = state.getNewBankruptcyIdx(bankruptcyIndex);
+    	
         if (industryTurns > maxIndustryTurns){
-            industryBoom = false;
-            industryCrash = false;
+        	state = new NormalState();
             industryTurns = 0;
         }
-
-        industryBoom = Utils.randomNum(10) > 9;
-        industryCrash = Utils.randomNum(10) > 9;
-
-        if (industryCrash && industryBoom){
-            industryBoom = false;
-            industryTurns = 0;
+        
+        if (Utils.randomNum(10) > 9) {			// By chance
+        	state = new IndustryCrashState();
+        	industryTurns = 0;
         }
-
-        if (sharesOwned == 0 || record.isEmpty() || sharesOwned < (int) (0.01 * (double) Game.getTimeClone().day) || (!industryBoom && Utils.randomNum(10) > 7) || industryCrash) {
+        else if (Utils.randomNum(10) > 9) {		// By chance
+        	state = new IndustryBoomState();
+        	industryTurns = 0;
+        }
+        
+        if (sharesOwned == 0 || record.isEmpty() ||  
+        		sharesOwned < (int) (0.01 * (double) Game.getTimeClone().day) ) {
             bankruptcyIndex++;
         }
 
         if (bankruptcyIndex > BANKRUPTCYTURNS) {
-            bankrupt = true;
+            state = new BankruptState();
         }
 
     }
 
-    public boolean isBankrupt() {
-        return bankrupt;
-    }
+
 
     public String toString() {
         return "Name: " + this.name + Utils.spaces(maxSquaringSize - this.name.length()) + " Price " + "$" + this.price + ".";
@@ -132,11 +125,15 @@ public class Asset {
     }
 
     public void setBankrupt() {
-        bankrupt = true;
+        state = new BankruptState();
     }
 
     public int getBankruptcyIndex() {
         return bankruptcyIndex;
+    }
+    
+    public int getCurve10() {
+    	return this.curve10;
     }
 
     public int getPrice() {
@@ -144,10 +141,14 @@ public class Asset {
     }
 
     public boolean isIndustryCrash() {
-        return industryCrash;
+        return state instanceof IndustryCrashState;
     }
 
     public boolean isIndustryBoom() {
-        return industryBoom;
+        return state instanceof IndustryBoomState;
+    }
+    
+    public boolean isBankrupt() {
+        return state instanceof BankruptState;
     }
 }
