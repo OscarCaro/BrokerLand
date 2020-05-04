@@ -3,6 +3,9 @@ package model.players.botBuild;
 import controller.Difficulty;
 import model.locations.WorldMap;
 import model.players.Bot;
+import model.players.chooseActionStrategies.ChooseActionStrategy;
+import model.players.chooseActionStrategies.FastMovingStrategy;
+import model.players.chooseActionStrategies.SedentatyStrategy;
 import model.players.marketstrategies.*;
 import model.players.socialStrategies.FlirtyStrategy;
 import model.players.socialStrategies.RoughStrategy;
@@ -33,42 +36,48 @@ public class BotBuildDirector {
         for (int i = 0; i < botsNum * diff.getAggressiveRatio(); i++) {
         	builder.setName(Utils.generateName(), Utils.generateSurname())
         	.setMarketStrategy(new aggressiveStrategy())
-        	.setSocialStrategy(pickSocStr());
+        	.setSocialStrategy(pickSocStr())
+        	.setChooseActionStrategy(pickActStr());
             list.add(builder.build());
         }
         
         for (int i = 0; i < botsNum * diff.getDumbassRatio(); i++) {
         	builder.setName(Utils.generateName(), Utils.generateSurname())
         	.setMarketStrategy(new dumbassStrategy())
-        	.setSocialStrategy(pickSocStr());
+        	.setSocialStrategy(pickSocStr())
+        	.setChooseActionStrategy(pickActStr());
             list.add(builder.build());
         }
         
         for (int i = 0; i < botsNum * diff.getKnowledgeableRatio(); i++) {
         	builder.setName(Utils.generateName(), Utils.generateSurname())
         	.setMarketStrategy(new knowledgeableStrategy())
-        	.setSocialStrategy(pickSocStr());
+        	.setSocialStrategy(pickSocStr())
+        	.setChooseActionStrategy(pickActStr());
             list.add(builder.build());
         }
         
         for (int i = 0; i < botsNum * diff.getGreedyRatio(); i++) {
         	builder.setName(Utils.generateName(), Utils.generateSurname())
         	.setMarketStrategy(new greedyStrategy())
-        	.setSocialStrategy(pickSocStr());
+        	.setSocialStrategy(pickSocStr())
+        	.setChooseActionStrategy(pickActStr());
             list.add(builder.build());
         }
         
         for (int i = 0; i < botsNum * diff.getRandomRatio(); i++) {
         	builder.setName(Utils.generateName(), Utils.generateSurname())
         	.setMarketStrategy(new randomStrategy())
-        	.setSocialStrategy(pickSocStr());
+        	.setSocialStrategy(pickSocStr())
+        	.setChooseActionStrategy(pickActStr());
             list.add(builder.build());
         }
         
         while (list.size() < botsNum) {
         	builder.setName(Utils.generateName(), Utils.generateSurname())
         	.setMarketStrategy(new randomStrategy())
-        	.setSocialStrategy(pickSocStr());
+        	.setSocialStrategy(pickSocStr())
+        	.setChooseActionStrategy(pickActStr());
             list.add(builder.build());
         }
 		while (list.size() > botsNum) {
@@ -83,6 +92,13 @@ public class BotBuildDirector {
 			case 0: return new ShyStrategy();
 			case 1: return new FlirtyStrategy();
 			default: return new RoughStrategy();
+		}
+	}
+	
+	private ChooseActionStrategy pickActStr() {
+		switch (Utils.randomNum(2)) {
+			case 0: return new SedentatyStrategy();
+			default: return new FastMovingStrategy();
 		}
 	}
 }

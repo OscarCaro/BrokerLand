@@ -42,4 +42,12 @@ public abstract class Action{
     public int getTime() {
     	return this.time;
     }
+    
+    public int getHunger() {
+    	return this.hunger;
+    }
+    
+    public int getMentalHealth() {
+    	return this.mental;
+    }
 }

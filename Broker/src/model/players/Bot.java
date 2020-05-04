@@ -7,6 +7,7 @@ import model.events.BotUpdateEvent;
 import model.events.Event;
 import model.events.EventHandler;
 import model.life.Time;
+import model.players.chooseActionStrategies.ChooseActionStrategy;
 import model.players.marketstrategies.MarketStrategy;
 import model.players.socialStrategies.SocialStrategy;
 import model.trading.Banker;
@@ -19,13 +20,15 @@ public class Bot extends Player {
 
     private MarketStrategy marketStrategy;
     private SocialStrategy socialStrategy;
+    private ChooseActionStrategy chooseActionStrategy;
     private boolean hasActionScheduled;
 
-    public Bot(String name, String surname, int locIdx, int money, 
-    		MarketStrategy marketStrategy, SocialStrategy socialStrategy) {
+    public Bot(String name, String surname, int locIdx, int money, MarketStrategy marketStrategy,
+    		SocialStrategy socialStrategy, ChooseActionStrategy chooseActionStrategy) {
         super(name, surname, locIdx, money);
         this.marketStrategy = marketStrategy;
         this.socialStrategy = socialStrategy;
+        this.chooseActionStrategy = chooseActionStrategy;
     }
 
     @Override
@@ -53,21 +56,8 @@ public class Bot extends Player {
 
     @Override
     public void update() {
-        if (!hasActionScheduled) {        	
-        	/* To be able to manage the probability in which a bot changes location.
-        	 * If not dealt in this way, the prob would be so high that bots spend the day moving
-        	 * and doing nothing.
-        	 * TODO: Add this feature as part of bot's personality strategy
-        	 */
-        	List<Action> actions;
-        	if (Utils.randomNum(100) > 30) {
-        		actions = new ArrayList<>(currLoc.getActions());
-        	}
-        	else {
-        		actions = new ArrayList<>(currLoc.getMoveActions());
-        	}
-            
-            Action action = actions.get(Utils.randomNum(actions.size()));
+        if (!hasActionScheduled) {     
+            Action action = chooseActionStrategy.chooseAction(currLoc.getActions(), currLoc.getMoveActions());
             Time triggerTime = Game.getTimeClone();
             triggerTime.addTime(action.getTime());
 

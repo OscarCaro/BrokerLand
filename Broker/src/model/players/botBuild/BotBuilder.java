@@ -1,6 +1,7 @@
 package model.players.botBuild;
 
 import model.players.Bot;
+import model.players.chooseActionStrategies.ChooseActionStrategy;
 import model.players.marketstrategies.*;
 import model.players.socialStrategies.SocialStrategy;
 
@@ -12,6 +13,7 @@ public class BotBuilder {
     private int initLocIdx;
     private MarketStrategy marketStrategy;
     private SocialStrategy socialStrategy;
+    private ChooseActionStrategy chooseActionStrategy;
     
     public BotBuilder setName(String name, String surname) {
     	this.name = name;
@@ -29,6 +31,11 @@ public class BotBuilder {
     	return this;
     }
     
+    public BotBuilder setChooseActionStrategy(ChooseActionStrategy chooseActionStrategy) {
+    	this.chooseActionStrategy = chooseActionStrategy;
+    	return this;
+    }
+    
     public BotBuilder setMoney(int money) {
     	this.money = money;
     	return this;
@@ -40,7 +47,7 @@ public class BotBuilder {
     }
     
     public Bot build() {
-    	return new Bot(name, surname, initLocIdx, money, marketStrategy, socialStrategy);
+    	return new Bot(name, surname, initLocIdx, money, marketStrategy, socialStrategy, chooseActionStrategy);
     }
     
 }
