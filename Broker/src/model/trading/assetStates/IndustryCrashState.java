@@ -4,6 +4,13 @@ import model.trading.Asset;
 import model.utils.Utils;
 
 public class IndustryCrashState implements AssetState {
+	
+	private final int MAXCYCLES = Math.max(Utils.randomNum(4), 2);  //3 or 2 turns randomly
+	private int cycleCounter;
+	
+	public IndustryCrashState () {
+		cycleCounter = 0;
+	}
 
 	@Override
 	public int getNewPrice(Asset asset) {
@@ -14,13 +21,17 @@ public class IndustryCrashState implements AssetState {
 	}
 
 	@Override
-	public int getNewBankruptcyIdx(int currBankruptIdx) {
-		return currBankruptIdx + 1;
+	public AssetState getNextState(Asset asset) {
+		asset.incrementBIndex();
+		
+		cycleCounter++;
+		if (cycleCounter > MAXCYCLES) {
+			return new NormalState();
+		}
+		else {
+			return this;
+		}
 	}
 
-	@Override
-	public int getNewIndustryTurns(int currIndustryTurn) {
-		return currIndustryTurn + 1;
-	}
 
 }

@@ -23,11 +23,7 @@ public class Asset {
     public int sharesOwned; //number of shares that are sold and are brokers properties as of now
     public int curve10;
     private SortedArrayList<Pair<Time, Integer>> record;
-
-    // State change markers
     private int bankruptcyIndex;
-    private int industryTurns;
-    private final int maxIndustryTurns;
     
     public Asset() {
     	state = new NormalState();
@@ -40,8 +36,6 @@ public class Asset {
             else return 0;
         });
         bankruptcyIndex = 0;
-        industryTurns = 0;
-        maxIndustryTurns = Math.max(Utils.randomNum(4), 2); //3 or 2 turns randomly
     }
 
     public boolean buy(Player player, int quantity) {
@@ -58,8 +52,12 @@ public class Asset {
         return false;
     }
 
-    private void decreaseBIndex() {
+    public void decreaseBIndex() {
         bankruptcyIndex = Math.max(0, bankruptcyIndex - 1);
+    }
+    
+    public void incrementBIndex() {
+    	this.bankruptcyIndex++;
     }
 
     private void updateCurve10() {
@@ -81,29 +79,9 @@ public class Asset {
 
     public void refreshAsset() {
     	this.price = state.getNewPrice(this);
-    	refreshState();
-    }
-    
-    private void refreshState() {
-
-    	industryTurns = state.getNewIndustryTurns(industryTurns);
-    	bankruptcyIndex = state.getNewBankruptcyIdx(bankruptcyIndex);
+    	this.state = state.getNextState(this);
     	
-        if (industryTurns > maxIndustryTurns){
-        	state = new NormalState();
-            industryTurns = 0;
-        }
-        
-        if (Utils.randomNum(10) > 9) {			// By chance
-        	state = new IndustryCrashState();
-        	industryTurns = 0;
-        }
-        else if (Utils.randomNum(10) > 9) {		// By chance
-        	state = new IndustryBoomState();
-        	industryTurns = 0;
-        }
-        
-        if (sharesOwned == 0 || record.isEmpty() ||  
+    	if (sharesOwned == 0 || record.isEmpty() ||  
         		sharesOwned < (int) (0.01 * (double) Game.getTimeClone().day) ) {
             bankruptcyIndex++;
         }
@@ -111,10 +89,7 @@ public class Asset {
         if (bankruptcyIndex > BANKRUPTCYTURNS) {
             state = new BankruptState();
         }
-
     }
-
-
 
     public String toString() {
         return "Name: " + this.name + Utils.spaces(maxSquaringSize - this.name.length()) + " Price " + "$" + this.price + ".";

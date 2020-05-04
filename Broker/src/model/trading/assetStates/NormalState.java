@@ -1,5 +1,6 @@
 package model.trading.assetStates;
 
+import controller.Game;
 import model.trading.Asset;
 import model.utils.Utils;
 
@@ -23,16 +24,16 @@ public class NormalState implements AssetState {
 	}
 
 	@Override
-	public int getNewBankruptcyIdx(int currBankruptIdx) {
-		if (Utils.randomNum(10) > 7) {
-			return currBankruptIdx + 1;
-		}
-		return currBankruptIdx;		
-	}
-
-	@Override
-	public int getNewIndustryTurns(int currIndustryTurn) {
-		return 0;
+	public AssetState getNextState(Asset asset) {				
+        if (Utils.randomNum(10) > 8) {			// By chance
+        	return new IndustryCrashState();
+        }
+        else if (Utils.randomNum(10) > 8) {			// By chance
+        	return new IndustryBoomState();
+        }
+        else {
+        	return this;
+        }
 	}
 
 }

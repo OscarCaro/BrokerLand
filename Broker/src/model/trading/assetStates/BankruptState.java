@@ -23,13 +23,8 @@ public class BankruptState implements AssetState {
 	}
 
 	@Override
-	public int getNewBankruptcyIdx(int currBankruptIdx) {
-		return currBankruptIdx;
-	}
-
-	@Override
-	public int getNewIndustryTurns(int currIndustryTurn) {
-		return currIndustryTurn;
+	public AssetState getNextState(Asset asset) {
+		return this;
 	}
 
 }
