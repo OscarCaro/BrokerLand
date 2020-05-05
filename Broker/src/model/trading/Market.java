@@ -45,6 +45,9 @@ public class Market {
     }
 
     public void refresh() {
+        if (assets.size()< 3){
+            this.addNewAsset();
+        }
         Iterator<Asset> iter = assets.iterator();
         while (iter.hasNext()) {
             Asset a = iter.next();

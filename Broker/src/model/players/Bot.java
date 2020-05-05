@@ -7,7 +7,7 @@ import model.events.BotUpdateEvent;
 import model.events.Event;
 import model.events.EventHandler;
 import model.life.Time;
-import model.players.botStates.StateGovernor;
+import model.players.botStates.BotStateGovernor;
 import model.players.botStates.chooseActionStrategies.ChooseActionStrategy;
 import model.players.botStates.socialStrategies.SocialStrategy;
 import model.players.marketstrategies.MarketStrategy;
@@ -22,12 +22,12 @@ public class Bot extends Player {
     private SocialStrategy socialStrategy;
     private ChooseActionStrategy chooseActionStrategy;
     private boolean hasActionScheduled;
-    private StateGovernor mind;
+    private BotStateGovernor mind;
 
     public Bot(String name, String surname, int locIdx, int money, MarketStrategy marketStrategy, double adaptability) {
         super(name, surname, locIdx, money);
         this.marketStrategy = marketStrategy;
-        this.mind = new StateGovernor(adaptability);
+        this.mind = new BotStateGovernor(adaptability);
         mind.update(this);
     }
 

@@ -9,11 +9,11 @@ import java.util.List;
 public class OfficePerformanceStrategy implements ChooseActionStrategy {
     @Override
     public Action chooseAction(List<Action> actions, List<Action> moveActions) {
-        if (moveActions.contains(new goOfficeAction())){
-            return new goOfficeAction();
+        for (Action a : moveActions){
+            if(a instanceof goOfficeAction) {
+                return new goOfficeAction();
+            }
         }
-        else{
-            return actions.get(Utils.randomNum(actions.size()));
-        }
+        return actions.get(Utils.randomNum(actions.size()));//he's in the office
     }
 }
