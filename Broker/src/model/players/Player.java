@@ -183,6 +183,14 @@ public abstract class Player {
             }
         }
     }
+
+    public int getHunger(){
+           return this.hunger.getHungerIndex();
+    }
+
+    public  int getMental() {
+        return this.mentalH.getMentalIndex();
+    }
 }
 
 

@@ -1,11 +1,11 @@
-package model.players.chooseActionStrategies;
-
-import java.util.List;
+package model.players.botStates.chooseActionStrategies;
 
 import model.actions.Action;
 import model.utils.Utils;
 
-public class SedentatyStrategy implements ChooseActionStrategy {
+import java.util.List;
+
+public class SedentaryStrategy implements ChooseActionStrategy {
 	
 	@Override
 	public Action chooseAction(List<Action> actions, List<Action> moveActions) {
@@ -13,7 +13,7 @@ public class SedentatyStrategy implements ChooseActionStrategy {
 			return actions.get(Utils.randomNum(actions.size()));
 		}
 		else {
-			return moveActions.get(Utils.randomNum(actions.size()));
+			return moveActions.get(Utils.randomNum(moveActions.size()));
 		}		
 	}
 

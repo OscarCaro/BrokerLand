@@ -47,7 +47,7 @@ public class Game {
 
     public void run() {
         while (player.canContinue(true) && !playerIsWinner()) {
-            player.update();
+            //player.update();
             eventHandler.executeEvents(this);
         }
         System.out.println(player.endMessage());

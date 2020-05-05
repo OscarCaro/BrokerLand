@@ -7,13 +7,13 @@ import model.events.BotUpdateEvent;
 import model.events.Event;
 import model.events.EventHandler;
 import model.life.Time;
-import model.players.chooseActionStrategies.ChooseActionStrategy;
+import model.players.botStates.StateGovernor;
+import model.players.botStates.chooseActionStrategies.ChooseActionStrategy;
+import model.players.botStates.socialStrategies.SocialStrategy;
 import model.players.marketstrategies.MarketStrategy;
-import model.players.socialStrategies.SocialStrategy;
 import model.trading.Banker;
 import model.utils.Utils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Bot extends Player {
@@ -22,13 +22,13 @@ public class Bot extends Player {
     private SocialStrategy socialStrategy;
     private ChooseActionStrategy chooseActionStrategy;
     private boolean hasActionScheduled;
+    private StateGovernor mind;
 
-    public Bot(String name, String surname, int locIdx, int money, MarketStrategy marketStrategy,
-    		SocialStrategy socialStrategy, ChooseActionStrategy chooseActionStrategy) {
+    public Bot(String name, String surname, int locIdx, int money, MarketStrategy marketStrategy, double adaptability) {
         super(name, surname, locIdx, money);
         this.marketStrategy = marketStrategy;
-        this.socialStrategy = socialStrategy;
-        this.chooseActionStrategy = chooseActionStrategy;
+        this.mind = new StateGovernor(adaptability);
+        mind.update(this);
     }
 
     @Override
@@ -56,11 +56,11 @@ public class Bot extends Player {
 
     @Override
     public void update() {
-        if (!hasActionScheduled) {     
+        if (!hasActionScheduled) {
+
             Action action = chooseActionStrategy.chooseAction(currLoc.getActions(), currLoc.getMoveActions());
             Time triggerTime = Game.getTimeClone();
             triggerTime.addTime(action.getTime());
-
             Event event = new BotUpdateEvent(triggerTime, action, this);
             EventHandler.getInstance().addEvent(event);
         }
@@ -123,4 +123,15 @@ public class Bot extends Player {
         this.hasActionScheduled = b;
     }
 
+    public void setChooseActionStrategy(ChooseActionStrategy chooseActionStrategy) {
+        this.chooseActionStrategy = chooseActionStrategy;
+    }
+
+    public void setSocialStrategy(SocialStrategy socialStrategy) {
+        this.socialStrategy = socialStrategy;
+    }
+
+    public void updateMind(){
+        this.mind.update(this);
+    }
 }

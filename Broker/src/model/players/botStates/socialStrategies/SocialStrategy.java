@@ -1,4 +1,4 @@
-package model.players.socialStrategies;
+package model.players.botStates.socialStrategies;
 
 import model.players.Bot;
 import model.players.Player;

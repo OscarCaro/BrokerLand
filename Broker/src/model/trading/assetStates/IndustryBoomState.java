@@ -4,12 +4,13 @@ import model.trading.Asset;
 import model.utils.Utils;
 
 public class IndustryBoomState implements AssetState {
-	
-	private final int MAXCYCLES = Math.max(Utils.randomNum(4), 2);  //3 or 2 turns randomly
+
+	private int maxCycles;
 	private int cycleCounter;
 	
 	public IndustryBoomState() {
 		cycleCounter = 0;
+		maxCycles = Math.max(Utils.randomNum(4), 2);  //3 or 2 turns randomly
 	}
 
 	@Override
@@ -23,9 +24,8 @@ public class IndustryBoomState implements AssetState {
 	@Override
 	public AssetState getNextState(Asset asset) {
 		asset.decreaseBIndex();
-		
 		cycleCounter++;
-		if (cycleCounter > MAXCYCLES) {
+		if (cycleCounter > maxCycles) {
 			return new NormalState();
 		}
 		else {

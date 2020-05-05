@@ -3,7 +3,7 @@ package model.life;
 
 public class Hunger {
 
-    int hunger;
+    private int hunger;
 
     public Hunger(int h) {
         this.hunger = h;
@@ -33,5 +33,9 @@ public class Hunger {
         if (this.hunger > 100) {
             this.hunger = 100;
         }
+    }
+
+    public int getHungerIndex() {
+        return hunger;
     }
 }

@@ -24,6 +24,8 @@
 	- IndustryCrashState
 	- BankruptState
 
+	- BotStates (Governed by BotStateGovernor)	
+
 - Singleton Pattern:
 	- EventHandler
 	- WorldMap

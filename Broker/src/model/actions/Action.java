@@ -50,4 +50,8 @@ public abstract class Action{
     public int getMentalHealth() {
     	return this.mental;
     }
+
+    public int getMoney(){
+        return this.money;
+    }
 }

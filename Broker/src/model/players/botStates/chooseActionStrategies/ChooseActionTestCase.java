@@ -1,16 +1,11 @@
-package model.players.chooseActionStrategies;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
+package model.players.botStates.chooseActionStrategies;
 
 import model.actions.Action;
 import model.locations.Home;
 import model.locations.Location;
-import model.locations.WorldMap;
-import model.players.Bot;
-import model.players.marketstrategies.randomStrategy;
-import model.players.socialStrategies.ShyStrategy;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ChooseActionTestCase {
 

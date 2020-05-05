@@ -82,11 +82,11 @@ public class Asset {
     	this.state = state.getNextState(this);
     	
     	if (sharesOwned == 0 || record.isEmpty() ||  
-        		sharesOwned < (int) (0.01 * (double) Game.getTimeClone().day) ) {
+        	sharesOwned < (int) (0.01 * (double) Game.getTimeClone().day) ) {
             bankruptcyIndex++;
         }
 
-        if (bankruptcyIndex > BANKRUPTCYTURNS) {
+        if (bankruptcyIndex > BANKRUPTCYTURNS || this.price == 0) {
             state = new BankruptState();
         }
     }

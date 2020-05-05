@@ -1,6 +1,5 @@
 package model.trading.assetStates;
 
-import controller.Game;
 import model.trading.Asset;
 import model.utils.Utils;
 
@@ -26,10 +25,10 @@ public class NormalState implements AssetState {
 	@Override
 	public AssetState getNextState(Asset asset) {				
         if (Utils.randomNum(10) > 8) {			// By chance
-        	return new IndustryCrashState();
-        }
-        else if (Utils.randomNum(10) > 8) {			// By chance
         	return new IndustryBoomState();
+        }
+        else if (Utils.randomNum(10) > 7) {			// By chance
+        	return new IndustryCrashState();
         }
         else {
         	return this;
