@@ -35,10 +35,9 @@ public class BotStateGovernor {
                     } else {
                         state = new NormalState();
                     }
-                    
-                }
-                if (b.getMoney() > 1500 && Utils.randomNum(10) < 4) {
-                    state = new LuxuriousState();
+                    if (b.getMoney() > 1500 && Utils.randomNum(10) < 4) {
+                        state = new LuxuriousState();
+                    }
                 }
             }
         }

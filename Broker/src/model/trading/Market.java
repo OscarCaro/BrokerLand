@@ -10,6 +10,7 @@ import java.util.List;
 public class Market {
 
     private static final int startingAssetsNum = 10;
+    private static final int minimumAssetsNum = 3;
     private static Market instance;
     public List<Asset> assets;
     private int priceMean;
@@ -45,7 +46,7 @@ public class Market {
     }
 
     public void refresh() {
-        if (assets.size()< 3){
+        if (assets.size()< minimumAssetsNum){
             this.addNewAsset();
         }
         Iterator<Asset> iter = assets.iterator();
