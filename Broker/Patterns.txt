@@ -12,12 +12,12 @@
 	- SocialStrategy classes
 	- MarketStrategy classes
 
--Façade Pattern:
+- Façade Pattern:
 	- LocationChanger class: façade of WorldMap
 	- WorldMap: class whose details are hidden
 	- Player, Bot, Broker... : users of façade, ignore WorldMap internal details, just want to startIn(Location) and goTo(location)
 
--State Pattern:
+- State Pattern:
 	- Asset class: can be in one of this states:
 	- NormalState
 	- IndustryBoomState
@@ -31,3 +31,9 @@
 	- WorldMap
 	- Banker
 	- Market
+
+- Object Pool Pattern:
+	-BotStateGovernor (Contains instances of the States that it will use)
+
+- Adapter Pattern:
+	-Difficulty (interface adapts Enum and Class to pass as equals)
