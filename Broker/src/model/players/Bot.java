@@ -7,10 +7,7 @@ import model.events.BotUpdateEvent;
 import model.events.Event;
 import model.events.EventHandler;
 import model.life.Time;
-import model.players.botStates.BotState;
 import model.players.botStates.BotStateGovernor;
-import model.players.botStates.chooseActionStrategies.ChooseActionStrategy;
-import model.players.botStates.socialStrategies.SocialStrategy;
 import model.players.marketstrategies.MarketStrategy;
 import model.trading.Banker;
 import model.utils.Utils;
@@ -24,10 +21,11 @@ public class Bot extends Player {
     private boolean hasActionScheduled;
     private BotStateGovernor mind;
 
-    public Bot(String name, String surname, int locIdx, int money, MarketStrategy marketStrategy, double adaptability) {
+    public Bot(String name, String surname, int locIdx, int money, MarketStrategy marketStrategy, double adaptability, Sex sex) {
         super(name, surname, locIdx, money);
         this.marketStrategy = marketStrategy;
         this.mind = new BotStateGovernor(adaptability);
+        this.sex = sex;
     }
 
     @Override
@@ -84,18 +82,18 @@ public class Bot extends Player {
         if (mentalH.insane()) {
             int rSuicide = Utils.randomNum(100);
             if (rSuicide < 10) {
-                aux = this.getName() + " ended his miserable existence.";
+                aux = this.getName() + " ended "+ Sex.objectPronoun(this.getSex())+" miserable existence.";
             } else {
-                aux = this.getName() + " went insane and deeply depressed, he quit trading and entered therapy.";
+                aux = this.getName() + " went insane and deeply depressed, "+ Sex.subjectPronoun(this.getSex(), false)+" quit trading and entered therapy.";
             }
         } else if (this.hunger.starved()) {
             int rStarvation = Utils.randomNum(100);
             if (rStarvation < 10) {
-                aux = this.getName() + " was hospitalized too late,\nhis body rejected food and he died of famine.";
+                aux = this.getName() + " was hospitalized too late,\n"+ Sex.objectPronoun(this.getSex())+" body rejected food and "+ Sex.subjectPronoun(this.getSex(), false)+" died of famine.";
             } else if (rStarvation < 40) {
-                aux = this.getName() + " was so focused on work he didn't eat for a while.\nHe fainted and fell, and is now hospitalized with a severe head trauma.";
+                aux = this.getName() + " was so focused on work he didn't eat for a while.\n"+ Sex.subjectPronoun(this.getSex(), true)+" fainted and fell, and is now hospitalized with a severe head trauma.";
             } else {
-                aux = this.getName() + " was very focused on work and forgot to eat.\nHe was hospitalized, for his own well-being has been dictated to give up trading.";
+                aux = this.getName() + " was very focused on work and forgot to eat.\n"+ Sex.subjectPronoun(this.getSex(), true)+" was hospitalized, for "+ Sex.objectPronoun(this.getSex())+" own well-being has been dictated to give up trading.";
             }
         } else {
             aux = this.getName() + " went bankrupt and fled.";
@@ -113,7 +111,7 @@ public class Bot extends Player {
         if (!this.portfolio.isEmpty()) {
             this.marketStrategy.sellAsset(this);
         } else {
-            System.out.println(getName() + " looked to his portfolio and found it empty.");
+            System.out.println(getName() + " looked to "+ Sex.objectPronoun(this.getSex())+" portfolio and found it empty.");
         }
     }
 

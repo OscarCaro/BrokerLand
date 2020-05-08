@@ -1,9 +1,9 @@
 package model.players.botBuild;
 
 import model.players.Bot;
-import model.players.botStates.chooseActionStrategies.ChooseActionStrategy;
-import model.players.marketstrategies.*;
-import model.players.botStates.socialStrategies.SocialStrategy;
+import model.players.Sex;
+import model.players.marketstrategies.MarketStrategy;
+import model.utils.Utils;
 
 public class BotBuilder {
 	
@@ -12,21 +12,20 @@ public class BotBuilder {
     private int money;
     private int initLocIdx;
     private MarketStrategy marketStrategy;
-    private SocialStrategy socialStrategy;
-    private ChooseActionStrategy chooseActionStrategy;
     private double adaptability;
-    
-    public BotBuilder setName(String name, String surname) {
-    	this.name = name;
-    	this.surname = surname;
+    private Sex sex;
+
+    public BotBuilder generateName() {
+    	this.name = Utils.generateName(sex);
+    	this.surname = Utils.generateSurname();
     	return this;
-    }	
-    
+    }
+
     public BotBuilder setMarketStrategy(MarketStrategy marketStrategy) {
     	this.marketStrategy = marketStrategy;
     	return this;
     }
-    
+
     public BotBuilder setMoney(int money) {
     	this.money = money;
     	return this;
@@ -38,10 +37,15 @@ public class BotBuilder {
     }
     
     public Bot build() {
-    	return new Bot(name, surname, initLocIdx, money, marketStrategy, adaptability);
+    	return new Bot(name, surname, initLocIdx, money, marketStrategy, adaptability, sex);
     }
 
     public void setStateGovernorMutability(double adaptability) {
         this.adaptability = adaptability;
+    }
+
+    public BotBuilder generateSex() {
+        sex = Sex.randomSex();
+        return this;
     }
 }

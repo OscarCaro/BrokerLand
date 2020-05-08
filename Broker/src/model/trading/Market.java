@@ -9,18 +9,14 @@ import java.util.List;
 //This class follows the Singleton pattern, since there should be only one Market
 public class Market {
 
-    private static final int startingAssetsNum = 10;
-    private static final int minimumAssetsNum = 3;
+    private int startingAssetsNum;
+    private int minimumAssetsNum;
     private static Market instance;
     public List<Asset> assets;
     private int priceMean;
 
     private Market() {
         assets = new ArrayList<>();
-        for (int i = 0; i < startingAssetsNum; i++) {
-            this.addNewAsset();
-        }
-        refreshPriceMean();
     }
 
     public static Market getInstance() {
@@ -28,6 +24,23 @@ public class Market {
             instance = new Market();
         }
         return instance;
+    }
+
+    public void changeMinimumAssetsNum(int minimumAssetsNum) {
+        this.minimumAssetsNum = minimumAssetsNum;
+    }
+
+    public void initMarket(int startingAssetsNum, int minimumAssetsNum) {
+        this.changeMinimumAssetsNum(minimumAssetsNum);
+        this.initAssets(startingAssetsNum);
+    }
+
+    public void initAssets(int startingAssetsNum) {
+        this.startingAssetsNum = startingAssetsNum;
+        for (int i = 0; i < Math.max(startingAssetsNum, minimumAssetsNum); i++) {
+            this.addNewAsset();
+        }
+        refreshPriceMean();
     }
 
     private void addNewAsset() {
@@ -46,7 +59,7 @@ public class Market {
     }
 
     public void refresh() {
-        if (assets.size()< minimumAssetsNum){
+        if (assets.size() < minimumAssetsNum) {
             this.addNewAsset();
         }
         Iterator<Asset> iter = assets.iterator();
@@ -58,8 +71,8 @@ public class Market {
     }
 
     private void refreshPriceMean() {
-        priceMean=0;
-        for (Asset a : assets){
+        priceMean = 0;
+        for (Asset a : assets) {
             priceMean += a.price;
         }
         priceMean /= assets.size();
@@ -103,7 +116,7 @@ public class Market {
     }
 
     public boolean canBuyAnyWith(int money) {
-        for (Asset a : assets){
+        for (Asset a : assets) {
             if (a.price <= money)
                 return true;
         }
@@ -116,7 +129,7 @@ public class Market {
         while (iter.hasNext()) {
             Asset a = iter.next();
             if (a.isBankrupt()) {
-                System.out.println("-----------------"+ a.name + " declared bankruptcy!-----------------");
+                System.out.println("-----------------" + a.name + " declared bankruptcy!-----------------");
                 return a;
             }
         }

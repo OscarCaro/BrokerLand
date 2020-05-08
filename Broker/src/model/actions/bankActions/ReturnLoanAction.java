@@ -2,6 +2,7 @@ package model.actions.bankActions;
 
 import model.actions.Action;
 import model.players.Player;
+import model.players.Sex;
 
 public class ReturnLoanAction  extends Action {
     public ReturnLoanAction() {
@@ -14,14 +15,14 @@ public class ReturnLoanAction  extends Action {
             if (isUser) {
                 System.out.println("You successfully pay back your loan.");
             } else {
-                System.out.println(player.getName() + " paid back his loan.");
+                System.out.println(player.getName() + " paid back "+ Sex.objectPronoun(player.getSex())+" loan.");
             }
         }
         else{
             if (isUser) {
                 System.out.println("You cannot pay back your loan.");
             } else {
-                System.out.println(player.getName() + " is struggling to pay back his debt.");
+                System.out.println(player.getName() + " is struggling to pay back "+ Sex.objectPronoun(player.getSex())+" debt.");
             }
         }
     }

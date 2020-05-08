@@ -1,6 +1,7 @@
 package model.players.marketstrategies;
 
 import model.players.Bot;
+import model.players.Sex;
 import model.trading.Asset;
 import model.trading.Market;
 import model.utils.Pair;
@@ -31,7 +32,7 @@ public class aggressiveStrategy extends MarketCommonKnowledge implements MarketS
                     aaux = maux.assets.get(rAsset);
                 }
             }
-            int rQuant = Math.max(Utils.randomNum(b.getMoney() / aaux.price), 1); //He buys either 1 or a random amount he can afford
+            int rQuant = Math.max(Utils.randomNum(b.getMoney() / aaux.price), 1); //buys either 1 or a random amount that can afford
             if (!b.playerBuyAsset(rAsset, rQuant)) {
                 throw new IllegalArgumentException("Bot " + this + " cannot make such a transaction.");
             }
@@ -43,7 +44,7 @@ public class aggressiveStrategy extends MarketCommonKnowledge implements MarketS
             }
         }
         else{
-            System.out.println(b.getName() + " wants to buy shares but is very short on cash, he is infuriated.");
+            System.out.println(b.getName() + " wants to buy shares but is very short on cash, "+ Sex.subjectPronoun(b.getSex(), false)+" is infuriated.");
         }
     }
 
@@ -56,7 +57,7 @@ public class aggressiveStrategy extends MarketCommonKnowledge implements MarketS
             int profitableAssetInPortfolio = findProfitableAssetInPortfolio(b);
             if (profitableAssetInPortfolio != -1) { //Found one
                 Asset aaux = b.getPortfolio().get(profitableAssetInPortfolio).getKey();
-                int rQuant = b.getPortfolio().get(profitableAssetInPortfolio).getValue(); //He sells all of them
+                int rQuant = b.getPortfolio().get(profitableAssetInPortfolio).getValue(); // sells all of them
                 if (!aaux.isIndustryCrash() || aaux.isIndustryBoom() || aaux.curve10 < 0) {
                     if (!b.playerSellAsset(profitableAssetInPortfolio, rQuant)) {
                         throw new IllegalArgumentException("Bot " + this + " cannot make such a transaction.");
@@ -72,7 +73,7 @@ public class aggressiveStrategy extends MarketCommonKnowledge implements MarketS
             }
         }
         if (!soldSomething) {
-            System.out.println(b.getName() + " wants to sell but he can't decide on what to.");
+            System.out.println(b.getName() + " wants to sell but "+ Sex.subjectPronoun(b.getSex(), false)+" can't decide on what to.");
         }
         memory = memClone;
     }

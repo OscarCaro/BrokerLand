@@ -14,6 +14,6 @@ public class OfficePerformanceStrategy implements ChooseActionStrategy {
                 return new goOfficeAction();
             }
         }
-        return actions.get(Utils.randomNum(actions.size()));//he's in the office
+        return actions.get(Utils.randomNum(actions.size()));//in the office
     }
 }

@@ -2,6 +2,7 @@ package model.actions.barActions;
 
 import model.actions.Action;
 import model.players.Player;
+import model.players.Sex;
 import model.utils.Utils;
 
 public class GetADrinkAction extends Action {
@@ -15,7 +16,7 @@ public class GetADrinkAction extends Action {
             System.out.println("You gulp down some alcohol trying to forget who you are.");
         }
         else {
-            System.out.println(player.getName() + " is drinking his problems away.");
+            System.out.println(player.getName() + " is drinking "+ Sex.objectPronoun(player.getSex())+" problems away.");
         }
     }
 }

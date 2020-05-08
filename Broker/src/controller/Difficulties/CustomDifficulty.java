@@ -1,27 +1,25 @@
-package controller;
+package controller.Difficulties;
 
-public enum Difficulty {
-
-    EASY(0.4, 0.1, 0.1, 0.1, 0.3, 0.4, 20 ),
-    NORMAL(0.3, 0.2, 0.2, 0.1, 0.2, 0.5,30 ),
-    DIFFICULT(0.1, 0.2, 0.3, 0.2, 0.2, 0.7, 40),
-    WORLDTRADECENTER(0, 0.2, 0.3, 0.4, 0.1, 0.8, 50);
-
+public class CustomDifficulty implements Difficulty{
     private double dumbassRatio;
     private double aggressiveRatio;
     private double greedyRatio;
     private double knowledgeableRatio;
     private double randomRatio;
     private double adaptability;
+    private int marketMinAssets;
+    private int marketStartingAssets;
     private int difficultyBotsNum;
 
-    private Difficulty(
+    public CustomDifficulty(
             double dumbassRatio,
             double aggressiveRatio,
             double greedyRatio,
             double knowledgeableRatio,
             double randomRatio,
             double adaptability,
+            int marketMinAssets,
+            int marketStartingAssets,
             int difficultyBotsNum
     ) {
         this.dumbassRatio = dumbassRatio;
@@ -30,14 +28,9 @@ public enum Difficulty {
         this.knowledgeableRatio = knowledgeableRatio;
         this.randomRatio = randomRatio;
         this.adaptability = adaptability;
+        this.marketMinAssets = marketMinAssets;
+        this.marketStartingAssets = marketStartingAssets;
         this.difficultyBotsNum = difficultyBotsNum;
-    }
-
-    public static Difficulty parse(String inputString) {
-        for (Difficulty level : Difficulty.values())
-            if (level.name().equalsIgnoreCase(inputString))
-                return level;
-        return null;
     }
 
     public double getDumbassRatio() {
@@ -66,5 +59,13 @@ public enum Difficulty {
 
     public double getAdaptabilityRatio() {
         return adaptability;
+    }
+
+    public int getMarketStartingAssets() {
+        return marketStartingAssets;
+    }
+
+    public int getMarketMinAssets() {
+        return marketMinAssets;
     }
 }

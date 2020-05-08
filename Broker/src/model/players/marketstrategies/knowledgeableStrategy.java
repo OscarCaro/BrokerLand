@@ -1,6 +1,7 @@
 package model.players.marketstrategies;
 
 import model.players.Bot;
+import model.players.Sex;
 import model.trading.Asset;
 import model.trading.Market;
 import model.utils.Pair;
@@ -43,7 +44,7 @@ public class knowledgeableStrategy extends MarketCommonKnowledge implements Mark
             }
         }
         else{
-            System.out.println(b.getName() + " wants to buy shares but has to put his matters in order before he can.");
+            System.out.println(b.getName() + " wants to buy shares but has to put "+ Sex.objectPronoun(b.getSex())+" matters in order before "+ Sex.subjectPronoun(b.getSex(),false)+ " can.");
         }
     }
 
@@ -72,7 +73,7 @@ public class knowledgeableStrategy extends MarketCommonKnowledge implements Mark
             }
         }
         if (!soldSomething) {
-            System.out.println(b.getName() + " wants to sell but he can't decide on what to.");
+            System.out.println(b.getName() + " wants to sell but "+ Sex.subjectPronoun(b.getSex(),false)+ " can't decide on what to.");
         }
         memory = memClone;
     }

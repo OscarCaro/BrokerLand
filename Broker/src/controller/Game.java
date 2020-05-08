@@ -1,5 +1,6 @@
 package controller;
 
+import controller.Difficulties.Difficulty;
 import model.events.EventHandler;
 import model.events.MarketRefreshEvent;
 import model.life.Time;
@@ -24,16 +25,18 @@ public class Game {
     private List<Bot> bots;
     private EventHandler eventHandler;
 
-    public Game(int botsNum, Difficulty diff) {
+    public Game(Difficulty diff) {
         t = new Time();
         market = Market.getInstance();
+        market.initMarket(diff.getMarketStartingAssets(), diff.getMarketMinAssets());
         player = new Broker();
         bots = new ArrayList<>();
         this.eventHandler = EventHandler.getInstance();
-        this.bots = new BotBuildDirector(new BotBuilder()).build(botsNum, diff);
+        this.bots = new BotBuildDirector(new BotBuilder()).build(diff.getDifficultyBotsNum(), diff);
         this.initBotRefreshes();
         this.initMarketRefreshes();
     }
+
 
     public static Time getTimeClone() {
         return new Time(t);

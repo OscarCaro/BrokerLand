@@ -2,6 +2,7 @@ package model.actions.officeActions;
 
 import model.actions.Action;
 import model.players.Player;
+import model.players.Sex;
 
 public class StareWallAction extends Action {
 	
@@ -15,7 +16,7 @@ public class StareWallAction extends Action {
 			System.out.println("You intently stare at the wall wondering about your life decisions.");		
 		}
 		else {
-			System.out.println(player.getName() + " intently stares at the wall wondering about his life decisions.");		
+			System.out.println(player.getName() + " intently stares at the wall wondering about "+ Sex.objectPronoun(player.getSex())+" life decisions.");
 		}		
 	}
 }

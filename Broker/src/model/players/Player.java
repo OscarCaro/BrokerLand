@@ -29,6 +29,7 @@ public abstract class Player {
     protected String surname;
     protected List<Pair<Asset, Integer>> portfolio;
     protected Loan loan;
+    protected Sex sex;
 
     public Player(String name, String surname, int locIdx, int money) {
         this.map = WorldMap.getInstance();
@@ -190,6 +191,10 @@ public abstract class Player {
 
     public  int getMental() {
         return this.mentalH.getMentalIndex();
+    }
+
+    public Sex getSex() {
+        return sex;
     }
 }
 

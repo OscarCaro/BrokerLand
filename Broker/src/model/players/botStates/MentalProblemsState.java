@@ -1,6 +1,7 @@
 package model.players.botStates;
 
 import model.players.Bot;
+import model.players.Sex;
 import model.players.botStates.chooseActionStrategies.SeekMentalHealthStrategy;
 import model.players.botStates.socialStrategies.FocusedStrategy;
 
@@ -11,6 +12,6 @@ public class MentalProblemsState extends BotState {
 
     @Override
     public void onStateChange(Bot b) {
-        System.out.println(b.getName() + " has noticed about his lack of motivation.");
+        System.out.println(b.getName() + " has noticed about "+ Sex.objectPronoun(b.getSex())+" lack of motivation.");
     }
 }

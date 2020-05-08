@@ -1,6 +1,7 @@
 package model.players.botStates;
 
 import model.players.Bot;
+import model.players.Sex;
 import model.players.botStates.chooseActionStrategies.SeekFoodStrategy;
 import model.players.botStates.socialStrategies.RoughStrategy;
 
@@ -12,6 +13,6 @@ public class HungerProblemsState extends BotState {
 
     @Override
     public void onStateChange(Bot b) {
-        System.out.println(b.getName() + " has noticed about his unhealthy habits.");
+        System.out.println(b.getName() + " has noticed about "+ Sex.objectPronoun(b.getSex())+" unhealthy habits.");
     }
 }

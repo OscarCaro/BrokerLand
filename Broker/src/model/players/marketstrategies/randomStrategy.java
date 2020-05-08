@@ -17,7 +17,7 @@ public class randomStrategy extends MarketCommonKnowledge implements MarketStrat
                 rAsset = Utils.randomNum(maux.assets.size());
                 aaux = maux.assets.get(rAsset);
             }
-            int rQuant = Math.max(Utils.randomNum(b.getMoney() / aaux.price), 1); //He buys either 1 or a random amount he can afford
+            int rQuant = Math.max(Utils.randomNum(b.getMoney() / aaux.price), 1); // buys either 1 or a random amount affords
             if (!b.playerBuyAsset(rAsset, rQuant)) {
                 throw new IllegalArgumentException("Bot " + this + " cannot make such a transaction.");
             }
@@ -32,7 +32,7 @@ public class randomStrategy extends MarketCommonKnowledge implements MarketStrat
     public void sellAsset(Bot b) {
         int rAsset = Utils.randomNum(b.getPortfolio().size());
         Asset aaux = b.getPortfolio().get(rAsset).getKey();
-        int rQuant = Math.max(Utils.randomNum(b.getPortfolio().get(rAsset).getValue()), 1); //He sells either 1 or a random amount he has
+        int rQuant = Math.max(Utils.randomNum(b.getPortfolio().get(rAsset).getValue()), 1); //He sells either 1 or a random amount in ownership
         if (!b.playerSellAsset(rAsset, rQuant)) {
             throw new IllegalArgumentException("Bot " + this + " cannot make such a transaction.");
         }

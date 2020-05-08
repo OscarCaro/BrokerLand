@@ -1,6 +1,7 @@
 package model.players.marketstrategies;
 
 import model.players.Bot;
+import model.players.Sex;
 import model.trading.Asset;
 import model.trading.Market;
 import model.utils.Pair;
@@ -31,13 +32,13 @@ public class greedyStrategy extends MarketCommonKnowledge implements MarketStrat
                     aaux = maux.assets.get(rAsset);
                 }
             }
-            int rQuant = Math.max((b.getMoney() / aaux.price) / 2, 1); //He buys either 1 or half of what he can afford
+            int rQuant = Math.max((b.getMoney() / aaux.price) / 2, 1); // buys either 1 or half of what affords
             if (!b.playerBuyAsset(rAsset, rQuant)) {
                 throw new IllegalArgumentException("Bot " + this + " cannot make such a transaction.");
             }
             memory.add(new Pair<>(aaux, aaux.getPrice()));
             if (decidedOnACheapAsset) {
-                System.out.println(b.getName() + " purchased " + rQuant + " shares of " + aaux.name + " since he saw them cheap.");
+                System.out.println(b.getName() + " purchased " + rQuant + " shares of " + aaux.name + " since "+ Sex.subjectPronoun(b.getSex(), false)+" saw them cheap.");
             } else {
                 System.out.println(b.getName() + " out of spite bought " + rQuant + " shares of " + aaux.name + ".");
             }
@@ -72,7 +73,7 @@ public class greedyStrategy extends MarketCommonKnowledge implements MarketStrat
             }
         }
         if (!soldSomething) {
-            System.out.println(b.getName() + " wants to sell but he can't decide on what to.");
+            System.out.println(b.getName() + " wants to sell but "+ Sex.subjectPronoun(b.getSex(), false)+" can't decide on what to.");
         }
         memory = memClone;
     }
