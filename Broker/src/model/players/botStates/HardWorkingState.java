@@ -4,21 +4,13 @@ import model.players.Bot;
 import model.players.botStates.chooseActionStrategies.OfficePerformanceStrategy;
 import model.players.botStates.socialStrategies.FocusedStrategy;
 
-public class HardWorkingState implements BotState{
-    @Override
-    public void updateSocialStrategy(Bot b) {
-        b.setSocialStrategy(new FocusedStrategy());
-    }
+public class HardWorkingState extends BotState{
+    public HardWorkingState() {
+		super(new FocusedStrategy(), new OfficePerformanceStrategy());
+	}
 
     @Override
-    public void updateActionStrategy(Bot b) {
-        b.setChooseActionStrategy(new OfficePerformanceStrategy());
-    }
-
-    @Override
-    public void update(Bot b) {
+    public void onStateChange(Bot b) {
         System.out.println(b.getName() + " wants to work!");
-        updateActionStrategy(b);
-        updateSocialStrategy(b);
     }
 }

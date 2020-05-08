@@ -7,6 +7,7 @@ import model.events.BotUpdateEvent;
 import model.events.Event;
 import model.events.EventHandler;
 import model.life.Time;
+import model.players.botStates.BotState;
 import model.players.botStates.BotStateGovernor;
 import model.players.botStates.chooseActionStrategies.ChooseActionStrategy;
 import model.players.botStates.socialStrategies.SocialStrategy;
@@ -19,8 +20,7 @@ import java.util.List;
 public class Bot extends Player {
 
     private MarketStrategy marketStrategy;
-    private SocialStrategy socialStrategy;
-    private ChooseActionStrategy chooseActionStrategy;
+
     private boolean hasActionScheduled;
     private BotStateGovernor mind;
 
@@ -28,7 +28,6 @@ public class Bot extends Player {
         super(name, surname, locIdx, money);
         this.marketStrategy = marketStrategy;
         this.mind = new BotStateGovernor(adaptability);
-        mind.update(this);
     }
 
     @Override
@@ -57,8 +56,7 @@ public class Bot extends Player {
     @Override
     public void update() {
         if (!hasActionScheduled) {
-
-            Action action = chooseActionStrategy.chooseAction(currLoc.getActions(), currLoc.getMoveActions());
+            Action action = mind.getState().chooseAction(currLoc.getActions(), currLoc.getMoveActions());
             Time triggerTime = Game.getTimeClone();
             triggerTime.addTime(action.getTime());
             Event event = new BotUpdateEvent(triggerTime, action, this);
@@ -68,12 +66,12 @@ public class Bot extends Player {
     
     @Override
     public void reactToGreeting(Player other, String message) {
-    	this.socialStrategy.reactToGreeting(this, other);    	
+    	mind.getState().reactToGreeting(this, other);    	
     }
     
     @Override
     public String getMessageToSay() {
-    	return this.socialStrategy.getMessageToSay(); 
+    	return mind.getState().getMessageToSay(); 
     }
     
     @Override
@@ -121,14 +119,6 @@ public class Bot extends Player {
 
     public void setHasActionScheduled(boolean b) {
         this.hasActionScheduled = b;
-    }
-
-    public void setChooseActionStrategy(ChooseActionStrategy chooseActionStrategy) {
-        this.chooseActionStrategy = chooseActionStrategy;
-    }
-
-    public void setSocialStrategy(SocialStrategy socialStrategy) {
-        this.socialStrategy = socialStrategy;
     }
 
     public void updateMind(){

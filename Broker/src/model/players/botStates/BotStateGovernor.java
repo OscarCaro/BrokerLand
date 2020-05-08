@@ -48,8 +48,12 @@ public class BotStateGovernor {
             if (nextState != currState) {
             	// There's a change in state, call update to notify
             	currState = nextState;
-                this.currState.update(b);
+                this.currState.onStateChange(b);
             }
         }
+    }
+    
+    public BotState getState() {
+    	return this.currState;
     }
 }

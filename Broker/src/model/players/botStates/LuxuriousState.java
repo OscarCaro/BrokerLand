@@ -4,21 +4,13 @@ import model.players.Bot;
 import model.players.botStates.chooseActionStrategies.SpendingStrategy;
 import model.players.botStates.socialStrategies.FlirtyStrategy;
 
-public class LuxuriousState implements  BotState {
-    @Override
-    public void updateSocialStrategy(Bot b) {
-        b.setSocialStrategy(new FlirtyStrategy());
-    }
+public class LuxuriousState extends  BotState {
+    public LuxuriousState() {
+		super(new FlirtyStrategy(), new SpendingStrategy());
+	}
 
     @Override
-    public void updateActionStrategy(Bot b) {
-        b.setChooseActionStrategy(new SpendingStrategy());
-    }
-
-    @Override
-    public void update(Bot b) {
+    public void onStateChange(Bot b) {
         System.out.println("Money has gone to " + b.getName() + "'s head.");
-        updateActionStrategy(b);
-        updateSocialStrategy(b);
     }
 }

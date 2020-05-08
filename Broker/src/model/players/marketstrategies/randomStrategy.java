@@ -39,8 +39,3 @@ public class randomStrategy extends MarketCommonKnowledge implements MarketStrat
         System.out.println(b.getName() + " rashly sold " + rQuant + " shares of " + aaux.name + ".");
     }
 }
-
-
-/*
-
- */

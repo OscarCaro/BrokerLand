@@ -4,20 +4,14 @@ import model.players.Bot;
 import model.players.botStates.chooseActionStrategies.FastMovingStrategy;
 import model.players.botStates.socialStrategies.NormalStrategy;
 
-public class InitialState implements BotState {
-    @Override
-    public void updateSocialStrategy(Bot b) {
-        b.setSocialStrategy(new NormalStrategy());
-    }
+public class InitialState extends BotState {
+	
+    public InitialState() {
+		super(new NormalStrategy(), new FastMovingStrategy());
+	}
 
     @Override
-    public void updateActionStrategy(Bot b) {
-        b.setChooseActionStrategy(new FastMovingStrategy());
-    }
-
-    @Override
-    public void update(Bot b) {
-        updateActionStrategy(b);
-        updateSocialStrategy(b);
+    public void onStateChange(Bot b) {
+    	// No message because this is the first state (no change)
     }
 }
