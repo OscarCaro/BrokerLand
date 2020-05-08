@@ -20,8 +20,8 @@ public class BotUpdateEvent extends Event{
 	@Override
 	public void execute() {
 		if(bot.canContinue(false)) {
-			bot.updateMind();
 			action.perform(bot, false);
+			bot.updateMind();
 			Utils.minusWall();
 			bot.setHasActionScheduled(false);
 			bot.update();
