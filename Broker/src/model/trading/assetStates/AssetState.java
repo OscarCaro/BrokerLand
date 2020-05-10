@@ -4,7 +4,7 @@ import model.trading.Asset;
 
 public interface AssetState {
 	
-	public int getNewPrice(Asset asset);
-	public AssetState getNextState(Asset asset);
+	 int getNewPrice(Asset asset);
+	 AssetState getNextState(Asset asset);
 
 }

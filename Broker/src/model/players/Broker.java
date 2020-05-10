@@ -19,6 +19,7 @@ import java.util.Scanner;
 public class Broker extends Player {
 
     private Scanner in;
+    Action previousAction; //so you cannot break the game doing the same thing over and over again
 
     public Broker() {
         super("you", "", WorldMap.HOMEIDX, 1000);
@@ -40,22 +41,32 @@ public class Broker extends Player {
     private void askActions() {
         List<Action> actions = currLoc.getActions();    
         List<Action> moveActions = currLoc.getMoveActions();
-        
+
         System.out.println("What do you want to do?");
         printActions(actions, moveActions);
         System.out.println("Select: ");
         String input = in.nextLine();
         Action action = ActionParser.parseAction(input, actions, moveActions);
+
         while (action == null) {
             System.out.println("Invalid option");
             System.out.println("What do you want to do?");
             input = in.nextLine();
             action = ActionParser.parseAction(input, actions, moveActions);
         }
-        
-        Time actionTime = Game.getTimeClone();
-		actionTime.addTime(action.getTime());
-		EventHandler.getInstance().addEvent(new BrokerUpdateEvent(actionTime, action, this));
+
+        if (previousAction == null || !action.equals(previousAction)) {
+            Time actionTime = Game.getTimeClone();
+            actionTime.addTime(action.getTime());
+            EventHandler.getInstance().addEvent(new BrokerUpdateEvent(actionTime, action, this));
+            previousAction = action;
+        }
+        else{
+            Utils.equalsWall();
+            System.out.println("You already did that.");
+            Utils.equalsWall();
+            this.askActions();
+        }
     }
     
     @Override
@@ -121,14 +132,17 @@ public class Broker extends Player {
         String input = in.nextLine();
         while (input.toUpperCase().equals("Y")) {
             mentalH.add(-10);
-            System.out.println("Which one? (0->" + (globalMarket.getNumOfAssets() - 1) + ")");
-            input = in.nextLine();
-            int idx = Integer.parseInt(input);
+            int idx = -1;
+            while(idx <0 || idx > globalMarket.getNumOfAssets()) {
+                System.out.println("Which one? (0->" + (globalMarket.getNumOfAssets() - 1) + ")");
+                input = in.nextLine();
+                idx = Integer.parseInt(input);
+            }
             System.out.println("How many? (1->" + (this.money / globalMarket.assets.get(idx).price) + ")");
             input = in.nextLine();
             int qtty = Integer.parseInt(input);
             if (!playerBuyAsset(idx, qtty)) {
-                System.out.println("You cannot buy that asset");
+                System.out.println("You cannot buy that asset for that quantity.");
             }
             showPortfolio();
             System.out.println("Do you want to buy any more assets? (y/n)");
@@ -136,7 +150,6 @@ public class Broker extends Player {
             if (input.toUpperCase().equals("Y")) {
                 globalMarket.print();
             }
-
         }
     }
 

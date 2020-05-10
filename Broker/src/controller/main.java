@@ -17,10 +17,10 @@ public class main {
     private static double adaptability;
     private static int startAssets;
     private static int minAssets;
+    private static double marketVolatilityRatio;
 
     //custom difficulty usage example
-    //-c -1 0.1 -2 0.2 -3 0.3 -4 0.4 -5 0.5 -a 0.7 -s 3 -m 2 -b 50
-
+    //-c -1 0.1 -2 0.2 -3 0.3 -4 0.4 -5 0.5 -a 0.7 -s 3 -m 2 -b 30 -v 0.3
     public static void main(String[] args) {
         Options cmdLineOptions = buildOptions();
         CommandLineParser parser = new DefaultParser();
@@ -36,9 +36,15 @@ public class main {
                     error += (" " + o);
                 throw new ParseException(error);
             }
-            Game game;
+            Game game = null;
             if (c != null) {
-                game = new Game(c);
+                try {
+                    game = new Game(c);
+                } catch (Exception e) {
+                    System.err.println(e.getLocalizedMessage());
+                    System.err.println("Problem with custom difficulty inputs.");
+                    System.exit(1);
+                }
             } else {
                 game = new Game(premadeDifficulty);
             }
@@ -61,6 +67,7 @@ public class main {
         cmdLineOptions.addOption(Option.builder("3").longOpt("type3").hasArg().desc("Ratio between 0 and 1 of GREEDY broker bots (Only needed if -c is enabled).").build());
         cmdLineOptions.addOption(Option.builder("4").longOpt("type4").hasArg().desc("Ratio between 0 and 1 of KNOWLEDGEABLE broker bots (Only needed if -c is enabled).").build());
         cmdLineOptions.addOption(Option.builder("5").longOpt("type5").hasArg().desc("Ratio between 0 and 1 of RANDOM broker bots (Only needed if -c is enabled).").build());
+        cmdLineOptions.addOption(Option.builder("v").longOpt("volatility").hasArg().desc("Ratio between 0 and 1 of market volatility (Only needed if -c is enabled).").build());
         cmdLineOptions.addOption(Option.builder("a").longOpt("adaptability").hasArg().desc("Adaptability to adversity ratio of the bots (Only needed if -c is enabled).").build());
         cmdLineOptions.addOption(Option.builder("s").longOpt("startingNum").hasArg().desc("Starting number of assets on the market (Only needed if -c is enabled).").build());
         cmdLineOptions.addOption(Option.builder("m").longOpt("minNum").hasArg().desc("Minimum number of assets on the market (Only needed if -c is enabled).").build());
@@ -82,12 +89,13 @@ public class main {
                 parseAdaptabilityOption(line);
                 parseMinNumOption(line);
                 parseStartingNumOption(line);
+                parseVolatilityOption(line);
             } else {
                 HelpFormatter formatter = new HelpFormatter();
                 formatter.printHelp(main.class.getCanonicalName(), cmdLineOptions, true);
                 System.exit(0);
             }
-            return new CustomDifficulty(dumbassRatio, aggressiveRatio, greedyRatio, knowledgeableRatio, randomRatio, adaptability, minAssets, startAssets, numbots);
+            return new CustomDifficulty(dumbassRatio, aggressiveRatio, greedyRatio, knowledgeableRatio, randomRatio, adaptability, minAssets, startAssets, numbots, marketVolatilityRatio);
         }
         return null;
     }
@@ -105,6 +113,10 @@ public class main {
     }
 
     private static void parseAdaptabilityOption(CommandLine line) {
+        marketVolatilityRatio = Double.parseDouble(line.getOptionValue("v"));
+    }
+
+    private static void parseVolatilityOption(CommandLine line) {
         adaptability = Double.parseDouble(line.getOptionValue("a"));
     }
 
@@ -117,11 +129,11 @@ public class main {
     }
 
     private static void parseStartingNumOption(CommandLine line) {
-        startAssets = Math.min(Integer.parseInt(line.getOptionValue("s")), 1);
+        startAssets = Math.max(Integer.parseInt(line.getOptionValue("s")), 1);
     }
 
     private static void parseMinNumOption(CommandLine line) {
-        minAssets = Math.min(Integer.parseInt(line.getOptionValue("m"),1);
+        minAssets = Math.max(Integer.parseInt(line.getOptionValue("m")), 1);
 
     }
 

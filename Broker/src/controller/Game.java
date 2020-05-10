@@ -28,7 +28,7 @@ public class Game {
     public Game(Difficulty diff) {
         t = new Time();
         market = Market.getInstance();
-        market.initMarket(diff.getMarketStartingAssets(), diff.getMarketMinAssets());
+        market.initMarket(diff.getMarketStartingAssets(), diff.getMarketMinAssets(), diff.getMarketVolatilityRatio());
         player = new Broker();
         bots = new ArrayList<>();
         this.eventHandler = EventHandler.getInstance();

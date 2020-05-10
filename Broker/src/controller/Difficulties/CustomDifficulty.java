@@ -10,6 +10,7 @@ public class CustomDifficulty implements Difficulty{
     private int marketMinAssets;
     private int marketStartingAssets;
     private int difficultyBotsNum;
+    private double marketVolatilityRatio;
 
     public CustomDifficulty(
             double dumbassRatio,
@@ -20,7 +21,8 @@ public class CustomDifficulty implements Difficulty{
             double adaptability,
             int marketMinAssets,
             int marketStartingAssets,
-            int difficultyBotsNum
+            int difficultyBotsNum,
+            double marketVolatilityRatio
     ) {
         this.dumbassRatio = dumbassRatio;
         this.aggressiveRatio = aggressiveRatio;
@@ -31,6 +33,7 @@ public class CustomDifficulty implements Difficulty{
         this.marketMinAssets = marketMinAssets;
         this.marketStartingAssets = marketStartingAssets;
         this.difficultyBotsNum = difficultyBotsNum;
+        this.marketVolatilityRatio = marketVolatilityRatio;
     }
 
     public double getDumbassRatio() {
@@ -67,5 +70,10 @@ public class CustomDifficulty implements Difficulty{
 
     public int getMarketMinAssets() {
         return marketMinAssets;
+    }
+
+    @Override
+    public double getMarketVolatilityRatio() {
+        return marketVolatilityRatio;
     }
 }

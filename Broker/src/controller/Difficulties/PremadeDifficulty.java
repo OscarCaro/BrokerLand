@@ -2,10 +2,10 @@ package controller.Difficulties;
 
 public enum PremadeDifficulty implements Difficulty{
 
-    EASY(0.4, 0.1, 0.1, 0.1, 0.3, 0.4, 3, 5, 20),
-    NORMAL(0.3, 0.2, 0.2, 0.1, 0.2, 0.5, 4, 6, 30),
-    DIFFICULT(0.1, 0.2, 0.3, 0.2, 0.2, 0.7, 5, 7, 40),
-    WORLDTRADECENTER(0, 0.2, 0.3, 0.4, 0.1, 0.8, 5, 8, 50);
+    EASY(0.4, 0.1, 0.1, 0.1, 0.3, 0.4, 3, 5, 20, 0.2),
+    NORMAL(0.3, 0.2, 0.2, 0.1, 0.2, 0.5, 4, 6, 30,0.2),
+    DIFFICULT(0.1, 0.2, 0.3, 0.2, 0.2, 0.7, 5, 7, 40, 0.3),
+    WORLDTRADECENTER(0, 0.2, 0.3, 0.4, 0.1, 0.8, 5, 8, 50,0.4);
 
     private double dumbassRatio;
     private double aggressiveRatio;
@@ -16,6 +16,7 @@ public enum PremadeDifficulty implements Difficulty{
     private int marketMinAssets;
     private int marketStartingAssets;
     private int difficultyBotsNum;
+    private double marketVolatilityRatio;
 
     private PremadeDifficulty(
             double dumbassRatio,
@@ -26,7 +27,8 @@ public enum PremadeDifficulty implements Difficulty{
             double adaptability,
             int marketMinAssets,
             int marketStartingAssets,
-            int difficultyBotsNum
+            int difficultyBotsNum,
+            double marketVolatilityRatio
     ) {
         this.dumbassRatio = dumbassRatio;
         this.aggressiveRatio = aggressiveRatio;
@@ -37,6 +39,7 @@ public enum PremadeDifficulty implements Difficulty{
         this.marketMinAssets = marketMinAssets;
         this.marketStartingAssets = marketStartingAssets;
         this.difficultyBotsNum = difficultyBotsNum;
+        this.marketVolatilityRatio = marketVolatilityRatio;
     }
 
 
@@ -82,5 +85,10 @@ public enum PremadeDifficulty implements Difficulty{
 
     public int getMarketMinAssets() {
         return marketMinAssets;
+    }
+
+    @Override
+    public double getMarketVolatilityRatio() {
+        return marketVolatilityRatio;
     }
 }

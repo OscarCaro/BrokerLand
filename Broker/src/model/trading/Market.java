@@ -1,6 +1,7 @@
 package model.trading;
 
 import model.players.Player;
+import model.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,6 +15,8 @@ public class Market {
     private static Market instance;
     public List<Asset> assets;
     private int priceMean;
+    private double volatility;
+    private static final int _marketGlobalBound = 30;
 
     private Market() {
         assets = new ArrayList<>();
@@ -30,14 +33,19 @@ public class Market {
         this.minimumAssetsNum = minimumAssetsNum;
     }
 
-    public void initMarket(int startingAssetsNum, int minimumAssetsNum) {
+    public void initMarket(int startingAssetsNum, int minimumAssetsNum, double volatility) {
         this.changeMinimumAssetsNum(minimumAssetsNum);
         this.initAssets(startingAssetsNum);
+        this.setVolatility(volatility);
+    }
+
+    public void setVolatility(double volatility) {
+        this.volatility = volatility;
     }
 
     public void initAssets(int startingAssetsNum) {
         this.startingAssetsNum = startingAssetsNum;
-        for (int i = 0; i < Math.max(startingAssetsNum, minimumAssetsNum); i++) {
+        for (int i = 0; i < Math.max(this.startingAssetsNum, this.minimumAssetsNum); i++) {
             this.addNewAsset();
         }
         refreshPriceMean();
@@ -65,7 +73,10 @@ public class Market {
         Iterator<Asset> iter = assets.iterator();
         while (iter.hasNext()) {
             Asset a = iter.next();
-            a.refreshAsset();
+            a.refreshAsset(volatility);
+        }
+        if (Utils.randomNum(100) < 100 * (volatility/2) && assets.size() < _marketGlobalBound){
+            this.addNewAsset();
         }
         refreshPriceMean();
     }
@@ -80,7 +91,8 @@ public class Market {
 
 
     public void opportunity() {
-        assets.add(new Asset());
+        if (assets.size() < _marketGlobalBound)
+        this.addNewAsset();
     }
 
     public void print() {

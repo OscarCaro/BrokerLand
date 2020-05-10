@@ -77,16 +77,15 @@ public class Asset {
         return true;
     }
 
-    public void refreshAsset() {
+    public void refreshAsset(double volatility) {
     	this.price = state.getNewPrice(this);
     	this.state = state.getNextState(this);
     	
-    	if (sharesOwned == 0 || record.isEmpty() ||  
-        	sharesOwned < (int) (0.01 * (double) Game.getTimeClone().day) ) {
+    	if (sharesOwned == 0 || record.isEmpty() ||  sharesOwned < (int) (0.01 * (double) Game.getTimeClone().day) || Utils.randomNum(100) < 100 * volatility){
             bankruptcyIndex++;
         }
 
-        if (bankruptcyIndex > BANKRUPTCYTURNS || this.price == 0) {
+        if (bankruptcyIndex > BANKRUPTCYTURNS || this.price <= 0) {
             state = new BankruptState();
         }
     }
@@ -96,7 +95,7 @@ public class Asset {
     }
 
     private int priceGen() {
-        return Utils.randomNum(10 + (Game.t.day * 10)) + 20;
+        return Utils.randomNum(500 + (Game.t.day * 20)) + 20;
     }
 
     public void setBankrupt() {

@@ -130,8 +130,24 @@ public abstract class Player {
         if (!globalMarket.buy(this, marketIndex, qtty)) {
             return false;
         } else {
-            portfolio.add(new Pair<>(globalMarket.assets.get(marketIndex), qtty));
+            this.addPortfolio(globalMarket.assets.get(marketIndex), qtty);
             return true;
+        }
+    }
+
+    private void addPortfolio(Asset a, Integer qtty){
+        boolean add = false;
+        for (Pair<Asset, Integer> ps : portfolio){
+            if (ps.getKey().equals(a)){
+                add = true;
+                int aux = ps.getValue();
+                portfolio.remove(ps);
+                portfolio.add(new Pair<>(a, aux+qtty));
+                break;
+            }
+        }
+        if (!add){
+            portfolio.add(new Pair<>(a, qtty));
         }
     }
 

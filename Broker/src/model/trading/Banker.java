@@ -65,7 +65,7 @@ public class Banker {
         Loan loan = calculateSavingLoan(debt);
         if (isUser) {
             System.out.println("The bank offers you a loan to save your ass.");
-            System.out.println("Said loan is:" + loan);
+            System.out.println("Said loan is:" + loan.loanStatement());
             System.out.println("Will you take it? (Y/N)");
             Scanner aux = new Scanner(System.in);
             String input = aux.nextLine();
@@ -87,10 +87,20 @@ public class Banker {
         int money = Math.abs(debt);
         int days = Utils.randomNum(12) + 7;
         int freq = Utils.randomNum(4) + 1;
+        int amount = 0;
         double rate = ((double) (Utils.randomNum(2) + 2)) / 10;
-        int amount = Utils.randomNum(50 * money) * 100;
-        if (amount <= money) {
-            amount = ((money * Math.max(Utils.randomNum(13), 5) *100)/100);
+        if  (money <= 300) { //not a substantial debt so it won't scale upwards too much
+            amount += Utils.randomNum(50 * money) * 100;
+            if (amount <= money) {
+                amount = ((money * Math.max(Utils.randomNum(13), 5) * 100) / 100);
+            }
+        }
+        else{
+            amount += Utils.randomNum(50 * money) * 100;
+            if (amount <= money) {
+                amount = ((money * Math.max(Utils.randomNum(7), 5) * 100) / 100);
+            }
+            amount = Math.min(12000, amount); //amount is bounded at 12000 just in case it scaled too much
         }
         return new Loan(amount, rate, days, freq);
     }

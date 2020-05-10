@@ -16,7 +16,6 @@ public class WaitMarket extends Action {
 			player.getGlobalMarket().print();
 		}
 		else {
-			player.getGlobalMarket().opportunity();
 			System.out.println(player.getName() + " analyzed the market.");
 		}		
 	}
