@@ -18,8 +18,8 @@ import java.util.Scanner;
 
 public class Broker extends Player {
 
-    private Scanner in;
     Action previousAction; //so you cannot break the game doing the same thing over and over again
+    private Scanner in;
 
     public Broker() {
         super("you", "", WorldMap.HOMEIDX, 1000);
@@ -34,12 +34,11 @@ public class Broker extends Player {
         Utils.minusWall();
         showPortfolio();
         Utils.minusWall();
-        System.out.println();
         askActions();
     }
 
     private void askActions() {
-        List<Action> actions = currLoc.getActions();    
+        List<Action> actions = currLoc.getActions();
         List<Action> moveActions = currLoc.getMoveActions();
 
         System.out.println("What do you want to do?");
@@ -60,41 +59,40 @@ public class Broker extends Player {
             actionTime.addTime(action.getTime());
             EventHandler.getInstance().addEvent(new BrokerUpdateEvent(actionTime, action, this));
             previousAction = action;
-        }
-        else{
+        } else {
             Utils.equalsWall();
             System.out.println("You already did that.");
             Utils.equalsWall();
             this.askActions();
         }
     }
-    
+
     @Override
     public void reactToGreeting(Player other, String message) {
-    	System.out.println("What do you respond back: ");
-       	System.out.println(in.nextLine());
+        System.out.println("What do you respond back: ");
+        System.out.println(in.nextLine());
     }
-    
+
     @Override
     public String getMessageToSay() {
-    	System.out.println("What do you want to say: ");
+        System.out.println("What do you want to say: ");
         return in.nextLine();
     }
-    
+
     @Override
     public Player choosePlayerToGreet(List<Player> players) {
-    	System.out.println("Who do you want to talk to:");
+        System.out.println("Who do you want to talk to:");
         for (int i = 0; i < players.size(); i++) {
-        	System.out.println(i + ". " + players.get(i).getName());
+            System.out.println(i + ". " + players.get(i).getName());
         }
         System.out.println("Select: ");
         String aux = in.nextLine();
         while (Integer.parseInt(aux) < 0 || Integer.parseInt(aux) >= players.size()) {
-        	System.out.println("Invalid option");
-        	System.out.println("Select: ");
-        	aux = in.nextLine();
+            System.out.println("Invalid option");
+            System.out.println("Select: ");
+            aux = in.nextLine();
         }
-    	return players.get(Integer.parseInt(aux));
+        return players.get(Integer.parseInt(aux));
     }
 
     public String endMessage() {
@@ -130,10 +128,9 @@ public class Broker extends Player {
         globalMarket.print();
         System.out.println("You're sure you want to buy one of them? (y/n)");
         String input = in.nextLine();
-        while (input.toUpperCase().equals("Y")) {
-            mentalH.add(-10);
+        if (input.toUpperCase().equals("Y")) {
             int idx = -1;
-            while(idx <0 || idx > globalMarket.getNumOfAssets()) {
+            while (idx < 0 || idx > globalMarket.getNumOfAssets()) {
                 System.out.println("Which one? (0->" + (globalMarket.getNumOfAssets() - 1) + ")");
                 input = in.nextLine();
                 idx = Integer.parseInt(input);
@@ -144,12 +141,6 @@ public class Broker extends Player {
             if (!playerBuyAsset(idx, qtty)) {
                 System.out.println("You cannot buy that asset for that quantity.");
             }
-            showPortfolio();
-            System.out.println("Do you want to buy any more assets? (y/n)");
-            input = in.nextLine();
-            if (input.toUpperCase().equals("Y")) {
-                globalMarket.print();
-            }
         }
     }
 
@@ -159,8 +150,7 @@ public class Broker extends Player {
         if (portfolio.size() > 0) {
             System.out.println("Are you sure you want to sell one of them? (y/n)");
             String input = in.nextLine();
-            while (!input.toUpperCase().equals("N")) {
-                mentalH.add(-10);
+            if (input.toUpperCase().equals("Y")) {
                 System.out.println("Which one? (index)");
                 input = in.nextLine();
                 int idx = Integer.parseInt(input);
@@ -178,13 +168,6 @@ public class Broker extends Player {
                     qtty = Integer.parseInt(input);
                 }
                 this.playerSellAsset(idx, qtty);
-                showPortfolio();
-                if (portfolio.size() > 0) {
-                    System.out.println("Do you want to sell any others? (y/n)");
-                    input = in.nextLine();
-                } else {
-                    input = "N"; //it HAS to break, but i dont want to insert break chain.
-                }
             }
         }
     }
@@ -213,12 +196,11 @@ public class Broker extends Player {
 
     @Override
     public boolean payBackLoan() {
-        if (this.loan.getAmountRemaining() >= this.getMoney()){
+        if (this.loan.getAmountRemaining() >= this.getMoney()) {
             System.out.println("You cannot pay back your loan because its remaining amount is: $ " + this.loan.getAmountRemaining() + ".");
             System.out.println("You're $ " + (this.loan.getAmountRemaining() - this.getMoney()) + " short.");
             return false;
-        }
-        else{
+        } else {
             System.out.println("You have to pay: $ " + this.loan.getAmountRemaining() + ".");
             System.out.println("It will leave you at $ " + (this.getMoney() - this.loan.getAmountRemaining()) + ".");
             System.out.println("Will you pay it? (y/n)");
@@ -227,8 +209,7 @@ public class Broker extends Player {
                 this.payLoanAmount(this.loan.getAmountRemaining());
                 loan = null;
                 return true;
-            }
-            else{
+            } else {
                 return false;
             }
         }
@@ -247,8 +228,7 @@ public class Broker extends Player {
                 i++;
             }
             Utils.minusWall();
-
-            System.out.println("\nYour portfolio now amounts to: " + "$" + money);
+            System.out.println("Your portfolio now amounts to: " + "$" + money);
         }
     }
 
