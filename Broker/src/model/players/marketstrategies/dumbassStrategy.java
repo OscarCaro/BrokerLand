@@ -63,6 +63,17 @@ public class dumbassStrategy extends MarketCommonKnowledge implements MarketStra
             System.out.println(b.getName() + " wants to sell but" + Sex.subjectPronoun(b.getSex(), false) + "can't decide on what to.");
         }
     }
-
-
+    @Override
+    public void sellAssetDebt(Bot b) { //he enters panic mode and tries to sell everything until he's saved
+        while (b.getMoney() < 0 && !b.getPortfolio().isEmpty()) {
+            Asset aaux = b.getPortfolio().get(0).getKey();
+            int qtty = b.getPortfolio().get(0).getValue();
+            if (!b.playerSellAsset(0, qtty)) {
+                throw new IllegalArgumentException("Bot " + this + " cannot make such a transaction.");
+            } else {
+                memoryRemoveAsset(aaux);
+                System.out.println(b.getName() + " sold " + qtty + " shares of " + aaux.name + " questionably to escape debt.");
+            }
+        }
+    }
 }

@@ -10,13 +10,13 @@ import java.util.List;
 //This class follows the Singleton pattern, since there should be only one Market
 public class Market {
 
-    private int startingAssetsNum;
-    private int minimumAssetsNum;
+    private static final int _marketGlobalBound = 30;
     private static Market instance;
     public List<Asset> assets;
+    private int startingAssetsNum;
+    private int minimumAssetsNum;
     private int priceMean;
     private double volatility;
-    private static final int _marketGlobalBound = 30;
 
     private Market() {
         assets = new ArrayList<>();
@@ -75,7 +75,7 @@ public class Market {
             Asset a = iter.next();
             a.refreshAsset(volatility);
         }
-        if (Utils.randomNum(100) < 100 * (volatility/2) && assets.size() < _marketGlobalBound){
+        if (Utils.randomNum(100) < 100 * (volatility / 2) && assets.size() < _marketGlobalBound) {
             this.addNewAsset();
         }
         refreshPriceMean();
@@ -92,7 +92,7 @@ public class Market {
 
     public void opportunity() {
         if (assets.size() < _marketGlobalBound)
-        this.addNewAsset();
+            this.addNewAsset();
     }
 
     public void print() {
@@ -137,7 +137,6 @@ public class Market {
 
     public Asset bankruptAsset() {
         Iterator<Asset> iter = assets.iterator();
-        boolean isFirst = true;
         while (iter.hasNext()) {
             Asset a = iter.next();
             if (a.isBankrupt()) {

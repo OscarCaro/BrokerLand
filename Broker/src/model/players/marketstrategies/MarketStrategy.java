@@ -5,4 +5,5 @@ import model.players.Bot;
 public interface MarketStrategy {
     void buyAsset(Bot b);
     void sellAsset(Bot b);
+    void sellAssetDebt(Bot b);
 }

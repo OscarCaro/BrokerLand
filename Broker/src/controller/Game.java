@@ -50,7 +50,7 @@ public class Game {
 
     public void run() {
         while (player.canContinue(true) && !playerIsWinner()) {
-            player.update();
+            //player.update();
             eventHandler.executeEvents(this);
         }
         System.out.println(player.endMessage());
@@ -58,7 +58,7 @@ public class Game {
 
     public void printScore() {
         Utils.equalsWall();
-        System.out.println((bots.size() + 1) + " total brokers remaining.");
+        System.out.println((bots.size()) + " total brokers and you remain in business.");
         Utils.equalsWall();
     }
 
@@ -71,6 +71,7 @@ public class Game {
     public void flushAssets() {
         Asset a = market.bankruptAsset();
         if (a != null) {
+            a.roundUpPriceFlush();
             for (Bot b : bots) {
                 b.flushAsset(a, false);
             }

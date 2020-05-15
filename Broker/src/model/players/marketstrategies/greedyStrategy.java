@@ -62,8 +62,11 @@ public class greedyStrategy extends MarketCommonKnowledge implements MarketStrat
                     if (!b.playerSellAsset(profitableAssetInPortfolio, rQuant)) {
                         throw new IllegalArgumentException("Bot " + this + " cannot make such a transaction.");
                     }
+                    else{
+                        memClone.remove(aaux);
+                    }
                     soldSomething = true;
-                    System.out.println(b.getName() + " sold " + rQuant + " shares of " + aaux.name + " avidly.");
+                    System.out.println(b.getName() + " sold " + rQuant + " shares of " + aaux.name + " in a jewish fashion.");
                     break;
                 }
                 memoryRemoveAsset(aaux);
@@ -78,4 +81,40 @@ public class greedyStrategy extends MarketCommonKnowledge implements MarketStrat
         memory = memClone;
     }
 
+    @Override
+    public void sellAssetDebt(Bot b) {
+        ArrayList<Pair<Asset, Integer>> memClone = (ArrayList<Pair<Asset, Integer>>) memory.clone();
+        while (!memory.isEmpty()) {
+            int profitableAssetInPortfolio = findProfitableAssetInPortfolio(b);
+            if (profitableAssetInPortfolio != -1) { //Found one
+                Asset aaux = b.getPortfolio().get(profitableAssetInPortfolio).getKey();
+                int rQuant = b.getPortfolio().get(profitableAssetInPortfolio).getValue();
+                if (!b.playerSellAsset(profitableAssetInPortfolio, rQuant)) {
+                    throw new IllegalArgumentException("Bot " + this + " cannot make such a transaction.");
+                }
+                else{
+                    System.out.println(b.getName() + " sold " + rQuant + " shares of " + aaux.name + " egotistically to escape debt.");
+                    memClone.remove(aaux);
+                }
+                this.memoryRemoveAsset(aaux);
+                if (b.getMoney() >= 0) {
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+        this.memory = memClone;
+        while (b.getMoney() < 0 && !b.getPortfolio().isEmpty()){
+            Asset aaux = b.getPortfolio().get(0).getKey();
+            int qtty = b.getPortfolio().get(0).getValue();
+            if (!b.playerSellAsset(0, qtty)) {
+                throw new IllegalArgumentException("Bot " + this + " cannot make such a transaction.");
+            }
+            else{
+                memoryRemoveAsset(aaux);
+                System.out.println(b.getName() + " sold " + qtty + " shares of " + aaux.name + " egotistically to escape debt.");
+            }
+        }
+    }
 }

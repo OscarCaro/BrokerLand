@@ -52,6 +52,11 @@ public class Bot extends Player {
     }
 
     @Override
+    public void sellAssetsDebt() {
+        this.marketStrategy.sellAssetDebt(this);
+    }
+
+    @Override
     public void update() {
         if (!hasActionScheduled) {
             Action action = mind.getState().chooseAction(currLoc.getActions(), currLoc.getMoveActions());

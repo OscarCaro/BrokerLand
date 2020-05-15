@@ -125,4 +125,8 @@ public class Asset {
     public boolean isBankrupt() {
         return state instanceof BankruptState;
     }
+
+    public void roundUpPriceFlush() {
+        this.price = Math.abs(this.price);
+    }
 }

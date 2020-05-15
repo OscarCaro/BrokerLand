@@ -6,7 +6,7 @@ import model.players.Player;
 public class SellAction extends Action {
 
 	public SellAction() {
-		super("Sell", "SELL", "Take a look at your portfolio and decide on what to sell.", 20, -8,0, 0);
+		super("Sell", "SELL", "Take a look at your portfolio and decide on what to sell.", 25, -8,0, 0);
 	}
 	
 	@Override

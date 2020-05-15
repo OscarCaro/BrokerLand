@@ -4,8 +4,8 @@ public enum PremadeDifficulty implements Difficulty{
 
     EASY(0.4, 0.1, 0.1, 0.1, 0.3, 0.4, 3, 5, 20, 0.2),
     NORMAL(0.3, 0.2, 0.2, 0.1, 0.2, 0.5, 4, 6, 30,0.2),
-    DIFFICULT(0.1, 0.2, 0.3, 0.2, 0.2, 0.7, 5, 7, 40, 0.3),
-    WORLDTRADECENTER(0, 0.2, 0.3, 0.4, 0.1, 0.8, 5, 8, 50,0.4);
+    DIFFICULT(0.1, 0.2, 0.3, 0.2, 0.2, 0.7, 5, 7, 35, 0.3),
+    WORLDTRADECENTER(0, 0.2, 0.3, 0.4, 0.1, 0.8, 5, 8, 40,0.4);
 
     private double dumbassRatio;
     private double aggressiveRatio;

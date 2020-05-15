@@ -77,6 +77,41 @@ public class aggressiveStrategy extends MarketCommonKnowledge implements MarketS
         }
         memory = memClone;
     }
-
+    @Override
+    public void sellAssetDebt(Bot b) {
+        ArrayList<Pair<Asset, Integer>> memClone = (ArrayList<Pair<Asset, Integer>>) memory.clone();
+        while (!memory.isEmpty()) {
+            int profitableAssetInPortfolio = findProfitableAssetInPortfolio(b);
+            if (profitableAssetInPortfolio != -1) { //Found one
+                Asset aaux = b.getPortfolio().get(profitableAssetInPortfolio).getKey();
+                int rQuant = b.getPortfolio().get(profitableAssetInPortfolio).getValue();
+                if (!b.playerSellAsset(profitableAssetInPortfolio, rQuant)) {
+                    throw new IllegalArgumentException("Bot " + this + " cannot make such a transaction.");
+                }
+                else{
+                    System.out.println(b.getName() + " sold " + rQuant + " shares of " + aaux.name + " aggressively to escape debt.");
+                    memClone.remove(aaux);
+                }
+                this.memoryRemoveAsset(aaux);
+                if (b.getMoney() >= 0) {
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+        this.memory = memClone;
+        while (b.getMoney() < 0 && !b.getPortfolio().isEmpty()){
+            Asset aaux = b.getPortfolio().get(0).getKey();
+            int qtty = b.getPortfolio().get(0).getValue();
+            if (!b.playerSellAsset(0, qtty)) {
+                throw new IllegalArgumentException("Bot " + this + " cannot make such a transaction.");
+            }
+            else{
+                memoryRemoveAsset(aaux);
+                System.out.println(b.getName() + " sold " + qtty + " shares of " + aaux.name + " aggressively to escape debt.");
+            }
+        }
+    }
 
 }

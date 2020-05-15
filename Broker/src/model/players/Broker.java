@@ -108,14 +108,14 @@ public class Broker extends Player {
         } else if (hunger.starved()) {
             aux = "You were so focused on your work and social life\n" +
                     "you have totally forgotten about your own physical health.\n" +
-                    "You were hospitalized and the doctors say you'll have to be there\n " +
+                    "You were hospitalized and the doctors say you'll have to be there\n" +
                     "some months. The first thing they dictate you to do is give up trading.\n";
             aux += "\n-------------- You are done ---------------";
         } else {
             aux = "You are the only broker left in the platform.\n" +
                     "With enormous influence over it and a moneymaking machine in your hands now,\n" +
-                    "you start paying attention to the equally enormous void in your heart.\n " +
-                    "You are now all alone in a trading world devoid of interest.\n " +
+                    "you start paying attention to the equally enormous void in your heart.\n" +
+                    "You are now all alone in a trading world devoid of interest.\n" +
                     "You won, but at what cost.\n";
             aux += "\n-------------- You won ---------------";
         }
@@ -135,10 +135,14 @@ public class Broker extends Player {
                 input = in.nextLine();
                 idx = Integer.parseInt(input);
             }
-            System.out.println("How many? (1->" + (this.money / globalMarket.assets.get(idx).price) + ")");
-            input = in.nextLine();
-            int qtty = Integer.parseInt(input);
+            int qtty =0;
+            if (this.money / globalMarket.assets.get(idx).price >0) {
+                System.out.println("How many? (1->" + (this.money / globalMarket.assets.get(idx).price) + ")");
+                input = in.nextLine();
+                qtty = Integer.parseInt(input);
+            }
             if (!playerBuyAsset(idx, qtty)) {
+                Utils.equalsWall();
                 System.out.println("You cannot buy that asset for that quantity.");
             }
         }
@@ -148,7 +152,7 @@ public class Broker extends Player {
     public void sell() {
         showPortfolio();
         if (portfolio.size() > 0) {
-            System.out.println("Are you sure you want to sell one of them? (y/n)");
+            System.out.println("You want to sell one of them? (y/n)");
             String input = in.nextLine();
             if (input.toUpperCase().equals("Y")) {
                 System.out.println("Which one? (index)");
@@ -212,6 +216,20 @@ public class Broker extends Player {
             } else {
                 return false;
             }
+        }
+    }
+
+    @Override
+    public void sellAssetsDebt() {
+        while (this.money < 0 && !this.portfolio.isEmpty()) {
+            Utils.equalsWall();
+            System.out.println("You are in debt!.");
+            Utils.equalsWall();
+            this.sell();
+
+        }
+        if (this.money < 0) {
+            System.out.println("You could not escape debt.");
         }
     }
 

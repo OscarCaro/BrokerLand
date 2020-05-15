@@ -6,7 +6,7 @@ import model.players.Player;
 public class BuyAction extends Action {
 	
 	public BuyAction() {
-		super("Buy", "BUY", "Take a look at the market and decide on what to buy.", 20, -10,0, 0);
+		super("Buy", "BUY", "Take a look at the market and decide on what to buy.", 25, -10,0, 0);
 	}
 
 	@Override

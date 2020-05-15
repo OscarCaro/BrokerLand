@@ -62,10 +62,13 @@ public abstract class Player {
     }
 
     public boolean canContinue(boolean isUser) {
-        if  (this.getMoney()< 0 && !this.hasLoan()){
-            Banker.getInstance().savingLoan(this.getMoney(),this, isUser);
+        if (this.getMoney() < 0 && !this.getPortfolio().isEmpty()) {
+            this.sellAssetsDebt();
         }
-        return !this.mentalH.insane() && this.getMoney() > 0 && !this.hunger.starved();
+        if (this.getMoney() < 0 && !this.hasLoan()) {
+            Banker.getInstance().savingLoan(this.getMoney(), this, isUser);
+        }
+        return !this.mentalH.insane() && this.getMoney() >= 0 && !this.hunger.starved();
     }
 
     public Location getCurrLoc() {
@@ -135,18 +138,18 @@ public abstract class Player {
         }
     }
 
-    private void addPortfolio(Asset a, Integer qtty){
+    private void addPortfolio(Asset a, Integer qtty) {
         boolean add = false;
-        for (Pair<Asset, Integer> ps : portfolio){
-            if (ps.getKey().equals(a)){
+        for (Pair<Asset, Integer> ps : portfolio) {
+            if (ps.getKey().equals(a)) {
                 add = true;
                 int aux = ps.getValue();
                 portfolio.remove(ps);
-                portfolio.add(new Pair<>(a, aux+qtty));
+                portfolio.add(new Pair<>(a, aux + qtty));
                 break;
             }
         }
-        if (!add){
+        if (!add) {
             portfolio.add(new Pair<>(a, qtty));
         }
     }
@@ -167,9 +170,8 @@ public abstract class Player {
         if (this.hasLoan()) {
             if (isUser) {
                 System.out.println("You paid $ " + loan.getInstallment() + " off of your loan debt.");
-            }
-            else{
-                System.out.println(this.getName() +" is being crushed by debt.");
+            } else {
+                System.out.println(this.getName() + " is being crushed by debt.");
             }
             this.payLoanAmount(installment);
         }
@@ -180,10 +182,10 @@ public abstract class Player {
     }
 
     public LocationChanger getLocationChanger() {
-    	return this.map;
+        return this.map;
     }
 
-    public void flushAsset(Asset a, boolean isUser){
+    public void flushAsset(Asset a, boolean isUser) {
         for (Pair<Asset, Integer> p : portfolio) {
             if (p.getKey().equals(a)) {
                 if (isUser) {
@@ -201,17 +203,19 @@ public abstract class Player {
         }
     }
 
-    public int getHunger(){
-           return this.hunger.getHungerIndex();
+    public int getHunger() {
+        return this.hunger.getHungerIndex();
     }
 
-    public  int getMental() {
+    public int getMental() {
         return this.mentalH.getMentalIndex();
     }
 
     public Sex getSex() {
         return sex;
     }
+
+    public abstract void sellAssetsDebt();
 }
 
 
