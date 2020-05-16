@@ -6,7 +6,7 @@ public class BankruptState implements AssetState {
 
 	@Override
 	public int getNewPrice(Asset asset) {
-		return 0; //defaultNull
+		return Math.abs(asset.getPrice());
 	}
 
 	@Override

@@ -78,7 +78,7 @@ public class Asset {
     }
 
     public void refreshAsset(double volatility) {
-    	this.price = state.getNewPrice(this);
+
     	this.state = state.getNextState(this);
     	
     	if (sharesOwned == 0 || record.isEmpty() ||  sharesOwned < (int) (0.01 * (double) Game.getTimeClone().day) || Utils.randomNum(100) < 100 * volatility){
@@ -88,6 +88,7 @@ public class Asset {
         if (bankruptcyIndex > BANKRUPTCYTURNS || this.price <= 0) {
             state = new BankruptState();
         }
+        this.price = state.getNewPrice(this);
     }
 
     public String toString() {
@@ -126,7 +127,4 @@ public class Asset {
         return state instanceof BankruptState;
     }
 
-    public void roundUpPriceFlush() {
-        this.price = Math.abs(this.price);
-    }
 }

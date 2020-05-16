@@ -71,7 +71,6 @@ public class Game {
     public void flushAssets() {
         Asset a = market.bankruptAsset();
         if (a != null) {
-            a.roundUpPriceFlush();
             for (Bot b : bots) {
                 b.flushAsset(a, false);
             }
