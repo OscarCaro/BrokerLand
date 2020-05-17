@@ -127,4 +127,7 @@ public class Asset {
         return state instanceof BankruptState;
     }
 
+    public AssetState getState() {
+        return state;
+    }
 }
