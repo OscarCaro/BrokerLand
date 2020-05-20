@@ -54,16 +54,14 @@ public class Game {
 
         while (player.canContinue(true) && !playerIsWinner()) {
             //player.update();
-
             eventHandler.executeEvents(this);
         }
         System.out.println(player.endMessage());
 
     }
 
-    public void marketprintout(FileOutputStream f) throws IOException {
+    public void marketprintout(FileOutputStream f) throws IOException { //tool to run large market tests in txt files
         f.write(Market.getInstance().getAssetsString().getBytes());
-
     }
 
     public void printScore() {
