@@ -46,7 +46,6 @@ public class Asset {
             record.add(new Pair<>(Game.getTimeClone(), quantity));
             updateCurve10();
             decreaseBIndex();
-            decreaseBIndex();
             return true;
         }
         return false;
@@ -79,16 +78,17 @@ public class Asset {
 
     public void refreshAsset(double volatility) {
 
-    	this.state = state.getNextState(this);
-    	
     	if (sharesOwned == 0 || record.isEmpty() ||  sharesOwned < (int) (0.01 * (double) Game.getTimeClone().day) || Utils.randomNum(100) < 100 * volatility){
-            bankruptcyIndex++;
+           incrementBIndex();
         }
 
-        if (bankruptcyIndex > BANKRUPTCYTURNS || this.price <= 0) {
-            state = new BankruptState();
-        }
+        this.state = state.getNextState(this);
         this.price = state.getNewPrice(this);
+
+        if (bankruptcyIndex > BANKRUPTCYTURNS || this.price <= 0) { //negative asset guard angel
+            state = new BankruptState();
+            this.price = state.getNewPrice(this);
+        }
     }
 
     public String toString() {

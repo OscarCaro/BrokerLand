@@ -4,6 +4,7 @@ import controller.Game;
 import model.utils.SortedArrayList;
 import model.utils.Utils;
 
+import java.io.FileOutputStream;
 import java.util.List;
 
 public class EventHandler {
@@ -39,14 +40,21 @@ public class EventHandler {
     }
 
     public void executeEvents(Game game) {
+        FileOutputStream f = null;
+        try {
+            f = new FileOutputStream("src/skere.txt");
         Utils.minusWall();
         while (!eventList.get(0).stopHere() && eventList.size() > 1 && !game.noBotsRemaining()) {
             game.setTime(eventList.get(0).triggerTime);
             eventList.remove(0).execute();
             game.flushBots();
+            game.marketprintout(f);
         }
         game.printScore();
         eventList.remove(0).execute(); // execute last event which should be player's and expect input
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -67,12 +67,10 @@ public class Market {
     }
 
     public void refresh() {
-        if (assets.size() < minimumAssetsNum) {
+        while (assets.size() < minimumAssetsNum) {
             this.addNewAsset();
         }
-        Iterator<Asset> iter = assets.iterator();
-        while (iter.hasNext()) {
-            Asset a = iter.next();
+        for (Asset a : assets) {
             a.refreshAsset(volatility);
         }
         if (Utils.randomNum(100) < 100 * (volatility / 2) && assets.size() < _marketGlobalBound) {
@@ -149,5 +147,14 @@ public class Market {
 
     public int getPriceMean() {
         return priceMean;
+    }
+
+    public String getAssetsString() {
+        String aux ="";
+        for (int i = 0; i < assets.size(); i++) {
+            aux += i + ": " + assets.get(i) + "\n";
+        }
+        aux += "####\n";
+        return aux;
     }
 }

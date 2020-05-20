@@ -223,10 +223,9 @@ public class Broker extends Player {
     public void sellAssetsDebt() {
         while (this.money < 0 && !this.portfolio.isEmpty()) {
             Utils.equalsWall();
-            System.out.println("You are in debt!.");
+            System.out.println("You are in debt!");
             Utils.equalsWall();
             this.sell();
-
         }
         if (this.money < 0) {
             System.out.println("You could not escape debt.");

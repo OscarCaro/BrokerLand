@@ -41,7 +41,7 @@ public class randomStrategy extends MarketCommonKnowledge implements MarketStrat
 
     @Override
     public void sellAssetDebt(Bot b) {
-        while(b.getMoney() <0) {
+        while(b.getMoney() <0 && !b.getPortfolio().isEmpty()) {
             int rAsset = Utils.randomNum(b.getPortfolio().size());
             Asset aaux = b.getPortfolio().get(rAsset).getKey();
             int rQuant = Math.max(Utils.randomNum(b.getPortfolio().get(rAsset).getValue()), 1); //He sells either 1 or a random amount in ownership

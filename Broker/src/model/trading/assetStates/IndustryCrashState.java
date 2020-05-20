@@ -27,7 +27,10 @@ public class IndustryCrashState implements AssetState {
             asset.incrementBIndex();
         }
         cycleCounter++;
-        if (cycleCounter > maxCycles) {
+        if (asset.getPrice() <= 0) {
+            return new BankruptState();
+        }
+        else if (cycleCounter > maxCycles) {
             return new NormalState();
         } else {
             return this;
