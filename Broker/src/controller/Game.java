@@ -12,8 +12,6 @@ import model.trading.Asset;
 import model.trading.Market;
 import model.utils.Utils;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -53,15 +51,11 @@ public class Game {
     public void run() {
 
         while (player.canContinue(true) && !playerIsWinner()) {
-            //player.update();
+            player.update();
             eventHandler.executeEvents(this);
         }
         System.out.println(player.endMessage());
 
-    }
-
-    public void marketprintout(FileOutputStream f) throws IOException { //tool to run large market tests in txt files
-        f.write(Market.getInstance().getAssetsString().getBytes());
     }
 
     public void printScore() {

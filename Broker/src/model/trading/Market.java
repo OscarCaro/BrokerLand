@@ -149,12 +149,4 @@ public class Market {
         return priceMean;
     }
 
-    public String getAssetsString() {
-        String aux ="";
-        for (int i = 0; i < assets.size(); i++) {
-            aux += i + ": " + assets.get(i) + "\n";
-        }
-        aux += "####\n";
-        return aux;
-    }
 }
