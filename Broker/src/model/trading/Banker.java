@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 public class Banker {
     private static final int STARTINGLOANAMOUNT = 300;
+    private static final int MAXLOANAMOUNT = 12000;
     private static Banker instance;
     private int loansGiven;
 
@@ -55,7 +56,7 @@ public class Banker {
         if (Utils.randomNum(10)>5){
             score++;
         }
-        int amount = ((Utils.randomNum(STARTINGLOANAMOUNT * (score + loansGiven)) + STARTINGLOANAMOUNT) / 100) * 100;
+        int amount = Math.min(MAXLOANAMOUNT, ((Utils.randomNum(STARTINGLOANAMOUNT * (score + loansGiven)) + STARTINGLOANAMOUNT) / 100) * 100);
         double rate = Math.max(0.6 - ((double) (Utils.randomNum(score)) / 10), 0.1);
         int days = Utils.randomNum(12) + 7;
         int freq = Utils.randomNum(4) + 1;
@@ -101,8 +102,8 @@ public class Banker {
             if (amount <= money) {
                 amount = ((money * Math.max(Utils.randomNum(7), 5) * 100) / 100);
             }
-            amount = Math.min(12000, amount); //amount is bounded at 12000 just in case it scaled too much
         }
+        amount = Math.min(MAXLOANAMOUNT, amount);
         return new Loan(amount, rate, days, freq);
     }
 

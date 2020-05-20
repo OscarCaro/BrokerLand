@@ -8,7 +8,7 @@ public class BotStateGovernor {
     private BotState currState;
     private double adaptability;
     
-    // This are just "algorithms", enough to have 1 instance for all Bots
+    // These are just "algorithms", enough to have 1 instance for all Bots, this is the object pool pattern
     private static BotState hunger = new HungerProblemsState();
     private static BotState mental = new MentalProblemsState();
     private static BotState defeated = new DefeatedState();

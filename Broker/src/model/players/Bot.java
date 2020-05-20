@@ -66,20 +66,20 @@ public class Bot extends Player {
             EventHandler.getInstance().addEvent(event);
         }
     }
-    
+
     @Override
     public void reactToGreeting(Player other, String message) {
-    	mind.getState().reactToGreeting(this, other);    	
+        mind.getState().reactToGreeting(this, other);
     }
-    
+
     @Override
     public String getMessageToSay() {
-    	return mind.getState().getMessageToSay(); 
+        return mind.getState().getMessageToSay();
     }
-    
+
     @Override
-    public Player choosePlayerToGreet(List<Player> players) {    	
-    	return players.get(Utils.randomNum(players.size())); 
+    public Player choosePlayerToGreet(List<Player> players) {
+        return players.get(Utils.randomNum(players.size()));
     }
 
     public String endMessage() {
@@ -87,18 +87,18 @@ public class Bot extends Player {
         if (mentalH.insane()) {
             int rSuicide = Utils.randomNum(100);
             if (rSuicide < 10) {
-                aux = this.getName() + " ended "+ Sex.objectPronoun(this.getSex())+" miserable existence.";
+                aux = this.getName() + " ended " + Sex.objectPronoun(this.getSex()) + " miserable existence.";
             } else {
-                aux = this.getName() + " went insane and deeply depressed, "+ Sex.subjectPronoun(this.getSex(), false)+" quit trading and entered therapy.";
+                aux = this.getName() + " went insane and deeply depressed, " + Sex.subjectPronoun(this.getSex(), false) + " quit trading and entered therapy.";
             }
         } else if (this.hunger.starved()) {
             int rStarvation = Utils.randomNum(100);
             if (rStarvation < 10) {
-                aux = this.getName() + " was hospitalized too late,\n"+ Sex.objectPronoun(this.getSex())+" body rejected food and "+ Sex.subjectPronoun(this.getSex(), false)+" died of famine.";
+                aux = this.getName() + " was hospitalized too late,\n" + Sex.objectPronoun(this.getSex()) + " body rejected food and " + Sex.subjectPronoun(this.getSex(), false) + " died of famine.";
             } else if (rStarvation < 40) {
-                aux = this.getName() + " was so focused on work he didn't eat for a while.\n"+ Sex.subjectPronoun(this.getSex(), true)+" fainted and fell, and is now hospitalized with a severe head trauma.";
+                aux = this.getName() + " was so focused on work he didn't eat for a while.\n" + Sex.subjectPronoun(this.getSex(), true) + " fainted and fell, and is now hospitalized with a severe head trauma.";
             } else {
-                aux = this.getName() + " was very focused on work and forgot to eat.\n"+ Sex.subjectPronoun(this.getSex(), true)+" was hospitalized, for "+ Sex.objectPronoun(this.getSex())+" own well-being has been dictated to give up trading.";
+                aux = this.getName() + " was very focused on work and forgot to eat.\n" + Sex.subjectPronoun(this.getSex(), true) + " was hospitalized, for " + Sex.objectPronoun(this.getSex()) + " own well-being has been dictated to give up trading.";
             }
         } else {
             aux = this.getName() + " went bankrupt and fled.";
@@ -116,7 +116,14 @@ public class Bot extends Player {
         if (!this.portfolio.isEmpty()) {
             this.marketStrategy.sellAsset(this);
         } else {
-            System.out.println(getName() + " looked to "+ Sex.objectPronoun(this.getSex())+" portfolio and found it empty.");
+            System.out.println(getName() + " looked to " + Sex.objectPronoun(this.getSex()) + " portfolio and found it empty.");
+        }
+    }
+
+    public void sellPortfolioOnDeath() { //this takes care of the will of the bots as well as it keeps the assets owned index correct
+        if (!portfolio.isEmpty()) {
+            this.playerSellAsset(0, portfolio.get(0).getValue());
+            this.sellPortfolioOnDeath();
         }
     }
 
@@ -124,7 +131,7 @@ public class Bot extends Player {
         this.hasActionScheduled = b;
     }
 
-    public void updateMind(){
+    public void updateMind() {
         this.mind.update(this);
     }
 }

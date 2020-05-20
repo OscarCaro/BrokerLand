@@ -51,7 +51,7 @@ public class Game {
     public void run() {
 
         while (player.canContinue(true) && !playerIsWinner()) {
-            player.update();
+            //player.update();
             eventHandler.executeEvents(this);
         }
         System.out.println(player.endMessage());
@@ -93,6 +93,7 @@ public class Game {
             if (!b.canContinue(false)) {
                 System.out.println(b.endMessage());
                 System.out.println("----------------------" + b.getName() + " is OUT------------------------");
+                b.sellPortfolioOnDeath();
                 iter.remove();
             }
         }
