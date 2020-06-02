@@ -15,9 +15,9 @@ public class NormalState implements AssetState {
             } else {
                 sign = 1;
             }
-            price += sign * Utils.randomNum(10) * asset.getCurve10();
+            price += sign * Utils.randomNum(10) * (asset.getCurve10() + Utils.randomNum(4));
         } else {
-            price += Utils.randomNum(10) * asset.getCurve10();
+            price += Utils.randomNum(10) * (asset.getCurve10() + Utils.randomNum(4));
         }
         return price;
     }
