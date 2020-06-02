@@ -10,9 +10,7 @@ import org.junit.jupiter.api.Test;
 class MarketTest extends TestCommons {
     @Test
     void marketSingletonCreationTest() {
-        Market.getInstance().assets.clear(); //if you run the class as test this will fix using an outdated market
-        initGameAndMarket();
-        assertFalse(Market.getInstance().assets.isEmpty());
+        assertNotNull(Market.getInstance());
     }
 
     @Test

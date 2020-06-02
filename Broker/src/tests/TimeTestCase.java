@@ -14,6 +14,8 @@ class TimeTestCase extends TestCommons {
 
         assertEquals(t2.minus(t1), 100);
         assertTrue(t1.isBeforeThan(t2));
+        assertTrue(t1.toString().contains("It's:"));
+        assertTrue(t1.toString().contains(" of day "));
     }
 
 }
