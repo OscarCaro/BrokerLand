@@ -21,7 +21,7 @@ Find a specific explanation on how the code is organized at [Architecture](https
 This project contains several standard **Java Patterns**. Find all the documentation and diagrams in the [Java Patterns](https://github.com/UCM-FDI-IS2-2020/se2-project-broker-studios/wiki/3.-Java-Patterns) tab on the wiki.
 If you directly want to take a look at the **UML Diagrams**, go to the diagrams folder inside the Broker folder.
 ### Testing
-The development of the project has been done with testing techniques. To get more information about it, visit the [Testing](https://github.com/UCM-FDI-IS2-2020/se2-project-broker-studios/wiki/4.-JUnit-Tests) tab.
+The development of the project has been done with testing techniques. To get more information about it, visit the [Testing](https://github.com/UCM-FDI-IS2-2020/se2-project-broker-studios/wiki/4.-JUnit-Tests) tab. Also you can check out the tests folder inside the src folder in the project to take a look at the tests and run them yourself.
 
 
  
