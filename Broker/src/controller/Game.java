@@ -7,7 +7,6 @@ import model.life.Time;
 import model.players.Bot;
 import model.players.Broker;
 import model.players.botBuild.BotBuildDirector;
-import model.players.botBuild.BotBuilder;
 import model.trading.Asset;
 import model.trading.Market;
 import model.utils.Utils;
@@ -32,7 +31,7 @@ public class Game {
         player = new Broker();
         bots = new ArrayList<>();
         this.eventHandler = EventHandler.getInstance();
-        this.bots = new BotBuildDirector(new BotBuilder()).build(diff.getDifficultyBotsNum(), diff);
+        this.bots = new BotBuildDirector().build(diff.getDifficultyBotsNum(), diff);
         this.initBotRefreshes();
         this.initMarketRefreshes();
     }
