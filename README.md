@@ -5,9 +5,6 @@ If you want to gain some insight on the project, here is some useful information
 ## Project Structure
 The repository is divided into 2 projects. The **Broker** folder contains out project,  and the **WastelandMud** is an external project we took references from.
 
-## Feedback
-If you notice any issue while running the program, or want to give some feedback, please refer to the [Issues Page](https://github.com/UCM-FDI-IS2-2020/se2-project-broker-studios/issues).
-
 ## Planning
 We are following the agile methodologies. To have a look at our schedule and management, visit the [Projects Tab](https://github.com/UCM-FDI-IS2-2020/se2-project-broker-studios/projects).
 
