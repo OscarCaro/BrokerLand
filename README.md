@@ -1,6 +1,4 @@
-Welcome to the Broker Studios final project!
-
-If you want to gain some insight on the project, here is some useful information.
+**Welcome to the Broker Studios college project!**
 
 ### Project Structure
 The repository is divided into 2 projects. The [`Broker`](https://github.com/UCM-FDI-IS2-2020/se2-project-broker-studios/blob/master/Broker) folder contains our project,  and the [`Wasteland-MUD`](https://github.com/UCM-FDI-IS2-2020/se2-project-broker-studios/blob/master/Wasteland-MUD) is an external project we took references from.
