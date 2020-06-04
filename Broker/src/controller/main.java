@@ -61,7 +61,7 @@ public class main {
         Options cmdLineOptions = new Options();
         cmdLineOptions.addOption(Option.builder("b").longOpt("bots").hasArg().desc("Number of bots that will accompany you.").build());
         cmdLineOptions.addOption(Option.builder("d").longOpt("premadeDifficulty").hasArg().desc("Set premadeDifficulty, values are: Easy, Normal, Difficult, WorldTradeCenter.").build());
-        cmdLineOptions.addOption(Option.builder("c").longOpt("custom").desc("Custom play mode, to play this you will need to input options 1, 2, 3, 4, 5, a, s, m, b.").build());
+        cmdLineOptions.addOption(Option.builder("c").longOpt("custom").desc("Custom play mode, to play this you will need to input options 1, 2, 3, 4, 5, a, s, m, b, v.").build());
         cmdLineOptions.addOption(Option.builder("1").longOpt("type1").hasArg().desc("Ratio between 0 and 1 of AGGRESSIVE broker bots (Only needed if -c is enabled).").build());
         cmdLineOptions.addOption(Option.builder("2").longOpt("type2").hasArg().desc("Ratio between 0 and 1 of DUMBASS broker bots (Only needed if -c is enabled).").build());
         cmdLineOptions.addOption(Option.builder("3").longOpt("type3").hasArg().desc("Ratio between 0 and 1 of GREEDY broker bots (Only needed if -c is enabled).").build());
