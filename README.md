@@ -28,17 +28,29 @@ The jar file can be run as any other jar file without the input of any argument 
 usage: controller.main [-1 <arg>] [-2 <arg>] [-3 <arg>] [-4 <arg>] [-5<arg>] [-a <arg>] [-b <arg>] [-c] [-d <arg>] [-h] [-m <arg>] [-s<arg>] [-v <arg>]
               
 -1,--type1 <arg>               Ratio between 0 and 1 of AGGRESSIVE brokerbots (Only needed if -c is enabled).
+  
 -2,--type2 <arg>               Ratio between 0 and 1 of DUMBASS broker bots (Only needed if -c is enabled).
+  
 -3,--type3 <arg>               Ratio between 0 and 1 of GREEDY broker bots (Only needed if -c is enabled).
+  
 -4,--type4 <arg>               Ratio between 0 and 1 of KNOWLEDGEABLE broker bots (Only needed if -c is enabled).
+  
 -5,--type5 <arg>               Ratio between 0 and 1 of RANDOM broker bots (Only needed if -c is enabled).
+  
 -a,--adaptability <arg>        Adaptability to adversity ratio of the bots (Only needed if -c is enabled).
+  
 -b,--bots <arg>                Number of bots that will accompany you.
+  
 -c,--custom                    Custom play mode, to play this you will need to input options 1, 2, 3, 4, 5, a, s, m, b.
+
 -d,--premadeDifficulty <arg>   Set premadeDifficulty, values are: Easy, Normal, Difficult, WorldTradeCenter.
+  
 -h,--help                      Print this message.
+
 -m,--minNum <arg>              Minimum number of assets on the market (Only needed if -c is enabled).
+  
 -s,--startingNum <arg>         Starting number of assets on the market (Only needed if -c is enabled).
+  
 -v,--volatility <arg>          Ratio between 0 and 1 of market volatility (Only needed if -c is enabled).
         
         
