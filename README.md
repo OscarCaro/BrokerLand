@@ -65,8 +65,11 @@ usage: controller.main [-1 <arg>] [-2 <arg>] [-3 <arg>] [-4 <arg>] [-5<arg>] [-a
  These would be some examples of the usages explained above:
  
  -java -jar [path]\Broker.jar -d WORLDTRADECENTER (This creates a new game in WORLDTRADECENTER difficulty).
+ 
  -java -jar [path]\Broker.jar -d easy (This creates a new game in EASY difficulty).
+ 
  -java -jar [path]\Broker.jar -d easy (This creates a new game in EASY difficulty).
+ 
  -java -jar [path]\Broker.jar -c -1 0.1 -2 0.2 -3 0.3 -4 0.2 -5 0.3 -a 0.7 -s 3 -m 2 -b 30 -v 0.3 (This creates a new game in a custom difficulty with: 30 bots, 0.1 * 30 aggressive brokers, 0.2 * 30 dumbass brokers, 0.3 * 30 greedy brokers, 0.2 * 30 knowledgeable brokers, 0.3 * 30 random brokers, 0.7/1 adaptability ratio for every bot's behaviour, 3 starting assets, 2 minimum assets in the market allowed, and 0.3/1 market volatility).
 
 It is also to be noted that if one uses -c but does not add all custom game parameters an according exception will stop the execution of the code. Also if one inputs a complete custom difficulty but also uses the -d argument the program will ignore the premade difficulty argument and enter the custom difficulty the user created.
