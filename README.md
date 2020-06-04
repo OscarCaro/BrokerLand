@@ -25,8 +25,10 @@ The development of the project has been done with testing techniques. To get mor
 ## Jar File
 The jar file can be run as any other jar file without the input of any argument (with command 'java -jar [path]\Broker.jar' in the console terminal, or any other way of your preference). This will create a game with the "NORMAL" premade difficulty. If you input the argument -h (java -jar [path]\Broker.jar -h). You will get the following text: 
 
+-------------------------------------------------------------------------------
+
 usage: controller.main [-1 <arg>] [-2 <arg>] [-3 <arg>] [-4 <arg>] [-5<arg>] [-a <arg>] [-b <arg>] [-c] [-d <arg>] [-h] [-m <arg>] [-s<arg>] [-v <arg>]
-              
+            
 -1,--type1 <arg>               Ratio between 0 and 1 of AGGRESSIVE brokerbots (Only needed if -c is enabled).
   
 -2,--type2 <arg>               Ratio between 0 and 1 of DUMBASS broker bots (Only needed if -c is enabled).
@@ -53,18 +55,19 @@ usage: controller.main [-1 <arg>] [-2 <arg>] [-3 <arg>] [-4 <arg>] [-5<arg>] [-a
   
 -v,--volatility <arg>          Ratio between 0 and 1 of market volatility (Only needed if -c is enabled).
         
-        
+-------------------------------------------------------------------------------
+
  Though it is all self-explanatory, it is notable that there are two ways to run the program:
  
- -Through a premade difficulty using argument -d. 
- -Through a custom difficulty using arguments -c -1 -2 -3 -4 -5 -b -a -m -s -v. 
+ - Through a premade difficulty using argument -d. 
+ - Through a custom difficulty using arguments -c -1 -2 -3 -4 -5 -b -a -m -s -v. 
  
  These would be some examples of the usages explained above:
  
- - java -jar [path]\Broker.jar -d WORLDTRADECENTER (This creates a new game in WORLDTRADECENTER difficulty).
- - java -jar [path]\Broker.jar -d easy (This creates a new game in EASY difficulty).
- - java -jar [path]\Broker.jar -d easy (This creates a new game in EASY difficulty).
- - java -jar [path]\Broker.jar -c -1 0.1 -2 0.2 -3 0.3 -4 0.2 -5 0.3 -a 0.7 -s 3 -m 2 -b 30 -v 0.3 (This creates a new game in a custom difficulty with: 30 bots, 0.1 * 30 aggressive brokers, 0.2 * 30 dumbass brokers, 0.3 * 30 greedy brokers, 0.2 * 30 knowledgeable brokers, 0.3 * 30 random brokers, 0.7/1 adaptability ratio for every bot's behaviour, 3 starting assets, 2 minimum assets in the market allowed, and 0.3/1 market volatility).
+ -java -jar [path]\Broker.jar -d WORLDTRADECENTER (This creates a new game in WORLDTRADECENTER difficulty).
+ -java -jar [path]\Broker.jar -d easy (This creates a new game in EASY difficulty).
+ -java -jar [path]\Broker.jar -d easy (This creates a new game in EASY difficulty).
+ -java -jar [path]\Broker.jar -c -1 0.1 -2 0.2 -3 0.3 -4 0.2 -5 0.3 -a 0.7 -s 3 -m 2 -b 30 -v 0.3 (This creates a new game in a custom difficulty with: 30 bots, 0.1 * 30 aggressive brokers, 0.2 * 30 dumbass brokers, 0.3 * 30 greedy brokers, 0.2 * 30 knowledgeable brokers, 0.3 * 30 random brokers, 0.7/1 adaptability ratio for every bot's behaviour, 3 starting assets, 2 minimum assets in the market allowed, and 0.3/1 market volatility).
 
 It is also to be noted that if one uses -c but does not add all custom game parameters an according exception will stop the execution of the code. Also if one inputs a complete custom difficulty but also uses the -d argument the program will ignore the premade difficulty argument and enter the custom difficulty the user created.
 
