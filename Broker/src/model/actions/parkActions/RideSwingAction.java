@@ -15,7 +15,7 @@ public class RideSwingAction extends Action {
 			System.out.println("You ride the swing, everyone stares at you, you go sit down on the bench again fully ashamed.");		
 		}
 		else {
-			System.out.println(player.getName() + " just embarrassed himself at the park");
+			System.out.println(player.getName() + " just embarrassed himself at the park.");
 		}		
 	}
 
