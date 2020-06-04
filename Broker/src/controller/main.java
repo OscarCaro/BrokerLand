@@ -31,10 +31,10 @@ public class main {
             parseDiffOption(line, cmdLineOptions);
             String[] remaining = line.getArgs();
             if (remaining.length > 0) {
-                String error = "Illegal arguments:";
+                StringBuilder error = new StringBuilder("Illegal arguments:");
                 for (String o : remaining)
-                    error += (" " + o);
-                throw new ParseException(error);
+                    error.append(" ").append(o);
+                throw new ParseException(error.toString());
             }
             Game game = null;
             if (c != null) {
@@ -71,7 +71,7 @@ public class main {
         cmdLineOptions.addOption(Option.builder("a").longOpt("adaptability").hasArg().desc("Adaptability to adversity ratio of the bots (Only needed if -c is enabled).").build());
         cmdLineOptions.addOption(Option.builder("s").longOpt("startingNum").hasArg().desc("Starting number of assets on the market (Only needed if -c is enabled).").build());
         cmdLineOptions.addOption(Option.builder("m").longOpt("minNum").hasArg().desc("Minimum number of assets on the market (Only needed if -c is enabled).").build());
-        cmdLineOptions.addOption(Option.builder("h").longOpt("help").desc("Print this message").build());
+        cmdLineOptions.addOption(Option.builder("h").longOpt("help").desc("Print this message.").build());
         return cmdLineOptions;
     }
 
@@ -109,15 +109,15 @@ public class main {
     }
 
     private static void parseBotsOption(CommandLine line) {
-        numbots = Integer.parseInt(line.getOptionValue("b"));
+        numbots = Math.max(1, Integer.parseInt(line.getOptionValue("b")));
     }
 
     private static void parseAdaptabilityOption(CommandLine line) {
-        marketVolatilityRatio = Double.parseDouble(line.getOptionValue("v"));
+        marketVolatilityRatio = Math.max(Math.min(0.0, Double.parseDouble(line.getOptionValue("v"))), 1.0);
     }
 
     private static void parseVolatilityOption(CommandLine line) {
-        adaptability = Double.parseDouble(line.getOptionValue("a"));
+        adaptability = Math.max(Math.min(0.0, Double.parseDouble(line.getOptionValue("a"))), 1.0);
     }
 
     private static void parseTypesOption(CommandLine line) { //these are okay to leave unbounded
