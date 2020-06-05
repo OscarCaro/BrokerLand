@@ -21,3 +21,7 @@ The development of the project has run its course using testing techniques. To g
 
 ### Execution
 There are several ways to run the game depending on the argument input. Thus making it possible to access various difficuly levels or, with specific inputs, creating a custom game. To learn more about them, visit the [Execution](https://github.com/UCM-FDI-IS2-2020/se2-project-broker-studios/wiki/5.-Execution) tab of the wiki.
+
+***
+
+The studio hopes you enjoy the depicted broker lifestyle our project offers, and that the documentation is clear and organised enough to your taste!
