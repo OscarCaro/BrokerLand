@@ -1,7 +1,7 @@
 **Welcome to the Broker Studios college project!**
 
 ### Project Structure
-The repository is divided into 2 projects. The [`Broker`](https://github.com/UCM-FDI-IS2-2020/se2-project-broker-studios/blob/master/Broker) folder contains our project,  and the [`Wasteland-MUD`](https://github.com/UCM-FDI-IS2-2020/se2-project-broker-studios/blob/master/Wasteland-MUD) is an external project we took references from.
+The repository is divided into 2 projects. The [`Broker`](https://github.com/OscarCaro/BrokerLand/blob/master/Broker) folder contains our project,  and the [`Wasteland-MUD`](https://github.com/UCM-FDI-IS2-2020/se2-project-broker-studios/blob/master/Wasteland-MUD) is an external project we took references from.
 
 ### Planning
 We are following the agile methodologies. To have a look at our schedule and management, visit the [Projects Tab](https://github.com/UCM-FDI-IS2-2020/se2-project-broker-studios/projects). Also parts of the process were divided into sprints, the last of them is documented in the [Issues Tab](https://github.com/UCM-FDI-IS2-2020/se2-project-broker-studios/issues).
